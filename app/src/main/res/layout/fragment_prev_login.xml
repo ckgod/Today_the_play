@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ctl_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mainBlack">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ctl_splash_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <!-- 98dp 위로 올라가는 애니메이션-->
+
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/group"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tv_name"
+                app:layout_constraintVertical_chainStyle="packed"
+                android:layout_marginBottom="7dp"/>
+
+            <TextView
+                android:visibility="invisible"
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_logo"
+                android:text="@string/app_name_space"
+                android:textSize="20dp"
+                android:textColor="@color/colorWhite"
+                android:fontFamily="@font/eland_nice_medium"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ctl_late_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="invisible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_nice_medium"
+                android:textColor="@color/colorWhite"
+                android:textSize="17dp"
+                android:text="@string/app_name_space"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30.7dp"/>
+
+            <ImageView
+                android:id="@+id/iv_right_hand"
+                android:layout_width="104dp"
+                android:layout_height="142dp"
+                android:src="@drawable/bg_hand_right"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.36"/>
+
+            <ImageView
+                android:id="@+id/iv_left_hand"
+                android:layout_width="104dp"
+                android:layout_height="142dp"
+                android:src="@drawable/bg_hand_left"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.36"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ctl_tool_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="37dp">
+
+                <TextView
+                    android:id="@+id/tv_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/login_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/btn_join"
+                    android:textColor="@color/mainForText"
+                    android:textSize="14dp"
+                    android:fontFamily="@font/eland_nice_medium"
+                    android:layout_marginBottom="38dp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_join"
+                    android:layout_width="0dp"
+                    android:layout_height="62dp"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.725641025641026"
+                    android:background="@drawable/custom_round_button_default"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/btn_go_login"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="@font/eland_nice_medium"
+                    android:textSize="20dp"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/login_join"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_go_login"
+                    android:layout_width="0dp"
+                    android:layout_height="62dp"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.725641025641026"
+                    android:background="@drawable/custom_round_button_default"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/btn_find_pw"
+                    android:layout_marginBottom="17dp"
+                    android:fontFamily="@font/eland_nice_medium"
+                    android:textSize="17dp"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/login_already"/>
+
+                <TextView
+                    android:id="@+id/btn_find_pw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_medium"
+                    android:textSize="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="@string/login_find"
+                    android:textColor="@color/subGray"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

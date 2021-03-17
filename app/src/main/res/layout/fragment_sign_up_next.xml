@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ctl_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mainBlack">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ctl_top_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="bottom">
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_go_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="17.7dp"/>
+            <TextView
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_nice_medium"
+                android:textSize="17dp"
+                android:textColor="@color/colorWhite"
+                android:text="@string/app_name_space"
+                android:includeFontPadding="false"
+                app:layout_constraintStart_toEndOf="@id/btn_back"
+                app:layout_constraintBottom_toBottomOf="@id/btn_back"
+                app:layout_constraintTop_toTopOf="@id/btn_back"
+                android:layout_marginStart="9dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btn_complete"
+            app:layout_constraintTop_toBottomOf="@id/ctl_top_bar">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_nice_medium"
+                android:textSize="20dp"
+                android:textColor="@color/colorWhite"
+                android:text="@string/sign_nick_name_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="21dp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ctl_nickname"
+                android:layout_width="327dp"
+                android:layout_height="382dp"
+                android:background="@drawable/custom_round_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                android:layout_marginTop="12dp">
+
+                <ImageView
+                    android:id="@+id/iv_soju"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_soju_alone"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/ll_first_nick"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_first_nick"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_soju"
+                    app:layout_constraintBottom_toTopOf="@id/ll_second_nick"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="69.5dp">
+                    <ImageView
+                        android:id="@+id/iv_first_arrow"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:src="@drawable/ic_go_bright"
+                        android:scaleType="fitCenter"/>
+                    <TextView
+                        android:id="@+id/tv_first_nick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/eland_nice_medium"
+                        android:textSize="20dp"
+                        android:textColor="@color/mainForText"
+                        android:text="우아한 보드카"
+                        android:layout_marginStart="6.5dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_second_nick"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll_first_nick"
+                    app:layout_constraintBottom_toTopOf="@id/ll_third_nick"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="69.5dp">
+                    <ImageView
+                        android:id="@+id/iv_second_arrow"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:src="@drawable/ic_go_bright"
+                        android:scaleType="fitCenter"
+                        android:visibility="invisible"/>
+                    <TextView
+                        android:id="@+id/tv_second_nick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/eland_nice_medium"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorWhite"
+                        android:text="우아한 보드카"
+                        android:layout_marginStart="6.5dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="invisible"
+                    android:clickable="false"
+                    android:id="@+id/ll_third_nick"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll_second_nick"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="69.5dp">
+                    <ImageView
+                        android:id="@+id/iv_third_arrow"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:src="@drawable/ic_go_bright"
+                        android:scaleType="fitCenter"
+                        android:visibility="invisible"/>
+                    <TextView
+                        android:id="@+id/tv_third_nick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/eland_nice_medium"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorWhite"
+                        android:text="우아한 보드카"
+                        android:layout_marginStart="6.5dp"/>
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/et_third_nick"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll_second_nick"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:backgroundTint="@color/subGray"
+                    android:fontFamily="@font/noto_sans_medium"
+                    android:maxLength="20"
+                    android:textAlignment="center"
+                    android:textSize="15dp"
+                    android:inputType="text"
+                    android:imeOptions="actionDone"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:hint="@string/sign_nick_name_info"
+                    android:textColorHint="@color/subGray"
+                    android:textColor="@color/subGray" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_tos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@id/ctl_nickname"
+                app:layout_constraintTop_toBottomOf="@id/ctl_nickname"
+                android:layout_marginTop="14.5dp">
+                <ImageView
+                    android:id="@+id/iv_tos"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:src="@drawable/ic_tos_false"
+                    android:scaleType="fitCenter"/>
+                <TextView
+                    android:id="@+id/tv_tos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_medium"
+                    android:textSize="12dp"
+                    android:textColor="@color/error1"
+                    android:text="@string/sign_tos_check"
+                    android:includeFontPadding="false"
+                    android:layout_marginStart="9.5dp"/>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_complete"
+            android:layout_width="0dp"
+            android:layout_height="62dp"
+            android:background="@drawable/custom_round_button_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:fontFamily="@font/eland_nice_medium"
+            android:textSize="20dp"
+            android:textColor="@color/subGray"
+            android:text="@string/sign_complete"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginBottom="21dp"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

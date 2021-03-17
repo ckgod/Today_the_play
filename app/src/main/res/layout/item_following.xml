@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ctl_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_pager"
+            android:layout_width="0dp"
+            android:layout_height="421dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginHorizontal="22dp"
+            android:layout_marginTop="9dp"/>
+        <Space
+            android:id="@+id/vp_pager_space"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="25dp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@id/vp_pager"
+            app:layout_constraintEnd_toEndOf="@id/vp_pager"
+            app:layout_constraintTop_toTopOf="@id/vp_pager"
+            app:layout_constraintBottom_toBottomOf="@id/vp_pager"/>
+
+        <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+            android:id="@+id/worm_dots_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:dotsColor="@color/colorWhite"
+            app:dotsStrokeColor="@color/subGray"
+            app:dotsCornerRadius="8dp"
+            app:dotsSize="8dp"
+            app:dotsSpacing="4dp"
+            app:dotsStrokeWidth="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/ctl_main_content"
+            android:layout_marginBottom="12dp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ctl_main_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_round_background"
+            app:layout_constraintStart_toStartOf="@id/vp_pager"
+            app:layout_constraintEnd_toEndOf="@id/vp_pager"
+            app:layout_constraintTop_toBottomOf="@id/vp_pager_space"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="9dp">
+
+            <TextView
+                android:id="@+id/tv_nick_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_nice_medium"
+                android:textSize="20dp"
+                android:textColor="@color/colorWhite"
+                android:text="nickname"
+                android:layout_marginTop="26dp"
+                android:layout_marginStart="14dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/btn_more"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_more_0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_nick_name"
+                android:layout_marginEnd="14dp"/>
+            <ImageView
+                android:id="@+id/btn_comment"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_comment"
+                android:scaleType="fitCenter"
+                app:layout_constraintTop_toTopOf="@id/btn_more"
+                app:layout_constraintEnd_toStartOf="@id/btn_more"
+                android:layout_marginEnd="5dp"/>
+            <ImageView
+                android:id="@+id/btn_heart"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_heart_false"
+                app:layout_constraintTop_toTopOf="@id/btn_more"
+                app:layout_constraintEnd_toStartOf="@id/btn_comment"
+                android:layout_marginEnd="11dp"/>
+
+            <TextView
+                android:id="@+id/tv_good_cnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_medium"
+                android:textSize="10dp"
+                android:textColor="@color/subGray"
+                android:text="좋아요 40개"
+                app:layout_constraintStart_toStartOf="@id/tv_nick_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_nick_name"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_medium"
+                android:textSize="10dp"
+                android:textColor="@color/subGray"
+                android:text="2021.04.03"
+                app:layout_constraintStart_toEndOf="@id/tv_good_cnt"
+                app:layout_constraintTop_toBottomOf="@id/tv_nick_name"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"/>
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginTop="3dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_good_cnt"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/noto_sans_medium"
+                android:textSize="12dp"
+                android:textColor="@color/colorWhite"
+                android:text="contentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontent"
+                />
+
+            <View
+                android:id="@+id/v_line_dark"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_content"
+                android:background="@color/black1c"
+                android:layout_marginTop="19.5dp"/>
+
+
+
+            <ImageView
+                android:id="@+id/btn_book_mark"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_book_mark_0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/v_line_dark"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="14dp"/>
+
+            <LinearLayout
+                android:id="@+id/tmp"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/v_line_dark"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_blur_body"
+                android:backgroundTint="@color/mainBlack"
+                android:layout_marginStart="10.5dp"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_drinks_wine_0"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="2dp"/>
+
+                <TextView
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_medium"
+                    android:textSize="12dp"
+                    android:textColor="@color/colorWhite"
+                    android:text="펜폴츠 뱅쇼"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginEnd="16dp"/>
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ctl_comment_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tmp"
+                android:layout_marginBottom="17dp"
+                android:layout_marginTop="22.5dp">
+
+                <TextView
+                    android:id="@+id/tv_comment_cnt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_medium"
+                    android:textSize="10dp"
+                    android:textColor="@color/subGray"
+                    android:text="댓글 5개 모두 보기"
+                    app:layout_constraintStart_toStartOf="@id/ctl_et_container"
+                    app:layout_constraintBottom_toTopOf="@id/tv_first_comment_name"
+                    android:layout_marginBottom="5dp"/>
+
+
+                <TextView
+                    android:id="@+id/tv_first_comment_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_black"
+                    android:textSize="12dp"
+                    android:textColor="@color/colorWhite"
+                    android:text="예민한 보드카"
+                    app:layout_constraintStart_toStartOf="@id/ctl_et_container"
+                    app:layout_constraintBottom_toTopOf="@id/ctl_et_container"
+                    android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:id="@+id/tv_first_comment_content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_medium"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textSize="12dp"
+                    android:textColor="@color/colorWhite"
+                    android:text="게시글 내용 잘 보고 가요게시글 내용 잘 보고 가요게시글 내용 잘 보고 가요"
+                    app:layout_constraintStart_toEndOf="@id/tv_first_comment_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_first_comment_name"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="14dp"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ctl_et_container"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:background="@drawable/custom_round_background_main_blakc"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginHorizontal="14dp">
+
+                    <ImageView
+                        android:id="@+id/btn_add_comment"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_go"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="8dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

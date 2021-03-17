@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">오늘한주</string>
+    <string name="app_name_space">오늘 한 주</string>
+    <string name="loading">로딩중입니다...</string>
+    <string name="send_data">데이터 전송중입니다.</string>
+    <string name="network_error">네트워크 연결이 원활하지 않습니다.</string>
+    <string name="confirm">확인</string>
+    <string name="complete">완료</string>
+    <string name="continued">다음</string>
+    <string name="app_version">현재 버전 1.0.0</string>
+    <string name="default_notification_channel_id">default_notification_channel_id</string>
+
+
+    <!-- 회원가입 / 로그인 -->
+    <string name="login_title">술꾼들이 만든 음주생활을 위한 공간\n\n오늘 한 주</string>
+    <string name="login_join">참여하기</string>
+    <string name="login_already">이미 계정이 있으신가요?</string>
+    <string name="login_find">비밀번호 찾기</string>
+    <string name="login_login">로그인 하기</string>
+    <string name="login_login_normal">로그인</string>
+    <string name="login_email_info">이메일을 입력해주세요</string>
+    <string name="login_pw_hint">6자리 이상, 12자리 미만 비밀번호</string>
+    <string name="login_pw_info">비밀번호를 입력해주세요</string>
+    <string name="login_find_pw">비밀번호 찾기</string>
+    <string name="sign_title">회원가입</string>
+    <string name="sign_email_info">비밀번호 찾기를 우해 수신 가능한 이메일을 입력해주세요</string>
+    <string name="sign_email_hint">이메일을 입력해주세요</string>
+    <string name="sign_pw_hint">6자리 이상, 12자리 미만</string>
+    <string name="sign_pw_info">6자리 이상, 12자리 미만의 비밀번호를 적어주세요</string>
+    <string name="sign_pw_check_hint">비밀번호 확인</string>
+    <string name="sign_nick_name_title">닉네임</string>
+    <string name="sign_nick_name_info">직접 닉네임을 입력해주세요</string>
+    <string name="sign_tos_check">개인정보 이용 동의(필수)</string>
+    <string name="sign_complete">가입하기</string>
+    <string name="sign_welcome">오늘 한 주로 입장해주세요</string>
+    <string name="sign_pw_check_info">동일한 비밀번호를 적어주세요</string>
+
+    <!-- main -->
+    <string name="main_follow">팔로잉</string>
+
+    <!-- search -->
+    <string name="search_hing">술이나 레시피를 입력해주세요</string>
+
+    <!-- recipe -->
+    <string name="recipe_show_all">모두보기</string>
+    <string name="recipe_title">인기 레시피</string>
+
+    <!-- write -->
+    <string name="write_title">새 게시물</string>
+    <string name="write_write">글 작성하기</string>
+    <string name="write_write_hint">문구 입력..</string>
+    <string name="write_tag_hint">술 태그하기 : 오늘 함께한 술을 1개 이상 입력해주세요</string>
+
+
+
+
+
+
+
+
+</resources>
