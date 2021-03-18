@@ -69,14 +69,14 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
 //        !(::binding.isInitialized)
         if(databinding == null) {
             databinding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
-            databinding?.lifecycleOwner = viewLifecycleOwner
+            databinding!!.lifecycleOwner = viewLifecycleOwner
             binding = databinding!!
             initStartView()
             initDataBinding()
             initAfterBinding()
         }
         reLoadUI()
-        return databinding?.root
+        return databinding!!.root
     }
 
     override fun onDestroyView() {

@@ -1,6 +1,7 @@
 package com.akvelon.imagepicker
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -14,6 +15,7 @@ import android.provider.MediaStore
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -75,7 +77,7 @@ internal class PickerActivity: AppCompatActivity(), ImageDelegate.ClickListener 
 
         view_multipleSelect.isActivated = true
         view_multipleSelect.setOnClickListener { multipleSelectChange() }
-        imageView_back.setOnClickListener { finish() }
+        imageView_back.setOnClickListener { cancelSelect(); finish()}
         textView_next.setOnClickListener { confirmWithResult() }
         textView_photo.setOnClickListener { showCamera() }
         (recyclerView_photos.itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
@@ -112,6 +114,11 @@ internal class PickerActivity: AppCompatActivity(), ImageDelegate.ClickListener 
             }
             else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         }
+    }
+
+    override fun onBackPressed() {
+        cancelSelect()
+        super.onBackPressed()
     }
 
     private fun setupList() {
@@ -228,7 +235,21 @@ internal class PickerActivity: AppCompatActivity(), ImageDelegate.ClickListener 
         }
     }
 
+    private fun cancelSelect() {
+        this.setResult(
+            Activity.RESULT_OK,
+            Intent().apply {
+                putExtra("cancelSelect", -1)
+            }
+        )
+    }
+
+    @SuppressLint("ShowToast")
     private fun finishWithResult(images: ArrayList<String>) {
+        if (images.isEmpty()) {
+            Toast.makeText(applicationContext, "사진을 선택해주세요", Toast.LENGTH_SHORT).show()
+            return
+        }
         this.setResult(
             Activity.RESULT_OK,
             Intent().apply {

@@ -15,9 +15,8 @@ class RecipeMainFragment() : BaseKotlinFragment<FragmentRecipeMainBinding>() {
     var itemList : MutableList<RecipeItem> = mutableListOf()
 
     override fun initStartView() {
+        itemList = mutableListOf()
         binding.rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        itemList.add(RecipeItem("adfasdf"))
-        itemList.add(RecipeItem("adfasdf"))
         itemList.add(RecipeItem("adfasdf"))
         itemList.add(RecipeItem("adfasdf"))
         binding.rv.adapter = RecipeAdapter(requireActivity(), requireContext(), itemList)

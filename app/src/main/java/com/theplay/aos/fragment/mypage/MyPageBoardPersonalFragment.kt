@@ -24,10 +24,6 @@ class MyPageBoardPersonalFragment() : BaseKotlinFragment<FragmentMyPageBoardPers
         itemList.add(FollowItem(imageList,"sss"))
         itemList.add(FollowItem(imageList,"sss"))
         itemList.add(FollowItem(imageList,"sss"))
-        itemList.add(FollowItem(imageList,"sss"))
-        itemList.add(FollowItem(imageList,"sss"))
-        itemList.add(FollowItem(imageList,"sss"))
-        itemList.add(FollowItem(imageList,"sss"))
         binding.rv.adapter = FollowAdapter(this, requireActivity(), requireContext(), itemList)
     }
 
