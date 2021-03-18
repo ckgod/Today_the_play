@@ -27,7 +27,7 @@ class MyPeedFragment() : BaseKotlinFragment<FragmentMyPeedBinding>() {
     override fun initStartView() {
         binding.btnSetting.setOnClickListener(object : OnSingleClickListener() {
             override fun onSingleClick(v: View) {
-                requireActivity().findNavController(R.id.fragment).navigate(MainFragmentDirections.actionMainFragmentToSettingFragment())
+                requireActivity().findNavController(R.id.main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToSettingFragment())
             }
         })
 

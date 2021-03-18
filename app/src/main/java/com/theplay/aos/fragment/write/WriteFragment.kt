@@ -1,6 +1,7 @@
 package com.theplay.aos.fragment.write
 
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.akvelon.imagepicker.ImagePicker
 import com.theplay.aos.R
 import com.theplay.aos.base.BaseKotlinFragment
@@ -11,6 +12,9 @@ class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
         get() = R.layout.fragment_write
 
     override fun initStartView() {
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
     }
 
@@ -24,6 +28,14 @@ class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
 
     override fun reLoadUI() {
 //        ImagePicker.launch(this)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+//        if (view != null) {
+//            val parentViewGroup = requireView().parent as ViewGroup?
+//            parentViewGroup?.removeAllViews()
+//        }
     }
 
     companion object {

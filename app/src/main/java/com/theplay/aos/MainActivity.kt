@@ -28,29 +28,30 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment)
-        val currentFragment = navHostFragment?.childFragmentManager?.fragments?.get(0)
-        Log.d(TAG, "onBackPressed() currentFragment:$currentFragment")
-        when (currentFragment) {
-            is MainFragment -> {
-                if (currentFragment.interceptBackPressed()) {
-                    return
-                } else {
-                    val curTime = System.currentTimeMillis()
-                    val gapTime = curTime - backBtnTime
-
-                    if (gapTime in 0..2000) {
-                        super.onBackPressed()
-                    } else {
-                        backBtnTime = curTime;
-                        Toast.makeText(this, "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-            else -> {
-                super.onBackPressed()
-            }
-        }
+//        val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_nav_host_fragment)
+//        val currentFragment = navHostFragment?.childFragmentManager?.fragments?.get(0)
+//        Log.d(TAG, "onBackPressed() currentFragment:$currentFragment")
+//        when (currentFragment) {
+//            is MainFragment -> {
+//                if (currentFragment.interceptBackPressed()) {
+//                    return
+//                } else {
+//                    val curTime = System.currentTimeMillis()
+//                    val gapTime = curTime - backBtnTime
+//
+//                    if (gapTime in 0..2000) {
+//                        super.onBackPressed()
+//                    } else {
+//                        backBtnTime = curTime;
+//                        Toast.makeText(this, "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//            }
+//            else -> {
+//                super.onBackPressed()
+//            }
+//        }
+        super.onBackPressed()
     }
 
     companion object {

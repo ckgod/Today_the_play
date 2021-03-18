@@ -66,12 +66,18 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
     ): View? {
         if(!(::binding.isInitialized)) {
             binding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
+            binding.lifecycleOwner = viewLifecycleOwner
             initStartView()
             initDataBinding()
             initAfterBinding()
         }
         reLoadUI()
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
     }
 
     fun hideKeyboard(view: View) {

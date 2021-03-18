@@ -34,7 +34,7 @@ class MainFragment() : BaseKotlinFragment<FragmentMainBinding>() {
             override fun onSingleClick(v: View) {
                 Log.d(TAG, "write click")
 //                listener?.goWrite()
-                requireActivity().findNavController(R.id.fragment).navigate(MainFragmentDirections.actionMainFragmentToWriteFragment())
+                requireActivity().findNavController(R.id.main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToWriteFragment())
             }
         })
     }
@@ -82,7 +82,7 @@ class MainFragment() : BaseKotlinFragment<FragmentMainBinding>() {
 
         val bottomNavigationView = binding.bottomNav
         binding.bottomNav.itemIconTintList = null
-        //binding.bottomNav.selectedItemId = R.id.nav_home
+        binding.bottomNav.selectedItemId = R.id.nav_home
 
         val navGraphIds = listOf(
                 R.navigation.nav_write,
