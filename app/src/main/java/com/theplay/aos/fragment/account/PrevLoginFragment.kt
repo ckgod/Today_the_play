@@ -14,6 +14,7 @@ class PrevLoginFragment() : BaseKotlinFragment<FragmentPrevLoginBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_prev_login
 
+
     override fun initStartView() {
         binding.btnGoLogin.setOnClickListener(object : OnSingleClickListener() {
             override fun onSingleClick(v: View) {

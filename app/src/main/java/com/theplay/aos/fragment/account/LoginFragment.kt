@@ -11,6 +11,7 @@ class LoginFragment() : BaseKotlinFragment<FragmentLoginBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_login
 
+
     override fun initStartView() {
         binding.btnLogin.setOnClickListener(object : OnSingleClickListener() {
             override fun onSingleClick(v: View) {

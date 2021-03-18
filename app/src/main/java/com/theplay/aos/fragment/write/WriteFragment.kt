@@ -15,7 +15,6 @@ class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
         }
-
     }
 
     override fun initDataBinding() {

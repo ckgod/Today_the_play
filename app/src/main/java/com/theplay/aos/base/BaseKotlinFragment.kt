@@ -22,7 +22,9 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
     var mProgressDialog: ProgressDialog? = null
     var mProgressCircle: DelayedProgressDialog? = null
 
-    lateinit var binding: T
+//    lateinit var binding: T
+    var databinding: T? = null
+    lateinit var binding : T
 
     /**
      * setContentView로 호출할 Layout의 리소스 Id.
@@ -64,20 +66,22 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if(!(::binding.isInitialized)) {
-            binding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
-            binding.lifecycleOwner = viewLifecycleOwner
+//        !(::binding.isInitialized)
+        if(databinding == null) {
+            databinding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
+            databinding?.lifecycleOwner = viewLifecycleOwner
+            binding = databinding!!
             initStartView()
             initDataBinding()
             initAfterBinding()
         }
         reLoadUI()
-        return binding.root
+        return databinding?.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-
+        databinding = null
     }
 
     fun hideKeyboard(view: View) {

@@ -29,6 +29,7 @@ class MainFragment() : BaseKotlinFragment<FragmentMainBinding>() {
     private var currentNavController: LiveData<NavController>? = null
     var listener : MainFragmentListener? = null
 
+
     override fun initStartView() {
         binding.btnWrite.setOnClickListener(object : OnSingleClickListener() {
             override fun onSingleClick(v: View) {
@@ -79,6 +80,7 @@ class MainFragment() : BaseKotlinFragment<FragmentMainBinding>() {
      * Called on first creation and when restoring state.
      */
     private fun setupBottomNavigationBar() {
+
 
         val bottomNavigationView = binding.bottomNav
         binding.bottomNav.itemIconTintList = null
