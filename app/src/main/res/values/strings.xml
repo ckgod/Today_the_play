@@ -7,6 +7,7 @@
     <string name="confirm">확인</string>
     <string name="complete">완료</string>
     <string name="continued">다음</string>
+    <string name="cancel">취소</string>
     <string name="app_version">현재 버전 1.0.0</string>
     <string name="default_notification_channel_id">default_notification_channel_id</string>
 
@@ -50,6 +51,24 @@
     <string name="write_write">글 작성하기</string>
     <string name="write_write_hint">문구 입력..</string>
     <string name="write_tag_hint">술 태그하기 : 오늘 함께한 술을 1개 이상 입력해주세요</string>
+
+    <!-- setting -->
+    <string name="setting_profile">프로필 설정</string>
+    <string name="setting_app">앱 설정</string>
+    <string name="setting_p_1">개인정보 수정</string>
+    <string name="setting_p_2">차단한 이용자</string>
+    <string name="setting_p_3">로그아웃</string>
+    <string name="setting_a_1">공지사항</string>
+    <string name="setting_a_2">문의하기</string>
+    <string name="setting_a_3">알림 설정</string>
+    <string name="setting_a_4">계정 탈퇴</string>
+    <string name="setting_a_5">오픈 소스 라이선스</string>
+    <string name="setting_version_info">최신 버전을 사용 중입니다</string>
+    <string name="setting_version">1.0.0</string>
+
+    <!-- logout -->
+    <string name="logout_title">로그아웃</string>
+    <string name="logout_content">우아한 보드카 계정에서\n로그아웃 하시겠어요?</string>
 
 
 

@@ -9,17 +9,134 @@
         android:layout_height="match_parent"
         android:background="@color/mainBlack">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ctl_top_bar"
+            android:layout_width="0dp"
+            android:layout_height="101.7dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:fontFamily="@font/eland_nice_medium"
-            android:textSize="20dp"
-            android:textColor="@color/colorWhite"
-            android:text="setting"/>
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_nice_medium"
+                android:textSize="20dp"
+                android:textColor="@color/colorWhite"
+                android:text="@string/app_name_space"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="21.7dp"/>
+
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_go_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="19dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_nice_medium"
+                android:textSize="20dp"
+                android:textColor="@color/subGray"
+                android:text="우아한 보드카"
+                app:layout_constraintStart_toEndOf="@id/btn_back"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                android:layout_marginTop="21dp"
+                android:layout_marginStart="3dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ctl_top_bar"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_profile_setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_medium"
+                    android:textSize="10dp"
+                    android:textColor="@color/subGray"
+                    android:text="@string/setting_profile"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="20.5dp"
+                    android:layout_marginTop="18dp"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_profile"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_profile_setting"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginStart="20dp"/>
+                <TextView
+                    android:id="@+id/tv_app_setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_medium"
+                    android:textSize="10dp"
+                    android:textColor="@color/subGray"
+                    android:text="@string/setting_app"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_profile"
+                    android:layout_marginStart="20.5dp"
+                    android:layout_marginTop="15dp"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_app"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_app_setting"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginStart="20dp"/>
+
+                <TextView
+                    android:id="@+id/tv_version_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_medium"
+                    android:textSize="10dp"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/setting_version_info"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_app"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="39dp"/>
+                <TextView
+                    android:id="@+id/tv_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_medium"
+                    android:textSize="10dp"
+                    android:textColor="@color/subGray"
+                    android:text="@string/setting_version"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_version_check"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="7dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,7 +35,8 @@
             app:layout_constraintBottom_toTopOf="@id/ll_email_container"
             android:layout_marginStart="63dp"
             android:layout_marginBottom="7dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:visibility="invisible"/>
 
         <LinearLayout
             android:id="@+id/ll_email_container"
@@ -85,7 +86,8 @@
             app:layout_constraintStart_toStartOf="@id/tv_email_info"
             app:layout_constraintBottom_toTopOf="@id/ll_pw_container"
             android:layout_marginBottom="7dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:visibility="invisible"/>
         <LinearLayout
             android:id="@+id/ll_pw_container"
             android:layout_width="0dp"
