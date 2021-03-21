@@ -1,4 +1,4 @@
-package com.akvelon.imagepicker
+package com.theplay.aos.imagepicker
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

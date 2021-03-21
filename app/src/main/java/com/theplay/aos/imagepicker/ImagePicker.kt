@@ -1,4 +1,4 @@
-package com.akvelon.imagepicker
+package com.theplay.aos.imagepicker
 
 import android.app.Activity
 import android.content.Intent
@@ -26,11 +26,19 @@ object ImagePicker {
     }
 
     fun launch(activity: Activity) {
-        activity.startActivityForResult(PickerActivity.getIntent(activity, emptyList()), PickerActivity.REQ_CODE)
+        activity.startActivityForResult(
+            PickerActivity.getIntent(activity, emptyList()),
+            PickerActivity.REQ_CODE
+        )
     }
 
     fun launch(fragment: Fragment) {
-        fragment.startActivityForResult(PickerActivity.getIntent(fragment.requireActivity(), emptyList()), PickerActivity.REQ_CODE)
+        fragment.startActivityForResult(
+            PickerActivity.getIntent(
+                fragment.requireActivity(),
+                emptyList()
+            ), PickerActivity.REQ_CODE
+        )
     }
 
     fun shouldResolve(requestCode: Int, resultCode: Int): Boolean {

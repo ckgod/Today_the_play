@@ -1,4 +1,4 @@
-package com.akvelon.imagepicker
+package com.theplay.aos.imagepicker
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -25,17 +25,23 @@ class ImageDelegate(
 
     override fun onBindViewHolder(position: Int, item: ImageWrapModel, holder: ViewHolder, payloads: MutableList<Any>) {
         holder.view.setOnClickListener { listener.onClick(holder.adapterPosition) }
-        if(item.isCurrentlySelected) holder.tint.visibility = View.VISIBLE
-        else holder.tint.visibility = View.GONE
+        if(item.isCurrentlySelected) {
+            holder.tint.visibility = View.VISIBLE
+        }
+        else {
+            holder.tint.visibility = View.GONE
+        }
 
         if(item.isMultipleSelectEnabled) {
             holder.counter.visibility = View.VISIBLE
             if(item.countNumber != 0) {
                 holder.counter.text = item.countNumber.toString()
                 holder.counter.background = selectedDrawable
+//                holder.counter.backgroundTintList = ContextCompat.getColorStateList(context, R.color.mainColor)
             } else {
                 holder.counter.text = ""
                 holder.counter.background = deselectedDrawable
+//                holder.counter.backgroundTintList = ContextCompat.getColorStateList(context, R.color.colorNull)
             }
         } else holder.counter.visibility = View.GONE
 

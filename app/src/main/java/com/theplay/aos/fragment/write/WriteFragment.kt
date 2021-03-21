@@ -5,10 +5,9 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.akvelon.imagepicker.ImagePicker
-import com.akvelon.imagepicker.ImagePicker.getImages
-import com.akvelon.imagepicker.ImagePicker.getSingleImageOrNull
-import com.akvelon.imagepicker.ImagePicker.shouldResolve
+import com.theplay.aos.imagepicker.ImagePicker
+import com.theplay.aos.imagepicker.ImagePicker.getImages
+import com.theplay.aos.imagepicker.ImagePicker.shouldResolve
 import com.theplay.aos.R
 import com.theplay.aos.base.BaseKotlinFragment
 import com.theplay.aos.databinding.FragmentWriteBinding

@@ -1,4 +1,4 @@
-package com.akvelon.imagepicker
+package com.theplay.aos.imagepicker
 
 import android.graphics.Rect
 import android.view.View

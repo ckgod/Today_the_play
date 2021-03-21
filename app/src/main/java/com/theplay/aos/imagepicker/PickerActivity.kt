@@ -1,4 +1,4 @@
-package com.akvelon.imagepicker
+package com.theplay.aos.imagepicker
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -89,7 +89,8 @@ internal class PickerActivity: AppCompatActivity(), ImageDelegate.ClickListener 
                 != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(
                     arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    GET_STORAGE_REQ_CODE)
+                    GET_STORAGE_REQ_CODE
+                )
             } else setupList()
         } else setupList()
     }
