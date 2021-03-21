@@ -34,5 +34,6 @@
             android:textColor="@color/colorWhite"
             android:fontFamily="@font/eland_nice_medium"/>
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
