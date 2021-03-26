@@ -34,10 +34,5 @@ class RemoteRepository{
         ).getNoticeDetail(noticeId)
     }
 
-//    fun getUserInfo():Observable<getUserResponse> {
-//        return RetrofitCreator.create(
-//                TodaApi.TodaApiImpl::class.java
-//        ).getUserInfo()
-//    }
 
 }

@@ -51,6 +51,7 @@
     <string name="write_write">글 작성하기</string>
     <string name="write_write_hint">문구 입력..</string>
     <string name="write_tag_hint">술 태그하기 : 오늘 함께한 술을 1개 이상 입력해주세요</string>
+    <string name="write_drinks_name">술의 이름을 입력해주세요.</string>
 
     <!-- setting -->
     <string name="setting_profile">프로필 설정</string>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="335dp"
+        android:minHeight="348dp"
+        android:padding="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ctl_main_content"
+            android:layout_width="335dp"
+            android:layout_height="348dp"
+            android:background="@drawable/bg_dialog_body"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btn_complete">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ctl_background"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginHorizontal="33dp"
+                android:background="@drawable/custom_round_background_main_black_29dp">
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_icon"
+                android:layout_width="36dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="@id/ctl_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="30dp"
+                android:clipToPadding="false"
+                android:paddingTop="130dp"
+                android:paddingBottom="130dp"/>
+
+            <ImageView
+                android:id="@+id/iv_line"
+                android:layout_width="7dp"
+                android:layout_height="53dp"
+                android:src="@drawable/line_gray_blur"
+                android:layout_marginStart="12dp"
+                app:layout_constraintStart_toEndOf="@id/rv_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_medium"
+                android:background="@color/colorNull"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textSize="12dp"
+                android:inputType="text"
+                android:textColor="@color/colorWhite"
+                android:hint="@string/write_drinks_name"
+                android:textColorHint="@color/colorWhite"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="13dp"
+                android:imeOptions="actionDone"
+                app:layout_constraintStart_toEndOf="@id/iv_line"
+                app:layout_constraintEnd_toEndOf="@id/ctl_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_name_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_medium"
+                android:textSize="10dp"
+                android:textColor="@color/subGray"
+                android:text="@string/write_drinks_name"
+                app:layout_constraintStart_toStartOf="@id/et_name"
+                app:layout_constraintBottom_toTopOf="@id/ctl_background"
+                android:layout_marginBottom="8dp"
+                android:visibility="invisible"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/btn_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_check_big_0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ctl_main_content"
+            android:layout_marginBottom="20dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

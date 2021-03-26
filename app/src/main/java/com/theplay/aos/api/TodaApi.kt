@@ -21,8 +21,6 @@ class UserApi {
         @GET("v1/user/notice/{noticeId}")
         fun getNoticeDetail(@Path("noticeId") noticeId : Int):Observable<NoticeDetailResponse>
 
-
-
 //        //15
 //        @GET("diaries")
 //        fun getDiaries(

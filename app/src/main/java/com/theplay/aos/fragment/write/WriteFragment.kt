@@ -4,14 +4,19 @@ import android.content.Intent
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.theplay.aos.imagepicker.ImagePicker
 import com.theplay.aos.imagepicker.ImagePicker.getImages
 import com.theplay.aos.imagepicker.ImagePicker.shouldResolve
 import com.theplay.aos.R
 import com.theplay.aos.base.BaseKotlinFragment
+import com.theplay.aos.customview.AddDrinkDialog
+import com.theplay.aos.customview.AddDrinkListener
 import com.theplay.aos.databinding.FragmentWriteBinding
 import com.theplay.aos.fragment.home.ImageFragment
+import com.theplay.aos.iadapter.DrinkAdapter
+import com.theplay.aos.item.DrinkItem
 import java.io.File
 
 
@@ -20,6 +25,7 @@ class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
         get() = R.layout.fragment_write
 
     private var viewPagerAdapter: ViewPagerAdapter? = null
+    var drinkList : MutableList<DrinkItem> = mutableListOf()
 
     override fun initStartView() {
         binding.btnBack.setOnClickListener {
@@ -28,6 +34,20 @@ class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
         binding.vpPager.isSaveEnabled = false
         binding.vpPager.isUserInputEnabled = true
         viewPagerAdapter = ViewPagerAdapter(this)
+        binding.btnPlusRecipe.setOnClickListener {
+            val dialog = AddDrinkDialog(requireContext(), requireActivity()).apply {
+                setDialogListener(object : AddDrinkListener{
+                    override fun onComplete(item: DrinkItem) {
+                        drinkList.add(item)
+                        binding.rvDrinks.adapter?.notifyDataSetChanged()
+                        dismiss()
+                    }
+                })
+            }
+            dialog.show()
+        }
+        binding.rvDrinks.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.rvDrinks.adapter = DrinkAdapter(requireActivity(), requireContext(), drinkList)
     }
 
     override fun initDataBinding() {

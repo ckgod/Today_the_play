@@ -84,6 +84,10 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
         databinding = null
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
     fun hideKeyboard(view: View) {
         val inputManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.hideSoftInputFromWindow(view.windowToken, 0)
@@ -91,7 +95,7 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
 
     @Suppress("DEPRECATION")
     fun setStatusBar(window:Window, view : View, context: Context) {
-        // status bar 투명하게 하기
+        // status bar 투명하게 하기sSSSSfghjk
         view.setPadding(0, ViewUtils.getStatusBarHeight(context),0,0)
         window.decorView.systemUiVisibility =
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
