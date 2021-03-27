@@ -51,5 +51,8 @@ class ApplicationClass : Application() {
         // fcmToken
         var fcmToken : SharedPreferences? = null
         var alarmAllowToken : SharedPreferences? = null
+
+
+
     }
 }

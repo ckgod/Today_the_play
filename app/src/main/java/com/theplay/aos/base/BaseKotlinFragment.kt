@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.theplay.aos.R
 import com.theplay.aos.customview.DelayedProgressDialog
 import com.theplay.aos.utils.ViewUtils
@@ -66,22 +67,20 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        !(::binding.isInitialized)
-        if(databinding == null) {
-            databinding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
-            databinding!!.lifecycleOwner = viewLifecycleOwner
-            binding = databinding!!
+        if(!(::binding.isInitialized)) {
+            binding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
             initStartView()
             initDataBinding()
             initAfterBinding()
         }
         reLoadUI()
-        return databinding!!.root
+        return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        databinding = null
+//        binding = databinding!!
+//        databinding = null
     }
 
     override fun onDestroy() {
@@ -125,6 +124,12 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
             onSingleClick(v)
         }
     }
+
+    fun interceptBackPressed() : Boolean {
+        findNavController().popBackStack()
+        return true
+    }
+
     fun showCustomToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }

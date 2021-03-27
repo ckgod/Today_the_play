@@ -63,13 +63,13 @@ class RootFragment() : BaseKotlinFragment<FragmentRootBinding>() {
 //        binding.vpPager.isUserInputEnabled = false
 //    }
 
-    fun interceptBackPressed() : Boolean {
-//        if(binding.vpPager.currentItem == 0) {
-//            binding.vpPager.setCurrentItem(1, true)
-//            return true
-//        }
-        return false
-    }
+//    fun interceptBackPressed() : Boolean {
+////        if(binding.vpPager.currentItem == 0) {
+////            binding.vpPager.setCurrentItem(1, true)
+////            return true
+////        }
+//        return false
+//    }
 
     private inner class ViewPagerAdapter(fa: Fragment) : FragmentStateAdapter(fa) {
         var fragments: HashMap<Int, Fragment> = HashMap()

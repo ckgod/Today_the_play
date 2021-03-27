@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_write"
-    app:startDestination="@id/writeFragment">
+    app:startDestination="@id/tmpFragment">
 
     <fragment
-        android:id="@+id/writeFragment"
-        android:name="com.theplay.aos.fragment.write.WriteFragment"
-        android:label="WriteFragment"
-        tools:layout="@layout/fragment_write"/>
+        android:id="@+id/tmpFragment"
+        android:name="com.theplay.aos.TmpFragment"
+        android:label="TmpFragment" />
+
 </navigation>

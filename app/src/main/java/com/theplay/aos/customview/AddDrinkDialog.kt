@@ -33,6 +33,7 @@ class AddDrinkDialog(
     private lateinit var listener: AddDrinkListener
     var iconList : MutableList<AddIconItem> = mutableListOf()
     var curIcon = R.drawable.ic_drinks_soju_main
+    var curColor = R.color.mainColor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +43,7 @@ class AddDrinkDialog(
         setContentView(view)
         initView()
     }
+
 
     private fun initView(){
         binding.etName.addTextChangedListener(object : TextWatcher{
@@ -53,7 +55,7 @@ class AddDrinkDialog(
             }
         })
         binding.btnComplete.setOnClickListener {
-            val item = DrinkItem(curIcon, binding.etName.text.toString(), false, R.color.mainColor)
+            val item = DrinkItem(curIcon, binding.etName.text.toString(), false, curColor)
             listener.onComplete(item)
         }
         binding.rvIcon.layoutManager = SliderLayoutManager(binding.rvIcon, mContext).apply {

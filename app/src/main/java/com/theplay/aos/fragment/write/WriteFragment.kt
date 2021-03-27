@@ -2,6 +2,7 @@ package com.theplay.aos.fragment.write
 
 import android.content.Intent
 import android.util.Log
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -48,7 +49,10 @@ class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
         }
         binding.rvDrinks.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvDrinks.adapter = DrinkAdapter(requireActivity(), requireContext(), drinkList)
+        //https://github.com/akvelon/android-image-picker
+        ImagePicker.launch(this)
     }
+
 
     override fun initDataBinding() {
 
@@ -59,18 +63,7 @@ class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
     }
 
     override fun reLoadUI() {
-        //https://github.com/akvelon/android-image-picker
-        ImagePicker.launch(this)
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-//        if (view != null) {
-//            val parentViewGroup = requireView().parent as ViewGroup?
-//            parentViewGroup?.removeAllViews()
-//        }
-    }
-
 
     //            get a single image only
 //            val image: File? = getSingleImageOrNull(data)

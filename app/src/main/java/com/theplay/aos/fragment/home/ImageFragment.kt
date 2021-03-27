@@ -33,7 +33,8 @@ class ImageFragment() : BaseKotlinFragment<FragmentImageBinding>() {
 //        binding.ivImage.setImageDrawable() -> imageString 으로 이미지 세팅
 //        binding.ivImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.dummy_image1))
 
-        // 첫 로딩때 안먹힘
+
+//        var str = "https://d2tkmpefgqef0b.cloudfront.net/KakaoTalk_Photo_2021-03-20-17-24-02-12.png-202129261829059"
         if(isFile) {
             Glide.with(requireContext()).load(imageFile)
                 .apply(RequestOptions().transform(CenterCrop(), RoundedCorners(ViewUtils.convertDpToPixel(8f,requireContext()).toInt())))

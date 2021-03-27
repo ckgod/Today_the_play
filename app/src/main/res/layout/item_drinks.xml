@@ -14,14 +14,15 @@
             android:layout_height="28dp"
             android:background="@drawable/custom_round_background_black_14dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:paddingEnd="10dp">
+
             <ImageView
                 android:id="@+id/iv_icon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_drinks_wine_0"
+                android:background="@drawable/ic_drinks_wine_0"
+                android:backgroundTint="@color/mainColor"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -47,16 +48,17 @@
             android:layout_height="24dp"
             android:src="@drawable/ic_drink_minus"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="@id/ctl_main_content"
+            app:layout_constraintBottom_toBottomOf="@id/ctl_main_content"
+            android:layout_marginEnd="25dp"/>
         <ImageView
             android:id="@+id/btn_recipe"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_recipe_false"
             app:layout_constraintEnd_toStartOf="@id/btn_delete"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ctl_main_content"
+            app:layout_constraintBottom_toBottomOf="@id/ctl_main_content"
             android:layout_marginEnd="11dp"/>
         <ImageView
             android:id="@+id/btn_color"
@@ -65,9 +67,119 @@
             android:backgroundTint="@color/colorFacebook"
             android:background="@drawable/ic_oval_blur_red"
             app:layout_constraintEnd_toStartOf="@id/btn_recipe"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ctl_main_content"
+            app:layout_constraintBottom_toBottomOf="@id/ctl_main_content"
             android:layout_marginEnd="11dp"/>
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/expanded_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:paddingTop="6dp"
+            app:el_expanded="false">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="192dp"
+                android:layout_height="101dp"
+                android:background="@drawable/bg_color_picker"
+                android:layout_marginEnd="11dp">
+                <ImageView
+                    android:id="@+id/color1"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:backgroundTint="@color/colorWhite"
+                    android:background="@drawable/ic_oval_blur_red"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toStartOf="@id/color2"/>
+                <ImageView
+                    android:id="@+id/color2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:backgroundTint="@color/ingre7"
+                    android:background="@drawable/ic_oval_blur_red"
+                    app:layout_constraintStart_toEndOf="@id/color1"
+                    app:layout_constraintTop_toTopOf="@id/color1"
+                    app:layout_constraintEnd_toStartOf="@id/color3"/>
+                <ImageView
+                    android:id="@+id/color3"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:backgroundTint="@color/ingre5"
+                    android:background="@drawable/ic_oval_blur_red"
+                    app:layout_constraintStart_toEndOf="@id/color2"
+                    app:layout_constraintTop_toTopOf="@id/color1"
+                    app:layout_constraintEnd_toStartOf="@id/color4"/>
+                <ImageView
+                    android:id="@+id/color4"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:backgroundTint="@color/ingre6"
+                    android:background="@drawable/ic_oval_blur_red"
+                    app:layout_constraintStart_toEndOf="@id/color3"
+                    app:layout_constraintTop_toTopOf="@id/color1"
+                    app:layout_constraintEnd_toStartOf="@id/color5"/>
+                <ImageView
+                    android:id="@+id/color5"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:backgroundTint="@color/ingre8"
+                    android:background="@drawable/ic_oval_blur_red"
+                    app:layout_constraintStart_toEndOf="@id/color4"
+                    app:layout_constraintTop_toTopOf="@id/color1"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+                <ImageView
+                    android:id="@+id/color6"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:backgroundTint="@color/mainColor"
+                    android:background="@drawable/ic_oval_blur_red"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/color1"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toStartOf="@id/color2"/>
+                <ImageView
+                    android:id="@+id/color7"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:backgroundTint="@color/ingre3"
+                    android:background="@drawable/ic_oval_blur_red"
+                    app:layout_constraintStart_toEndOf="@id/color6"
+                    app:layout_constraintTop_toTopOf="@id/color6"
+                    app:layout_constraintEnd_toStartOf="@id/color8"/>
+                <ImageView
+                    android:id="@+id/color8"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:backgroundTint="@color/ingre"
+                    android:background="@drawable/ic_oval_blur_red"
+                    app:layout_constraintStart_toEndOf="@id/color7"
+                    app:layout_constraintTop_toTopOf="@id/color6"
+                    app:layout_constraintEnd_toStartOf="@id/color9"/>
+                <ImageView
+                    android:id="@+id/color9"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:backgroundTint="@color/ingre4"
+                    android:background="@drawable/ic_oval_blur_red"
+                    app:layout_constraintStart_toEndOf="@id/color8"
+                    app:layout_constraintTop_toTopOf="@id/color6"
+                    app:layout_constraintEnd_toStartOf="@id/color10"/>
+                <ImageView
+                    android:id="@+id/color10"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:backgroundTint="@color/ingre2"
+                    android:background="@drawable/ic_oval_blur_red"
+                    app:layout_constraintStart_toEndOf="@id/color9"
+                    app:layout_constraintTop_toTopOf="@id/color6"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </net.cachapa.expandablelayout.ExpandableLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

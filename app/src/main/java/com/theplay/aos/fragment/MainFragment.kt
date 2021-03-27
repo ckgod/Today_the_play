@@ -10,6 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.theplay.aos.R
 import com.theplay.aos.base.BaseKotlinFragment
@@ -34,8 +35,9 @@ class MainFragment() : BaseKotlinFragment<FragmentMainBinding>() {
         binding.btnWrite.setOnClickListener(object : OnSingleClickListener() {
             override fun onSingleClick(v: View) {
                 Log.d(TAG, "write click")
-//                listener?.goWrite()
+//                findNavController().navigate(MainFragmentDirections.actionMainFragmentToWriteFragment())
                 requireActivity().findNavController(R.id.main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToWriteFragment())
+//                findNavController().navigate(MainFragmentDirections.actionMainFragmentToNavWrite())
             }
         })
     }
@@ -51,13 +53,7 @@ class MainFragment() : BaseKotlinFragment<FragmentMainBinding>() {
     override fun reLoadUI() {
     }
 
-    fun interceptBackPressed() : Boolean {
-//        if(binding.vpPager.currentItem == 0) {
-//            binding.vpPager.setCurrentItem(1, true)
-//            return true
-//        }
-        return false
-    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -73,15 +69,13 @@ class MainFragment() : BaseKotlinFragment<FragmentMainBinding>() {
         // Now that BottomNavigationBar has restored its instance state
         // and its selectedItemId, we can proceed with setting up the
         // BottomNavigationBar with Navigation
-        setupBottomNavigationBar()
+        setupBottomNavigationBar() //여기에러
     }
 
     /**
      * Called on first creation and when restoring state.
      */
     private fun setupBottomNavigationBar() {
-
-
         val bottomNavigationView = binding.bottomNav
         binding.bottomNav.itemIconTintList = null
         binding.bottomNav.selectedItemId = R.id.nav_home
@@ -94,12 +88,20 @@ class MainFragment() : BaseKotlinFragment<FragmentMainBinding>() {
         )
 
         // Setup the bottom navigation view with a list of navigation graphs
-        val controller = bottomNavigationView.setupWithNavController(
+        val controller = bottomNavigationView.setupWithNavController( // 여기에러
                 navGraphIds = navGraphIds,
-                fragmentManager = childFragmentManager,
+                fragmentManager = requireActivity().supportFragmentManager,
                 containerId = R.id.nav_host_container,
                 intent = requireActivity().intent
         )
+//        if(currentNavController == null) {
+//            currentNavController = bottomNavigationView.setupWithNavController(
+//                navGraphIds = navGraphIds,
+//                fragmentManager = childFragmentManager,
+//                containerId = R.id.nav_host_container,
+//                intent = requireActivity().intent
+//            )
+//        }
 
         // Whenever the selected controller changes, setup the action bar.
         subscribeBottomNavigation(controller)
