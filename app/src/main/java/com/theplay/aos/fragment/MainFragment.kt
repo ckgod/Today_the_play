@@ -78,7 +78,6 @@ class MainFragment() : BaseKotlinFragment<FragmentMainBinding>() {
     private fun setupBottomNavigationBar() {
         val bottomNavigationView = binding.bottomNav
         binding.bottomNav.itemIconTintList = null
-        binding.bottomNav.selectedItemId = R.id.nav_home
 
         val navGraphIds = listOf(
                 R.navigation.nav_write,
@@ -88,23 +87,25 @@ class MainFragment() : BaseKotlinFragment<FragmentMainBinding>() {
         )
 
         // Setup the bottom navigation view with a list of navigation graphs
-        val controller = bottomNavigationView.setupWithNavController( // 여기에러
+
+//        val controller = bottomNavigationView.setupWithNavController( // 여기에러
+//                navGraphIds = navGraphIds,
+//                fragmentManager = requireActivity().supportFragmentManager,
+//                containerId = R.id.nav_host_container,
+//                intent = requireActivity().intent
+//        )
+        if(currentNavController == null) {
+            binding.bottomNav.selectedItemId = R.id.nav_home
+            currentNavController = bottomNavigationView.setupWithNavController(
                 navGraphIds = navGraphIds,
                 fragmentManager = requireActivity().supportFragmentManager,
                 containerId = R.id.nav_host_container,
                 intent = requireActivity().intent
-        )
-//        if(currentNavController == null) {
-//            currentNavController = bottomNavigationView.setupWithNavController(
-//                navGraphIds = navGraphIds,
-//                fragmentManager = childFragmentManager,
-//                containerId = R.id.nav_host_container,
-//                intent = requireActivity().intent
-//            )
-//        }
+            )
+        }
 
         // Whenever the selected controller changes, setup the action bar.
-        subscribeBottomNavigation(controller)
+        subscribeBottomNavigation(currentNavController!!)
 
 //        addNotificationBadge()
     }

@@ -27,6 +27,7 @@ class LoginFragment() : BaseKotlinFragment<FragmentLoginBinding>() {
     }
 
     override fun initDataBinding() {
+
 //        viewModel.loginResponse.observe(this@LoginFragment, Observer {
 //            if (it == null) {
 //                hideCircleProgress()

@@ -1,10 +1,12 @@
 package com.theplay.aos.fragment.account
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.theplay.aos.R
 import com.theplay.aos.base.BaseKotlinFragment
@@ -15,12 +17,17 @@ class SignUpNextFragment() : BaseKotlinFragment<FragmentSignUpNextBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_sign_up_next
 
+    // viewModel
+    private val viewModel by lazy { SignUpViewModel() }
+
     private var checkTos = false
     private var checkFirstNick = true
     private var checkSecondNick = false
     private var checkThirdNick = false
 
     override fun initStartView() {
+        showLottie()
+        viewModel.getRandomNick()
         binding.btnBack.setOnClickListener{
             findNavController().popBackStack()
         }
@@ -112,7 +119,41 @@ class SignUpNextFragment() : BaseKotlinFragment<FragmentSignUpNextBinding>() {
     }
 
     override fun initDataBinding() {
-
+        viewModel.randomNickResponse.observe(this@SignUpNextFragment, Observer {
+            if(it == null) {
+//                hideLottie()
+            }
+            else {
+//                hideLottie()
+                Log.d(TAG, "${it.msg}, ${it.code}")
+                Log.d(TAG, it.toString())
+                if(it.code == 0) {
+                    Log.d(TAG, it.list.toString())
+                    binding.tvFirstNick.text = it.list[0].nickname
+                    binding.tvSecondNick.text = it.list[1].nickname
+                }
+            }
+        })
+//        viewModel.loginResponse.observe(this@LoginFragment, Observer {
+//            if (it == null) {
+//                hideCircleProgress()
+//                showNetworkError()
+//            } else {
+//                Log.d(TAG, it.message + it.code)
+//                if (it.code == 100) {
+//                    Log.d(TAG, it.result)
+//                    val preferences: SharedPreferences = requireContext().getSharedPreferences(X_ACCESS_TOKEN, Context.MODE_PRIVATE)
+//                    val editor = preferences.edit()
+//                    editor.putString(X_ACCESS_TOKEN, it.result)
+//                    editor.apply()
+//                    viewModel.getUserInfo()
+//                } else {
+//                    hideCircleProgress()
+//                    var dialog = CustomDialogOneButton(context,getString(R.string.login_invalid_id),getString(R.string.confirm))
+//                    dialog.show()
+//                }
+//            }
+//        })
     }
 
     override fun initAfterBinding() {

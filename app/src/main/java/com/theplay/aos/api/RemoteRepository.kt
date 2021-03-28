@@ -4,6 +4,7 @@ import com.theplay.aos.api.model.*
 import io.reactivex.Observable
 
 class RemoteRepository{
+
     fun postLogin(loginRequest: LoginRequest): Observable<LoginResponse> {
         return RetrofitCreator.create(
             UserApi.UserApiImpl::class.java
@@ -32,6 +33,12 @@ class RemoteRepository{
         return RetrofitCreator.create(
             UserApi.UserApiImpl::class.java
         ).getNoticeDetail(noticeId)
+    }
+
+    fun getRandomNick() : Observable<RandomNickNameResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getRandomNick()
     }
 
 

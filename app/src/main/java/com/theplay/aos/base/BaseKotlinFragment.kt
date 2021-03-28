@@ -17,11 +17,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.theplay.aos.R
 import com.theplay.aos.customview.DelayedProgressDialog
+import com.theplay.aos.customview.LottieDialog
 import com.theplay.aos.utils.ViewUtils
 
 abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
-    var mProgressDialog: ProgressDialog? = null
     var mProgressCircle: DelayedProgressDialog? = null
+    var mLottieLoading: LottieDialog? = null
 
 //    lateinit var binding: T
     var databinding: T? = null
@@ -130,29 +131,15 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
         return true
     }
 
+    fun backStep() {
+        findNavController().popBackStack()
+    }
+
     fun showCustomToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
     fun showNetworkError() {
         Toast.makeText(context, getString(R.string.network_error), Toast.LENGTH_LONG).show()
-    }
-
-    fun showProgressDialog() {
-        if (mProgressDialog == null) {
-            mProgressDialog = ProgressDialog(context)
-        }
-
-        mProgressDialog?.let {
-            it.setMessage(getString(R.string.loading))
-            it.isIndeterminate = true
-            it.setCanceledOnTouchOutside(false)
-            it.show()
-        }
-    }
-    fun hideProgressDialog() {
-        if (mProgressDialog != null && mProgressDialog!!.isShowing) {
-            mProgressDialog!!.dismiss()
-        }
     }
 
     fun showCircleProgress() {
@@ -166,6 +153,16 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
         mProgressCircle?.cancel()
     }
 
+    fun showLottie() {
+        if(mLottieLoading == null) {
+            mLottieLoading = LottieDialog()
+        }
+        mLottieLoading?.show(requireActivity().supportFragmentManager, "base")
+    }
+
+    fun hideLottie() {
+        mLottieLoading?.cancel()
+    }
 
 
 }

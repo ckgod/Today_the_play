@@ -108,7 +108,7 @@
                         android:fontFamily="@font/eland_nice_medium"
                         android:textSize="20dp"
                         android:textColor="@color/mainForText"
-                        android:text="우아한 보드카"
+                        android:text=""
                         android:layout_marginStart="6.5dp"/>
                 </LinearLayout>
 
@@ -136,7 +136,7 @@
                         android:fontFamily="@font/eland_nice_medium"
                         android:textSize="20dp"
                         android:textColor="@color/colorWhite"
-                        android:text="우아한 보드카"
+                        android:text=""
                         android:layout_marginStart="6.5dp"/>
                 </LinearLayout>
 

@@ -10,6 +10,10 @@ import androidx.navigation.findNavController
 import com.theplay.aos.databinding.ActivityMainBinding
 import com.theplay.aos.fragment.MainFragment
 import com.theplay.aos.fragment.RootFragment
+import com.theplay.aos.fragment.account.LoginFragment
+import com.theplay.aos.fragment.account.PrevLoginFragment
+import com.theplay.aos.fragment.account.SignUpFragment
+import com.theplay.aos.fragment.account.SignUpNextFragment
 import com.theplay.aos.fragment.setting.SettingFragment
 import com.theplay.aos.fragment.write.WriteFragment
 import com.theplay.aos.fragment.write.WriteRecipeFragment
@@ -52,6 +56,21 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             is WriteRecipeFragment -> {
+                if(currentFragment.interceptBackPressed()) {
+                    return
+                }
+            }
+            is LoginFragment -> {
+                if(currentFragment.interceptBackPressed()) {
+                    return
+                }
+            }
+            is SignUpFragment -> {
+                if(currentFragment.interceptBackPressed()) {
+                    return
+                }
+            }
+            is SignUpNextFragment -> {
                 if(currentFragment.interceptBackPressed()) {
                     return
                 }
