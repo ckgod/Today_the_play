@@ -26,7 +26,7 @@ class SignUpNextFragment() : BaseKotlinFragment<FragmentSignUpNextBinding>() {
     private var checkThirdNick = false
 
     override fun initStartView() {
-        showLottie()
+//        showLottie()
         viewModel.getRandomNick()
         binding.btnBack.setOnClickListener{
             findNavController().popBackStack()

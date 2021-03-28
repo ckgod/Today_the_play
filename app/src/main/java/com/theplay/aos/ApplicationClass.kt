@@ -34,6 +34,8 @@ class ApplicationClass : Application() {
     companion object {  // Retrofit 인스턴스
         const val TAG = "ApplicationClass"
 
+        var emailPattern : String = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+
         var X_ACCESS_TOKEN = "x-access-token"
         var LOCK_TOKEN = "LOCK-TOKEN"
         var FCM_TOKEN = "FCM-TOKEN"

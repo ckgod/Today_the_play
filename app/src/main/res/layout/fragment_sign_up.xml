@@ -177,6 +177,7 @@
                 android:layout_marginStart="14dp"
                 android:layout_marginEnd="14dp"
                 android:fontFamily="@font/noto_sans_medium"
+                android:imeOptions="actionDone"
                 android:textSize="15dp"
                 android:hint="@string/sign_pw_check_hint"
                 android:includeFontPadding="false"
