@@ -11,13 +11,13 @@ class TokenInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val builder: Request.Builder = chain.request().newBuilder()
         if (spToken == null) {
-            Log.e("[Log.e] ", "sp is null in Interceptor")
+//            Log.e("[Log.e] ", "sp is null in Interceptor")
         }
         val jwtToken: String? = spToken?.getString(X_ACCESS_TOKEN, null)
-        Log.e("[Log.e] tag : ", "$jwtToken ")
+//        Log.e("[Log.e] tag : ", "$jwtToken ")
         if (jwtToken != null) {
-            builder.addHeader("x-access-token", jwtToken)
-            Log.e("[Log.e] tag : ", "add header")
+            builder.addHeader("X-ACCESS-TOKEN", jwtToken)
+//            Log.e("[Log.e] tag : ", "add header")
         }
         return chain.proceed(builder.build())
     }

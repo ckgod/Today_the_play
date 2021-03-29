@@ -1,6 +1,7 @@
 package com.theplay.aos.fragment.account
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -8,10 +9,12 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.theplay.aos.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.theplay.aos.R
+import com.theplay.aos.api.model.SignUpRequest
 import com.theplay.aos.base.BaseKotlinFragment
 import com.theplay.aos.databinding.FragmentSignUpNextBinding
-import com.theplay.aos.fragment.account.SignUpNextFragmentDirections
 
 class SignUpNextFragment() : BaseKotlinFragment<FragmentSignUpNextBinding>() {
     override val layoutResourceId: Int
@@ -19,6 +22,7 @@ class SignUpNextFragment() : BaseKotlinFragment<FragmentSignUpNextBinding>() {
 
     // viewModel
     private val viewModel by lazy { SignUpViewModel() }
+    private val safeArgs : SignUpNextFragmentArgs by navArgs()
 
     private var checkTos = false
     private var checkFirstNick = true
@@ -103,17 +107,19 @@ class SignUpNextFragment() : BaseKotlinFragment<FragmentSignUpNextBinding>() {
                     showCustomToast("이용약관을 동의해주세요")
                     return
                 }
+                showLottie()
                 if(checkFirstNick) {
-
+                    Log.d(TAG, "${safeArgs.email}, ${safeArgs.pw}, ${binding.tvFirstNick.text.toString()}")
+                    viewModel.postSignUp(SignUpRequest(safeArgs.pw, safeArgs.email, binding.tvFirstNick.text.toString(), safeArgs.pw))
                 }
                 else if(checkSecondNick) {
-
+                    Log.d(TAG, "${safeArgs.email} , ${safeArgs.pw}, ${binding.tvSecondNick.text.toString()}")
+                    viewModel.postSignUp(SignUpRequest(safeArgs.pw, safeArgs.email, binding.tvSecondNick.text.toString(), safeArgs.pw))
                 }
                 else if(checkThirdNick) {
-
+                    Log.d(TAG, "${safeArgs.email} , ${safeArgs.pw}, ${binding.etThirdNick.text.toString()}")
+                    viewModel.postSignUp(SignUpRequest(safeArgs.pw, safeArgs.email, binding.etThirdNick.text.toString(), safeArgs.pw))
                 }
-
-                findNavController().navigate(SignUpNextFragmentDirections.actionSignUpNextFragmentToMainFragment())
             }
         })
     }
@@ -131,6 +137,26 @@ class SignUpNextFragment() : BaseKotlinFragment<FragmentSignUpNextBinding>() {
                     Log.d(TAG, it.list.toString())
                     binding.tvFirstNick.text = it.list[0].nickname
                     binding.tvSecondNick.text = it.list[1].nickname
+                }
+            }
+        })
+        viewModel.signUpResponse.observe(this@SignUpNextFragment, Observer {
+            hideLottie()
+            if(it == null) {
+                showNetworkError()
+            }
+            else {
+                Log.d(TAG, it.msg)
+                if(it.code == 0) {
+                    val preferences: SharedPreferences = requireContext().getSharedPreferences(
+                        X_ACCESS_TOKEN, Context.MODE_PRIVATE)
+                    val editor = preferences.edit()
+                    editor.putString(X_ACCESS_TOKEN, it.data)
+                    editor.apply()
+                    findNavController().navigate(SignUpNextFragmentDirections.actionSignUpNextFragmentToMainFragment())
+                }
+                else {
+                    Log.d(TAG, it.msg)
                 }
             }
         })

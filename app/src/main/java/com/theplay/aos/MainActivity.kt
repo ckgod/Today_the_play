@@ -1,15 +1,11 @@
 package com.theplay.aos
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import com.theplay.aos.databinding.ActivityMainBinding
-import com.theplay.aos.fragment.MainFragment
-import com.theplay.aos.fragment.RootFragment
 import com.theplay.aos.fragment.account.LoginFragment
 import com.theplay.aos.fragment.account.PrevLoginFragment
 import com.theplay.aos.fragment.account.SignUpFragment
@@ -27,17 +23,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        val dataBinding: ActivityMainBinding =
-//            DataBindingUtil.setContentView(this, R.layout.activity_main)
+        val dataBinding: ActivityMainBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
-    }
-
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        Log.d(TAG, "touch")
-        return super.onTouchEvent(event)
+//        binding = ActivityMainBinding.inflate(layoutInflater)
+//        val view = binding.root
+//        setContentView(view)
     }
 
     override fun onBackPressed() {

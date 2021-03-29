@@ -105,7 +105,7 @@ class MainFragment() : BaseKotlinFragment<FragmentMainBinding>() {
         }
 
         // Whenever the selected controller changes, setup the action bar.
-        subscribeBottomNavigation(currentNavController!!)
+//        subscribeBottomNavigation(currentNavController!!)
 
 //        addNotificationBadge()
     }

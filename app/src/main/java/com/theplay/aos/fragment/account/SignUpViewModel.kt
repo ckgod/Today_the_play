@@ -32,6 +32,24 @@ class SignUpViewModel() : ViewModel() {
         )
     }
 
+    private var _signUpResponse : MutableLiveData<SignUpResponse> = MutableLiveData()
+    val signUpResponse get() = _signUpResponse
+
+    fun postSignUp(signUpRequest: SignUpRequest) {
+        CompositeDisposable().add(
+            remoteRepository.postSignUp(signUpRequest)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        signUpResponse.postValue(response)
+                    }, { throwable ->
+                        Log.d(TAG,"throwable.localizedMessage${throwable.localizedMessage}")
+                        signUpResponse.postValue(null)
+                    })
+        )
+    }
+
     companion object{
         const val TAG = "SignUpViewModel"
     }

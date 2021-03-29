@@ -17,7 +17,6 @@ class LoginFragmentViewModel() : ViewModel() {
     private var _loginResponse: MutableLiveData<LoginResponse> = MutableLiveData()
     val loginResponse get() = _loginResponse
 
-
     fun postLogin(loginRequest : LoginRequest) {
         CompositeDisposable().add(
             remoteRepository.postLogin(loginRequest)
@@ -27,8 +26,21 @@ class LoginFragmentViewModel() : ViewModel() {
                 { response ->
                     loginResponse.postValue(response)
                 }, { throwable ->
-                        Log.d(TAG,"throwable.localizedMessage${throwable.localizedMessage}")
-                        loginResponse.postValue(null)
+                        Log.d(TAG,"throwable.localizedMessage : ${throwable.localizedMessage}")
+                        //loginResponse.postValue(null)
+                        if (throwable is HttpException) {
+                            if(throwable.code() == 400) {
+                                loginResponse.postValue(LoginResponse(-1005,"","비밀번호를 다시 입력해주세요.",false))
+                            }
+                            else if(throwable.code() == 404) {
+                                loginResponse.postValue(LoginResponse(-1000,"","존재하지 않는 회원입니다.",false))
+                            }
+                            else {
+                                loginResponse.postValue(null)
+                            }
+                            Log.d(TAG, "code is ${throwable.code()}")
+                            Log.d(TAG, "message is ${throwable.response().toString()}")
+                        }
             })
         )
     }

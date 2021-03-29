@@ -73,7 +73,7 @@ fun BottomNavigationView.setupWithNavController(
         if (this.selectedItemId == graphId) {
             // Update livedata with the selected graph
             selectedNavController.value = navHostFragment.navController
-            attachNavHostFragment(fragmentManager, navHostFragment, index == 1) // 여기에러
+            attachNavHostFragment(fragmentManager, navHostFragment, index == 1)
         } else {
             detachNavHostFragment(fragmentManager, navHostFragment)
         }

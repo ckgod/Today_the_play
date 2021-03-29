@@ -36,7 +36,7 @@ class ApplicationClass : Application() {
 
         var emailPattern : String = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
-        var X_ACCESS_TOKEN = "x-access-token"
+        var X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
         var LOCK_TOKEN = "LOCK-TOKEN"
         var FCM_TOKEN = "FCM-TOKEN"
         var ALARM_ALLOW_TOKEN = "ALARM-ALLOW-TOKEN"
@@ -53,8 +53,6 @@ class ApplicationClass : Application() {
         // fcmToken
         var fcmToken : SharedPreferences? = null
         var alarmAllowToken : SharedPreferences? = null
-
-
 
     }
 }

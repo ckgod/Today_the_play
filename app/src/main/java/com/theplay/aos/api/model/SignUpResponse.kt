@@ -7,7 +7,7 @@ data class SignUpResponse(
     @SerializedName("code")
     var code: Int,
     @SerializedName("data")
-    var `data`: String,
+    var data: String,
     @SerializedName("msg")
     var msg: String,
     @SerializedName("success")

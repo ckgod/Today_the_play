@@ -3,6 +3,8 @@ package com.theplay.aos.fragment
 import android.os.Handler
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.theplay.aos.ApplicationClass.Companion.X_ACCESS_TOKEN
+import com.theplay.aos.ApplicationClass.Companion.spToken
 import com.theplay.aos.R
 import com.theplay.aos.base.BaseKotlinFragment
 import com.theplay.aos.databinding.FragmentSplashBinding
@@ -14,7 +16,14 @@ class SplashFragment() : BaseKotlinFragment<FragmentSplashBinding>() {
 
     override fun initStartView() {
         Handler().postDelayed({
-            findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToPrevLoginFragment())
+            val jwtToken: String? = spToken?.getString(X_ACCESS_TOKEN, null)
+            if(jwtToken == null) {
+                view?.findNavController()?.navigate(SplashFragmentDirections.actionSplashFragmentToPrevLoginFragment())
+            }
+            else {
+                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToMainFragment())
+            }
+//            findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToPrevLoginFragment())
         }, SPLASH_TIME_OUT)
     }
 

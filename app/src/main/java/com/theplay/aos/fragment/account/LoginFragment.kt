@@ -6,7 +6,9 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.theplay.aos.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.theplay.aos.R
+import com.theplay.aos.api.model.LoginRequest
 import com.theplay.aos.base.BaseKotlinFragment
 import com.theplay.aos.databinding.FragmentLoginBinding
 import com.theplay.aos.fragment.account.LoginFragmentDirections
@@ -21,13 +23,33 @@ class LoginFragment() : BaseKotlinFragment<FragmentLoginBinding>() {
     override fun initStartView() {
         binding.btnLogin.setOnClickListener(object : OnSingleClickListener() {
             override fun onSingleClick(v: View) {
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
+                showLottie()
+                viewModel.postLogin(LoginRequest(binding.etEmail.text.toString(), binding.etPw.text.toString()))
             }
         })
     }
 
     override fun initDataBinding() {
-
+        viewModel.loginResponse.observe(this@LoginFragment, Observer {
+            hideLottie()
+            if(it == null) {
+                showNetworkError()
+            }
+            else {
+                Log.d(TAG, it.msg)
+                if(it.code == 0) {
+                    it.data?.let { it1 -> Log.d(TAG, it1) }
+                    val preferences: SharedPreferences = requireContext().getSharedPreferences(X_ACCESS_TOKEN, Context.MODE_PRIVATE)
+                    val editor = preferences.edit()
+                    editor.putString(X_ACCESS_TOKEN, it.data)
+                    editor.apply()
+                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
+                }
+                else {
+                    showCustomToast(it.msg)
+                }
+            }
+        })
 //        viewModel.loginResponse.observe(this@LoginFragment, Observer {
 //            if (it == null) {
 //                hideCircleProgress()

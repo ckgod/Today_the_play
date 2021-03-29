@@ -6,19 +6,19 @@ import retrofit2.http.*
 
 class UserApi {
     interface UserApiImpl {
-        @POST("v1/sign-in")
+        @POST("/v1/sign-in")
         fun postLogin(@Body params: LoginRequest): Observable<LoginResponse>
 
-        @POST("v1/sign-up")
+        @POST("/v1/sign-up")
         fun postSignUp(@Body params : SignUpRequest) : Observable<SignUpResponse>
 
-        @PUT("v1/user/nickname")
+        @PUT("/v1/user/nickname")
         fun putNickName(@Body params : NickNameRequest) : Observable<DefaultResponse>
 
-        @GET("v1/user/notice")
+        @GET("/v1/user/notice")
         fun getNotice() : Observable<NoticeResponse>
 
-        @GET("v1/user/notice/{noticeId}")
+        @GET("/v1/user/notice/{noticeId}")
         fun getNoticeDetail(@Path("noticeId") noticeId : Int):Observable<NoticeDetailResponse>
 
         @GET("/v1/sign-up")

@@ -70,6 +70,7 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
     ): View? {
         if(!(::binding.isInitialized)) {
             binding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
+            binding.lifecycleOwner = viewLifecycleOwner
             initStartView()
             initDataBinding()
             initAfterBinding()
@@ -140,17 +141,6 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
     }
     fun showNetworkError() {
         Toast.makeText(context, getString(R.string.network_error), Toast.LENGTH_LONG).show()
-    }
-
-    fun showCircleProgress() {
-        if(mProgressCircle == null) {
-            mProgressCircle = DelayedProgressDialog()
-        }
-        mProgressCircle?.show(requireActivity().supportFragmentManager, "base")
-    }
-
-    fun hideCircleProgress() {
-        mProgressCircle?.cancel()
     }
 
     fun showLottie() {

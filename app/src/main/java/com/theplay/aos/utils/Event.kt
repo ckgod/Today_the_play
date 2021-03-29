@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.smarttoolfactory.tutorial5_4navigationui_memoryleakcheck.util
+package com.theplay.aos.utils
 
 import androidx.lifecycle.Observer
 
