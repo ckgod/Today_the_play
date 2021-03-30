@@ -10,7 +10,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.theplay.aos.R
 import com.theplay.aos.base.BaseKotlinFragment
 import com.theplay.aos.databinding.FragmentMyPeedBinding
-import com.theplay.aos.fragment.MainFragmentDirections
 
 interface MyPeedListener {
     fun clickSetting()
@@ -26,7 +25,7 @@ class MyPeedFragment() : BaseKotlinFragment<FragmentMyPeedBinding>() {
 
     override fun initStartView() {
         binding.btnSetting.setOnClickListener {
-            requireActivity().findNavController(R.id.main_nav_host_fragment).navigate(R.id.action_mainFragment_to_settingFragment)
+            findNavController().navigate(MyPeedFragmentDirections.actionMyPeedFragmentToSettingActivity())
         }
 
         binding.vpPager.isSaveEnabled = false

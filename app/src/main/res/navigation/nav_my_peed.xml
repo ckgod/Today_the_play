@@ -11,12 +11,16 @@
         android:label="MyPeedFragment"
         tools:layout="@layout/fragment_my_peed">
         <action
-            android:id="@+id/action_myPeedFragment_to_settingFragment"
-            app:destination="@id/settingFragment"/>
+            android:id="@+id/action_myPeedFragment_to_settingActivity"
+            app:destination="@id/settingActivity"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
     </fragment>
-    <fragment
-        android:id="@+id/settingFragment"
-        android:name="com.theplay.aos.fragment.setting.SettingFragment"
-        android:label="SettingFragment"
+    <activity
+        android:id="@+id/settingActivity"
+        android:name="com.theplay.aos.SettingActivity"
+        android:label="SettingActivity"
         tools:layout="@layout/fragment_setting"/>
 </navigation>

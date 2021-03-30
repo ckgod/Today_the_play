@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.theplay.aos.MainActivity
 import com.theplay.aos.R
 import com.theplay.aos.customview.DelayedProgressDialog
 import com.theplay.aos.customview.LottieDialog
@@ -33,6 +34,7 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
      * ex) R.layout.activity_sbs_main
      */
     abstract val layoutResourceId: Int
+    open val showBottomNav : Boolean = true
 
     /**
      * 레이아웃을 띄운 직후 호출.
@@ -61,6 +63,8 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
      */
     abstract fun reLoadUI()
 
+
+
     private var isSetBackButtonValid = false
 
     override fun onCreateView(
@@ -75,6 +79,7 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
             initDataBinding()
             initAfterBinding()
         }
+        (requireActivity() as? MainActivity)?.setBottomNavVisible(showBottomNav)
         reLoadUI()
         return binding.root
     }

@@ -2,6 +2,7 @@ package com.theplay.aos.fragment.setting
 
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.theplay.aos.MainActivity
 import com.theplay.aos.R
 import com.theplay.aos.base.BaseKotlinFragment
 import com.theplay.aos.databinding.FragmentSettingBinding
@@ -12,6 +13,8 @@ import com.theplay.aos.item.SettingItem
 class SettingFragment() : BaseKotlinFragment<FragmentSettingBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_setting
+    override val showBottomNav: Boolean
+        get() = false
 
     var profileList : MutableList<SettingItem> = mutableListOf()
     var appList : MutableList<SettingItem> = mutableListOf()
@@ -21,7 +24,8 @@ class SettingFragment() : BaseKotlinFragment<FragmentSettingBinding>() {
         appList = mutableListOf()
 
         binding.btnBack.setOnClickListener {
-            findNavController().popBackStack()
+            requireActivity().finish()
+            requireActivity().overridePendingTransition(R.anim.right_in, R.anim.right_out)
         }
 
         binding.rvProfile.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -47,6 +51,11 @@ class SettingFragment() : BaseKotlinFragment<FragmentSettingBinding>() {
     }
 
     override fun reLoadUI() {
+    }
+
+    fun removeActivity() {
+        requireActivity().finish()
+        requireActivity().overridePendingTransition(R.anim.right_in, R.anim.right_out)
     }
 
 

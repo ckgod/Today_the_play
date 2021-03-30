@@ -30,7 +30,8 @@ class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
 
     override fun initStartView() {
         binding.btnBack.setOnClickListener {
-            findNavController().popBackStack()
+            requireActivity().finish()
+            requireActivity().overridePendingTransition(R.anim.slide_from_right,R.anim.slide_to_left)
         }
         binding.vpPager.isSaveEnabled = false
         binding.vpPager.isUserInputEnabled = true
@@ -65,13 +66,18 @@ class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
     override fun reLoadUI() {
     }
 
+    fun removeActivity() {
+        requireActivity().finish()
+        requireActivity().overridePendingTransition(R.anim.slide_from_right,R.anim.slide_to_left)
+    }
+
     //            get a single image only
 //            val image: File? = getSingleImageOrNull(data)
 //            Log.d(TAG, image.toString())
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (shouldResolve(requestCode, resultCode)) {
             if (data?.extras?.getInt("cancelSelect") == -1) {
-                findNavController().popBackStack()
+                removeActivity()
                 return
             }
             Log.d(TAG, "onActivity Result")

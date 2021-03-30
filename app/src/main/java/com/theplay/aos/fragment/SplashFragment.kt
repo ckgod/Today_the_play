@@ -1,10 +1,12 @@
 package com.theplay.aos.fragment
 
+import android.content.Intent
 import android.os.Handler
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.theplay.aos.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.theplay.aos.ApplicationClass.Companion.spToken
+import com.theplay.aos.MainActivity
 import com.theplay.aos.R
 import com.theplay.aos.base.BaseKotlinFragment
 import com.theplay.aos.databinding.FragmentSplashBinding
@@ -18,10 +20,17 @@ class SplashFragment() : BaseKotlinFragment<FragmentSplashBinding>() {
         Handler().postDelayed({
             val jwtToken: String? = spToken?.getString(X_ACCESS_TOKEN, null)
             if(jwtToken == null) {
+//                val nextIntent = Intent(requireContext(), MainActivity::class.java)
+//                startActivity(nextIntent)
+//                requireActivity().finish()
                 view?.findNavController()?.navigate(SplashFragmentDirections.actionSplashFragmentToPrevLoginFragment())
             }
             else {
-                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToMainFragment())
+                val nextIntent = Intent(requireContext(), MainActivity::class.java)
+                startActivity(nextIntent)
+                requireActivity().finish()
+//                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToMainActivity())
+//                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToMainFragment())
             }
 //            findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToPrevLoginFragment())
         }, SPLASH_TIME_OUT)

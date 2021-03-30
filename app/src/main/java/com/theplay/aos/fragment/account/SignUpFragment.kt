@@ -15,7 +15,6 @@ class SignUpFragment() : BaseKotlinFragment<FragmentSignUpBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_sign_up
 
-
     var emailCheck = false
     var pwCheck = false
     var pwCheckCheck = false

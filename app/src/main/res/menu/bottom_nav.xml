@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/nav_write"
+        android:id="@+id/nav_tmp"
         android:icon="@drawable/menu_write_selector"
         android:title="plus"
         android:enabled="false"/>

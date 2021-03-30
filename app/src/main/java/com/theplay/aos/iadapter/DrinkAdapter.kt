@@ -47,7 +47,8 @@ class DrinkAdapter(private val activity : Activity, private val context: Context
             }
 
             binding.btnRecipe.setOnClickListener {
-                activity.findNavController(R.id.main_nav_host_fragment).navigate(WriteFragmentDirections.actionWriteFragmentToWriteRecipeFragment(item.icon,item.name, item.colorType))
+                activity.findNavController(R.id.main_nav_host_fragment).navigate(WriteFragmentDirections.actionWriteFragmentToWriteRecipeFragment(item.icon,item.name,item.colorType))
+//                activity.findNavController(R.id.main_nav_host_fragment).navigate(WriteFragmentDirections.actionWriteFragmentToWriteRecipeFragment(item.icon,item.name, item.colorType))
             }
 
             binding.color1.setOnClickListener {

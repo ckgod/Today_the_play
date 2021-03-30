@@ -3,11 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_write"
-    app:startDestination="@id/tmpFragment">
+    app:startDestination="@id/writeFragment">
 
     <fragment
-        android:id="@+id/tmpFragment"
-        android:name="com.theplay.aos.TmpFragment"
-        android:label="TmpFragment" />
-
+        android:id="@+id/writeFragment"
+        android:name="com.theplay.aos.fragment.write.WriteFragment"
+        android:label="WriteFragment"
+        tools:layout="@layout/fragment_write">
+        <action
+            android:id="@+id/action_writeFragment_to_writeRecipeFragment"
+            app:destination="@id/writeRecipeFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/writeRecipeFragment"
+        android:name="com.theplay.aos.fragment.write.WriteRecipeFragment"
+        android:label="WriteRecipeFragment"
+        tools:layout="@layout/fragment_write_recipe">
+        <argument
+            android:name="icon"
+            app:argType="integer" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="colorType"
+            app:argType="integer" />
+    </fragment>
 </navigation>
