@@ -24,6 +24,24 @@ class UserApi {
         @GET("/v1/sign-up")
         fun getRandomNick():Observable<RandomNickNameResponse>
 
+        @GET("/v1/user/main-info")
+        fun getMyPageTopInfo() : Observable<MyPageTopResponse>
+
+        @GET("/v1/popular-recipes") // 인기 레시피 조회
+        fun getHotRecipe(@Query("pageNumber") pageNumber : Int, @Query("pageSize") pageSize : Int) : Observable<HotRecipeResponse>
+
+        @GET("/v1/main-posts")
+        fun getMainBoard(@Query("pageNumber") pageNumber: Int, @Query("pageSize") pageSize: Int) : Observable<MainBoardResponse>
+
+        @GET("/v1/user/setting")
+        fun getSettingProfile() :Observable<SettingProfileResponse>
+
+        @PUT("/v1/user/nickname")
+        fun putChangeNickName(@Body params : ChangeNickRequest) : Observable<DefaultResponse>
+
+        @PUT("/v1/user/password")
+        fun putChangePw(@Body params : ChangePwRequest) : Observable<DefaultResponse>
+
 //        //15
 //        @GET("diaries")
 //        fun getDiaries(

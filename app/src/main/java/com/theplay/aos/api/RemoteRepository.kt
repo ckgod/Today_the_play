@@ -41,5 +41,39 @@ class RemoteRepository{
         ).getRandomNick()
     }
 
+    fun getMyPageTopInfo() : Observable<MyPageTopResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getMyPageTopInfo()
+    }
 
+    fun getHotRecipe(pageNumber : Int, pageSize : Int) : Observable<HotRecipeResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getHotRecipe(pageNumber, pageSize)
+    }
+
+    fun getMainBoard(pageNumber : Int, pageSize : Int) : Observable<MainBoardResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getMainBoard(pageNumber, pageSize)
+    }
+
+    fun getSettingProfile() : Observable<SettingProfileResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getSettingProfile()
+    }
+
+    fun putChangeNickName(changeNickRequest: ChangeNickRequest) : Observable<DefaultResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).putChangeNickName(changeNickRequest)
+    }
+
+    fun putChangePw(changePwRequest: ChangePwRequest) : Observable<DefaultResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).putChangePw(changePwRequest)
+    }
 }

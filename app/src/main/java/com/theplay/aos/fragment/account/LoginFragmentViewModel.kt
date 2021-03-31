@@ -41,6 +41,9 @@ class LoginFragmentViewModel() : ViewModel() {
                             Log.d(TAG, "code is ${throwable.code()}")
                             Log.d(TAG, "message is ${throwable.response().toString()}")
                         }
+                        else {
+                            loginResponse.postValue(null)
+                        }
             })
         )
     }

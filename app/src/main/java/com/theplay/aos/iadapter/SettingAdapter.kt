@@ -21,6 +21,7 @@ import com.theplay.aos.databinding.ItemMyPageBoardAllBinding
 import com.theplay.aos.databinding.ItemRecipeColorBinding
 import com.theplay.aos.databinding.ItemRecipeImageBinding
 import com.theplay.aos.databinding.ItemSettingBinding
+import com.theplay.aos.fragment.setting.SettingFragmentDirections
 import com.theplay.aos.item.MyPageBoardAllItem
 import com.theplay.aos.item.RecipeColorItem
 import com.theplay.aos.item.RecipeImageItem
@@ -50,13 +51,11 @@ class SettingAdapter(
     inner class SettingVH(var binding: ItemSettingBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: SettingItem) {
             binding.tvName.text = item.name
+            setIcon(binding, item)
             itemView.setOnClickListener {
                 when (item.type) {
                     MODIFY_PROFILE -> {
-
-                    }
-                    BLOCK_USER -> {
-
+                        activity.findNavController(R.id.main_nav_host_fragment).navigate(SettingFragmentDirections.actionSettingFragmentToSettingProfileFragment())
                     }
                     LOGOUT -> {
                         var dialog = CustomDialogTwoButton(
@@ -105,15 +104,41 @@ class SettingAdapter(
         }
     }
 
+    fun setIcon(binding: ItemSettingBinding, item: SettingItem) {
+        when (item.type) {
+            MODIFY_PROFILE -> {
+                binding.ivSetting.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_profile_setting))
+            }
+            LOGOUT -> {
+                binding.ivSetting.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_logout))
+            }
+            NOTICE -> {
+                binding.ivSetting.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_notice))
+            }
+            ASK -> {
+                binding.ivSetting.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_ask_the_play))
+            }
+            SET_ALARM -> {
+                binding.ivSetting.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_alarm_setting))
+            }
+            QUIT_ACCOUNT -> {
+                binding.ivSetting.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_quit_account))
+            }
+            OPEN_SOURCE -> {
+                binding.ivSetting.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_open_source))
+            }
+        }
+    }
+
     companion object {
         const val TAG = "SettingAdapter"
         const val MODIFY_PROFILE = 1
-        const val BLOCK_USER = 2
-        const val LOGOUT = 3
-        const val NOTICE = 4
-        const val ASK = 5
-        const val SET_ALARM = 6
-        const val QUIT_ACCOUNT = 7
-        const val OPEN_SOURCE = 8
+//        const val BLOCK_USER = 2
+        const val LOGOUT = 2
+        const val NOTICE = 3
+        const val ASK = 4
+        const val SET_ALARM = 5
+        const val QUIT_ACCOUNT = 6
+        const val OPEN_SOURCE = 7
     }
 }

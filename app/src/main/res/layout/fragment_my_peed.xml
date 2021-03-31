@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/eland_nice_medium"
-                android:text="우아한 보드카"
+                android:text=""
                 android:textColor="@color/colorWhite"
                 android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="parent"

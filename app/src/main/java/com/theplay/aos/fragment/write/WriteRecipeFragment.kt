@@ -17,17 +17,17 @@ class WriteRecipeFragment() : BaseKotlinFragment<FragmentWriteRecipeBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_write_recipe
 
-//    private val safeArgs : WriteRecipeFragmentArgs by navArgs()
+    private val safeArgs : WriteRecipeFragmentArgs by navArgs()
 
     var stepList : MutableList<WriteRecipeStepItem> = mutableListOf()
     var curStep = 1
 
     override fun initStartView() {
         Log.d(TAG, findNavController().toString())
-//        binding.ivIcon.background = ContextCompat.getDrawable(requireContext(), safeArgs.icon)
-//        binding.tvName.text = safeArgs.name
-//        binding.ivIcon.backgroundTintList = ContextCompat.getColorStateList(requireContext(), safeArgs.colorType)
-//        binding.tvName.setTextColor(ContextCompat.getColor(requireContext(), safeArgs.colorType))
+        binding.ivIcon.background = ContextCompat.getDrawable(requireContext(), safeArgs.icon)
+        binding.tvName.text = safeArgs.name
+        binding.ivIcon.backgroundTintList = ContextCompat.getColorStateList(requireContext(), safeArgs.colorType)
+        binding.tvName.setTextColor(ContextCompat.getColor(requireContext(), safeArgs.colorType))
         binding.rvRecipesEx.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         stepList.add(WriteRecipeStepItem(curStep,""))
         curStep++

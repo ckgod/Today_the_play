@@ -1,6 +1,9 @@
 package com.theplay.aos.fragment.recipe
 
+import android.util.Log
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.theplay.aos.ApplicationClass.Companion.colorHashMap
 import com.theplay.aos.R
 import com.theplay.aos.base.BaseKotlinFragment
 import com.theplay.aos.databinding.FragmentRecipeMainBinding
@@ -15,6 +18,8 @@ class RecipeMainFragment() : BaseKotlinFragment<FragmentRecipeMainBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_recipe_main
 
+    private val viewModel by lazy { RecipeMainViewModel() }
+
     var itemList: MutableList<RecipeItem> = mutableListOf()
 
     var imageList: MutableList<RecipeImageItem> = mutableListOf()
@@ -24,15 +29,41 @@ class RecipeMainFragment() : BaseKotlinFragment<FragmentRecipeMainBinding>() {
     override fun initStartView() {
         binding.rv.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        setDummy()
+//        setDummy()
     }
 
     override fun initDataBinding() {
+        viewModel.hotRecipeResponse.observe(this@RecipeMainFragment, Observer {
+            if(it == null) {
+                showNetworkError()
+            }
+            else {
+                Log.d(TAG, it.toString())
+                if(it.code == 0) {
+                    for(item in it.data.content) {
+                        imageList = mutableListOf()
+                        colorList = mutableListOf()
+                        nameList = mutableListOf()
+                        for(image in item.images) {
+                            imageList.add(RecipeImageItem(image))
+                        }
+                        for(material in item.ingredients) {
+                            colorList.add(RecipeColorItem(colorHashMap[material.color]!!))
+                            nameList.add(RecipeNameItem(material.name, colorHashMap[material.color]!!))
+                        }
+                        itemList.add(RecipeItem(item.alcoholTagName,imageList,colorList,nameList))
+                    }
+                    binding.rv.adapter = RecipeAdapter(requireActivity(), requireContext(), itemList)
+                }
+            }
+            hideLottie()
+        })
 
     }
 
     override fun initAfterBinding() {
-
+        showLottie()
+        viewModel.getHotRecipe(0,10)
     }
 
     override fun reLoadUI() {
@@ -74,7 +105,6 @@ class RecipeMainFragment() : BaseKotlinFragment<FragmentRecipeMainBinding>() {
         )
 
         itemList.add(RecipeItem("모히또",imageList,colorList,nameList))
-        binding.rv.adapter = RecipeAdapter(requireActivity(), requireContext(), itemList)
     }
 
 

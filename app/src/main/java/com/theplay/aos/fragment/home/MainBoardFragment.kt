@@ -1,7 +1,10 @@
 package com.theplay.aos.fragment.home
 
+import android.util.Log
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.theplay.aos.R
+import com.theplay.aos.api.model.MainBoardResponse
 import com.theplay.aos.base.BaseKotlinFragment
 import com.theplay.aos.databinding.FragmentMainBoardBinding
 import com.theplay.aos.databinding.FragmentTmpBinding
@@ -12,29 +15,31 @@ class MainBoardFragment() : BaseKotlinFragment<FragmentMainBoardBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_main_board
 
-
-    var itemList : MutableList<MainBoardItem> = mutableListOf()
+    private val viewModel by lazy { HomeViewModel() }
+    var itemList : MutableList<MainBoardResponse.Content> = mutableListOf()
 
     override fun initStartView() {
         binding.rv.layoutManager = GridLayoutManager(requireContext(),2)
-        itemList.add(MainBoardItem(true,1))
-        itemList.add(MainBoardItem(true,1))
-        itemList.add(MainBoardItem(true,1))
-        itemList.add(MainBoardItem(true,1))
-        itemList.add(MainBoardItem(true,1))
-        itemList.add(MainBoardItem(true,1))
-        itemList.add(MainBoardItem(true,1))
-        itemList.add(MainBoardItem(true,1))
-        itemList.add(MainBoardItem(true,1))
-        binding.rv.adapter = MainBoardAdapter(requireActivity(), requireContext(), itemList)
     }
 
     override fun initDataBinding() {
+        viewModel.mainBoardResponse.observe(this@MainBoardFragment, Observer {
+            if(it == null) showNetworkError()
+            else {
+                Log.d(TAG, it.toString())
+                if(it.code == 0) {
+                    for(item in it.data.content) {
+                        itemList.add(item)
+                    }
+                    binding.rv.adapter = MainBoardAdapter(requireActivity(), requireContext(), itemList)
+                }
+            }
+        })
 
     }
 
     override fun initAfterBinding() {
-
+        viewModel.getMainBoard(0,10)
     }
 
     override fun reLoadUI() {

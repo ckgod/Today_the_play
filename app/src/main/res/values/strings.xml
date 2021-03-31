@@ -74,6 +74,27 @@
     <string name="setting_a_5">오픈 소스 라이선스</string>
     <string name="setting_version_info">최신 버전을 사용 중입니다</string>
     <string name="setting_version">1.0.0</string>
+    
+    <!-- setting profile -->
+    <string name="setting_profile_nick_name">닉네임</string>
+    <string name="setting_profile_id">아이디</string>
+    <string name="setting_profile_edit">개인정보 수정</string>
+    <string name="setting_profile_edit_nick_name">닉네임 변경하기</string>
+    <string name="setting_profile_edit_pw">비밀번호 변경하기</string>
+    <string name="setting_profile_edit_show_range">공개 범위 설정</string>
+    <string name="edit_nick_name">닉네임 변경</string>
+    <string name="edit_nick_name_hint">변경할 새로운 닉네임을 입력해주세요</string>
+    <string name="edit_nick_name_change">변경</string>
+    <string name="edit_pw">비밀번호 변경하기</string>
+    <string name="edit_pw_origin">기존 비밀번호</string>
+    <string name="edit_pw_new">새로운 비밀번호</string>
+    <string name="edit_pw_check">비밀번호 확인</string>
+    <string name="edit_pw_new_info">6자리 이상, 12자리 미만의 비밀번호</string>
+    <string name="edit_pw_change">변경하기</string>
+
+    <string name="edit_privacy">공개 범위 설정</string>
+    <string name="edit_privacy_small_info">좋아요, 팔로워 수 및 나의 레시피</string>
+    <string name="edit_privacy_big_info">계정 정보 비공개</string>
 
     <!-- logout -->
     <string name="logout_title">로그아웃</string>

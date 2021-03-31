@@ -9,5 +9,43 @@
         android:id="@+id/settingFragment"
         android:name="com.theplay.aos.fragment.setting.SettingFragment"
         android:label="SettingFragment"
-        tools:layout="@layout/fragment_setting"/>
+        tools:layout="@layout/fragment_setting">
+        <action
+            android:id="@+id/action_settingFragment_to_settingProfileFragment"
+            app:destination="@id/settingProfileFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingProfileFragment"
+        android:name="com.theplay.aos.fragment.setting.SettingProfileFragment"
+        android:label="SettingProfileFragment"
+        tools:layout="@layout/fragment_setting_profile">
+        <action
+            android:id="@+id/action_settingProfileFragment_to_settingChangePwFragment"
+            app:destination="@id/settingChangePwFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
+        <action
+            android:id="@+id/action_settingProfileFragment_to_settingPrivacyFragment"
+            app:destination="@id/settingPrivacyFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingChangePwFragment"
+        android:name="com.theplay.aos.fragment.setting.SettingChangePwFragment"
+        android:label="SettingChangePwFragment"
+        tools:layout="@layout/fragment_setting_change_pw"/>
+    <fragment
+        android:id="@+id/settingPrivacyFragment"
+        android:name="com.theplay.aos.fragment.setting.SettingPrivacyFragment"
+        android:label="SettingPrivacyFragment"
+        tools:layout="@layout/fragment_setting_privacy"/>
 </navigation>

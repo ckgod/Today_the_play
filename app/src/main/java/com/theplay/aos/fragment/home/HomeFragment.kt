@@ -1,8 +1,11 @@
 package com.theplay.aos.fragment.home
 
+import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import com.theplay.aos.ApplicationClass.Companion.userInfo
 import com.theplay.aos.R
 import com.theplay.aos.base.BaseKotlinFragment
 import com.theplay.aos.databinding.FragmentHomeBinding
@@ -11,7 +14,7 @@ class HomeFragment() : BaseKotlinFragment<FragmentHomeBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_home
 
-
+    private val viewModel by lazy { HomeViewModel() }
     private var viewPagerAdapter: ViewPagerAdapter? = null
 
     override fun initStartView() {
@@ -27,21 +30,24 @@ class HomeFragment() : BaseKotlinFragment<FragmentHomeBinding>() {
         TabLayoutMediator(binding.tlTab, binding.vpPager) { tab, position ->
             tab.text = tabLayoutTextArray[position]
         }.attach()
-//        binding.tlTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-//            override fun onTabReselected(tab: TabLayout.Tab?) {}
-//            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-//            override fun onTabSelected(tab: TabLayout.Tab?) {
-//                tab?.position?.let { binding.vpPager?.setCurrentItem(it, false) }
-//            }
-//        })
     }
 
     override fun initDataBinding() {
-
+        viewModel.myPageTopResponse.observe(this@HomeFragment, Observer {
+            if(it == null) {
+                showNetworkError()
+            }
+            else {
+                Log.d(TAG, "유저정보 받아오기 ${it.msg}")
+                if(it.code == 0) {
+                    userInfo = it
+                }
+            }
+        })
     }
 
     override fun initAfterBinding() {
-
+        viewModel.getMyPageTopInfo()
     }
 
     override fun reLoadUI() {
