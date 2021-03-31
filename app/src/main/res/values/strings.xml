@@ -10,6 +10,7 @@
     <string name="cancel">취소</string>
     <string name="app_version">현재 버전 1.0.0</string>
     <string name="default_notification_channel_id">default_notification_channel_id</string>
+    <string name="ask_email">theplaydev2021@gmail.com</string>
 
 
     <!-- 회원가입 / 로그인 -->
@@ -74,6 +75,9 @@
     <string name="setting_a_5">오픈 소스 라이선스</string>
     <string name="setting_version_info">최신 버전을 사용 중입니다</string>
     <string name="setting_version">1.0.0</string>
+
+    <!-- notice -->
+    <string name="notice">공지사항</string>
     
     <!-- setting profile -->
     <string name="setting_profile_nick_name">닉네임</string>
@@ -99,6 +103,9 @@
     <!-- logout -->
     <string name="logout_title">로그아웃</string>
     <string name="logout_content">우아한 보드카 계정에서\n로그아웃 하시겠어요?</string>
+    <!-- quit -->
+    <string name="quit_title">계정 탈퇴</string>
+    <string name="quit_content">모든 정보를 지우고\n우아한 보드카 계정을 탈퇴하실건가요?</string>
 
 
 

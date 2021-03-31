@@ -4,29 +4,19 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.theplay.aos.ApplicationClass.Companion.X_ACCESS_TOKEN
-import com.theplay.aos.MainActivity
 import com.theplay.aos.R
 import com.theplay.aos.SplashActivity
 import com.theplay.aos.customview.CustomDialogListener
 import com.theplay.aos.customview.CustomDialogTwoButton
-import com.theplay.aos.databinding.ItemMyPageBoardAllBinding
-import com.theplay.aos.databinding.ItemRecipeColorBinding
-import com.theplay.aos.databinding.ItemRecipeImageBinding
 import com.theplay.aos.databinding.ItemSettingBinding
 import com.theplay.aos.fragment.setting.SettingFragmentDirections
-import com.theplay.aos.item.MyPageBoardAllItem
-import com.theplay.aos.item.RecipeColorItem
-import com.theplay.aos.item.RecipeImageItem
 import com.theplay.aos.item.SettingItem
-import com.theplay.aos.utils.ViewUtils
 
 
 class SettingAdapter(
@@ -85,19 +75,47 @@ class SettingAdapter(
                         dialog.show()
                     }
                     NOTICE -> {
-
+                        activity.findNavController(R.id.main_nav_host_fragment).navigate(SettingFragmentDirections.actionSettingFragmentToSettingNoticeFragment())
                     }
                     ASK -> {
-
+                        val browserIntent = Intent(Intent.ACTION_SEND)
+                        browserIntent.type = "plain/text"
+                        val address = arrayOf(context.getString(R.string.ask_email))
+                        browserIntent.putExtra(Intent.EXTRA_EMAIL, address)
+                        activity.startActivity(browserIntent)
                     }
                     SET_ALARM -> {
 
                     }
                     QUIT_ACCOUNT -> {
-
+                        var dialog = CustomDialogTwoButton(
+                            context,
+                            context.getString(R.string.quit_title),
+                            context.getString(R.string.quit_content),
+                            context.getString(R.string.quit_title),
+                            context.getString(R.string.cancel)
+                        ).apply {
+                            setDialogListener(object : CustomDialogListener {
+                                override fun onFirstClicked() {
+                                    var preferences: SharedPreferences = context.getSharedPreferences(X_ACCESS_TOKEN, Context.MODE_PRIVATE)
+                                    var editor = preferences.edit()
+                                    editor.clear()
+                                    editor.apply()
+                                    val nextIntent = Intent(context, SplashActivity::class.java)
+                                    nextIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                    nextIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    context.startActivity(nextIntent)
+                                    dismiss()
+                                }
+                                override fun onSecondClicked() {
+                                    dismiss()
+                                }
+                            })
+                        }
+                        dialog.show()
                     }
                     OPEN_SOURCE -> {
-
+                        activity.findNavController(R.id.main_nav_host_fragment).navigate(SettingFragmentDirections.actionSettingFragmentToSettingOpenSourceFragment())
                     }
                 }
             }

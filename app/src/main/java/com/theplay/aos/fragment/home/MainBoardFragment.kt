@@ -34,11 +34,12 @@ class MainBoardFragment() : BaseKotlinFragment<FragmentMainBoardBinding>() {
                     binding.rv.adapter = MainBoardAdapter(requireActivity(), requireContext(), itemList)
                 }
             }
+            hideLottie()
         })
-
     }
 
     override fun initAfterBinding() {
+        showLottie()
         viewModel.getMainBoard(0,10)
     }
 

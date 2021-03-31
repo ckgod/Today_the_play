@@ -3,48 +3,41 @@ package com.theplay.aos.fragment.setting
 import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.theplay.aos.R
 import com.theplay.aos.base.BaseKotlinFragment
-import com.theplay.aos.databinding.FragmentSettingPrivacyBinding
+import com.theplay.aos.databinding.FragmentSettingNoticeDetailBinding
 import com.theplay.aos.databinding.FragmentTmpBinding
 
-class SettingPrivacyFragment() : BaseKotlinFragment<FragmentSettingPrivacyBinding>() {
+class SettingNoticeDetailFragment() : BaseKotlinFragment<FragmentSettingNoticeDetailBinding>() {
     override val layoutResourceId: Int
-        get() = R.layout.fragment_setting_privacy
+        get() = R.layout.fragment_setting_notice_detail
 
     private val viewModel by lazy { SettingViewModel() }
+    private val safeArgs : SettingNoticeDetailFragmentArgs by navArgs()
 
     override fun initStartView() {
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
         }
-        binding.switchPrivacy.setOnCheckedChangeListener { view, isChecked ->
-            when(isChecked) {
-                true -> {
-
-                }
-                false -> {
-
-                }
-            }
-        }
-
     }
 
     override fun initDataBinding() {
-        viewModel.getPrivacyStatusResponse.observe(this@SettingPrivacyFragment, Observer {
+        viewModel.noticeDetailResponse.observe(this@SettingNoticeDetailFragment, Observer {
             if(it == null) showNetworkError()
             else {
-                Log.d(TAG, it.msg)
+                Log.d(TAG, it.toString())
                 if(it.code == 0) {
-                    binding.switchPrivacy.isChecked = it.data.privacyYn == "Y"
+                    binding.tvNoticeTitle.text = it.data.title
+                    binding.tvNoticeContent.text = it.data.content
                 }
             }
         })
+
     }
 
     override fun initAfterBinding() {
-        viewModel.getPrivacy()
+        viewModel.getNoticeDetail(safeArgs.noticeId)
     }
 
     override fun reLoadUI() {
@@ -52,6 +45,6 @@ class SettingPrivacyFragment() : BaseKotlinFragment<FragmentSettingPrivacyBindin
 
 
     companion object {
-        const val TAG = "SettingPrivacyFragment"
+        const val TAG = "SettingNoticeDetailFragment"
     }
 }

@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.theplay.aos.databinding.ActivitySettingBinding
-import com.theplay.aos.fragment.setting.SettingChangePwFragment
-import com.theplay.aos.fragment.setting.SettingFragment
-import com.theplay.aos.fragment.setting.SettingPrivacyFragment
-import com.theplay.aos.fragment.setting.SettingProfileFragment
+import com.theplay.aos.fragment.setting.*
 
 
 class SettingActivity : AppCompatActivity() {
@@ -38,6 +35,18 @@ class SettingActivity : AppCompatActivity() {
                 return
             }
             is SettingPrivacyFragment -> {
+                currentFragment.backStep()
+                return
+            }
+            is SettingNoticeFragment -> {
+                currentFragment.backStep()
+                return
+            }
+            is SettingNoticeDetailFragment -> {
+                currentFragment.backStep()
+                return
+            }
+            is SettingOpenSourceFragment -> {
                 currentFragment.backStep()
                 return
             }

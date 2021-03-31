@@ -23,4 +23,5 @@ data class NoticeDetailResponse(
         @SerializedName("writtenAt")
         var writtenAt: String
     )
+
 }

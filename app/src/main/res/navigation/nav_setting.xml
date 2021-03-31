@@ -17,6 +17,20 @@
             app:exitAnim="@anim/slide_to_left"
             app:popEnterAnim="@anim/slide_from_left"
             app:popExitAnim="@anim/slide_to_right" />
+        <action
+            android:id="@+id/action_settingFragment_to_settingNoticeFragment"
+            app:destination="@id/settingNoticeFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
+        <action
+            android:id="@+id/action_settingFragment_to_settingOpenSourceFragment"
+            app:destination="@id/settingOpenSourceFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right"  />
     </fragment>
     <fragment
         android:id="@+id/settingProfileFragment"
@@ -48,4 +62,31 @@
         android:name="com.theplay.aos.fragment.setting.SettingPrivacyFragment"
         android:label="SettingPrivacyFragment"
         tools:layout="@layout/fragment_setting_privacy"/>
+    <fragment
+        android:id="@+id/settingNoticeFragment"
+        android:name="com.theplay.aos.fragment.setting.SettingNoticeFragment"
+        android:label="SettingNoticeFragment"
+        tools:layout="@layout/fragment_setting_notice">
+        <action
+            android:id="@+id/action_settingNoticeFragment_to_settingNoticeDetailFragment"
+            app:destination="@id/settingNoticeDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingNoticeDetailFragment"
+        android:name="com.theplay.aos.fragment.setting.SettingNoticeDetailFragment"
+        android:label="SettingNoticeDetailFragment"
+        tools:layout="@layout/fragment_setting_notice_detail">
+        <argument
+            android:name="noticeId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingOpenSourceFragment"
+        android:name="com.theplay.aos.fragment.setting.SettingOpenSourceFragment"
+        android:label="SettingOpenSourceFragment"
+        tools:layout="@layout/fragment_setting_open_source"/>
 </navigation>

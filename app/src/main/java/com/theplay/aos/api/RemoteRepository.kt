@@ -76,4 +76,10 @@ class RemoteRepository{
             UserApi.UserApiImpl::class.java
         ).putChangePw(changePwRequest)
     }
+
+    fun getPrivacyStatus() : Observable<PrivacyStatusResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getPrivacyYn()
+    }
 }

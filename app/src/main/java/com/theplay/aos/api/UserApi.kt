@@ -42,32 +42,8 @@ class UserApi {
         @PUT("/v1/user/password")
         fun putChangePw(@Body params : ChangePwRequest) : Observable<DefaultResponse>
 
-//        //15
-//        @GET("diaries")
-//        fun getDiaries(
-//                @Query("page") page : Int,
-//                @Query("status") status : Int
-//        ) : Observable<DiariesResponse>
-//
-//        // 15-4
-//        @GET("/notice/{diaryID}")
-//        fun getNotice(@Path("diaryID") diaryID : Int):Observable<GetNoticeResponse>
-//
-//        // 19
-//        @GET("/diaries/{diaryID}/posts")
-//        fun getDiaryList(
-//                @Path("diaryID") diaryID: Int,
-//                @Query("page") page : Int
-//                //@Query("post") post : Int
-//        ) :Observable<DiaryListResponse>
-//
-//        // 28
-//        @POST("posts/{postID}/like")
-//        fun postLike(
-//                @Path("postID") postID: Int,
-//                @Query("type") type: Int,
-//                @Body params:LikeRequest
-//        ) : Observable<DefaultResponse>
+        @GET("/v1/user/show-yn")
+        fun getPrivacyYn() : Observable<PrivacyStatusResponse>
 
 
     }

@@ -75,8 +75,61 @@ class SettingViewModel() : ViewModel() {
         )
     }
 
+    private val _getPrivacyStatusResponse : MutableLiveData<PrivacyStatusResponse> = MutableLiveData()
+    val getPrivacyStatusResponse get() = _getPrivacyStatusResponse
+
+    fun getPrivacy() {
+        CompositeDisposable().add(
+            remoteRepository.getPrivacyStatus()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        getPrivacyStatusResponse.postValue(response)
+                    }, { throwable ->
+                        Log.d(TAG,"throwable.localizedMessage${throwable.localizedMessage}")
+                        getPrivacyStatusResponse.postValue(null)
+                    })
+        )
+    }
+
+    private val _noticeResponse : MutableLiveData<NoticeResponse> = MutableLiveData()
+    val noticeResponse get() = _noticeResponse
+
+    fun getNotice() {
+        CompositeDisposable().add(
+            remoteRepository.getNotice()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        noticeResponse.postValue(response)
+                    }, { throwable ->
+                        Log.d(TAG,"throwable.localizedMessage${throwable.localizedMessage}")
+                        noticeResponse.postValue(null)
+                    })
+        )
+    }
+
+    private val _noticeDetailResponse : MutableLiveData<NoticeDetailResponse> = MutableLiveData()
+    val noticeDetailResponse get() = _noticeDetailResponse
+
+    fun getNoticeDetail(noticeId : Int) {
+        CompositeDisposable().add(
+            remoteRepository.getNoticeDetail(noticeId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        noticeDetailResponse.postValue(response)
+                    }, { throwable ->
+                        Log.d(TAG,"throwable.localizedMessage${throwable.localizedMessage}")
+                        noticeDetailResponse.postValue(null)
+                    })
+        )
+    }
 
     companion object{
-        const val TAG = "HomeViewModel"
+        const val TAG = "SettingViewModel"
     }
 }
