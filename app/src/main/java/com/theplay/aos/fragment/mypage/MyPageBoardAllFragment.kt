@@ -1,6 +1,7 @@
 package com.theplay.aos.fragment.mypage
 
 import androidx.recyclerview.widget.GridLayoutManager
+import com.theplay.aos.ApplicationClass
 import com.theplay.aos.R
 import com.theplay.aos.base.BaseKotlinFragment
 import com.theplay.aos.databinding.FragmentMyPageBoardAllBinding
@@ -16,28 +17,6 @@ class MyPageBoardAllFragment() : BaseKotlinFragment<FragmentMyPageBoardAllBindin
 
     override fun initStartView() {
         binding.rv.layoutManager = GridLayoutManager(requireContext(), 3)
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        itemList.add(MyPageBoardAllItem("aasdf"))
-        binding.rv.adapter = (MyPageBoardAllAdapter(requireActivity(),requireContext(),itemList))
     }
 
     override fun initDataBinding() {
@@ -49,6 +28,13 @@ class MyPageBoardAllFragment() : BaseKotlinFragment<FragmentMyPageBoardAllBindin
     }
 
     override fun reLoadUI() {
+        ApplicationClass.myPostedPost?.let {
+            itemList = mutableListOf()
+            for(i in it) {
+                itemList.add(MyPageBoardAllItem(i.images[0].filePath, i.postId))
+            }
+            binding.rv.adapter = (MyPageBoardAllAdapter(requireActivity(),requireContext(),itemList))
+        }
     }
 
 

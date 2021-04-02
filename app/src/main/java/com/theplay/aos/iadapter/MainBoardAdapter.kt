@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -17,6 +18,7 @@ import com.theplay.aos.ApplicationClass.Companion.iconHashMap
 import com.theplay.aos.R
 import com.theplay.aos.api.model.MainBoardResponse
 import com.theplay.aos.databinding.ItemMainBoardBinding
+import com.theplay.aos.fragment.home.HomeFragmentDirections
 import com.theplay.aos.utils.ViewUtils
 
 
@@ -64,6 +66,7 @@ class MainBoardAdapter(private val activity : Activity, private val context: Con
             else {
                 binding.ivGood.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_false))
             }
+
             when(item.alcoholTags.size) {
                 3 -> {
                     binding.ctlMore.visibility = View.GONE
@@ -88,6 +91,9 @@ class MainBoardAdapter(private val activity : Activity, private val context: Con
                     binding.ivSecond.setImageDrawable(ContextCompat.getDrawable(context, iconHashMap[item.alcoholTags[1].iconName]!!))
                     binding.ivThird.setImageDrawable(ContextCompat.getDrawable(context, iconHashMap[item.alcoholTags[2].iconName]!!))
                 }
+            }
+            binding.ivMainContent.setOnClickListener {
+                activity.findNavController(R.id.main_nav_host_fragment).navigate(HomeFragmentDirections.actionHomeFragmentToMainBoardDetailFragment())
             }
         }
         private fun clickTag() {

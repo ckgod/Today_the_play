@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -45,8 +46,20 @@ class DrinkAdapter(private val activity : Activity, private val context: Context
                 }
                 isExpanded = !isExpanded
             }
+            if(item.hasRecipe) {
+                binding.btnRecipe.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_recipe_true))
+            }
+            else {
+                binding.btnRecipe.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_recipe_false))
+            }
 
             binding.btnRecipe.setOnClickListener {
+                for(check in items) {
+                    if(check.hasRecipe) {
+                        Toast.makeText(context, "레시피는 하나만 추가할 수 있습니다",Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
+                }
                 activity.findNavController(R.id.main_nav_host_fragment).navigate(WriteFragmentDirections.actionWriteFragmentToWriteRecipeFragment(item.icon,item.name,item.colorType))
 //                activity.findNavController(R.id.main_nav_host_fragment).navigate(WriteFragmentDirections.actionWriteFragmentToWriteRecipeFragment(item.icon,item.name, item.colorType))
             }

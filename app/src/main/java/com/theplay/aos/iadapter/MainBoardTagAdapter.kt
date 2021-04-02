@@ -41,6 +41,6 @@ class MainBoardTagAdapter(private val activity : Activity, private val context: 
     }
 
     companion object{
-        const val TAG = "RecipeColorAdapter"
+        const val TAG = "MainBoardTagAdapter"
     }
 }

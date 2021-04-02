@@ -2,6 +2,8 @@ package com.theplay.aos.api
 
 import com.theplay.aos.api.model.*
 import io.reactivex.Observable
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 class UserApi {
@@ -45,6 +47,26 @@ class UserApi {
         @GET("/v1/user/show-yn")
         fun getPrivacyYn() : Observable<PrivacyStatusResponse>
 
+        @Multipart
+        @POST("/v1/post")
+        fun postAddPost(@PartMap request : HashMap<String, RequestBody>, @Part files : List<MultipartBody.Part>) : Observable<DefaultResponse>
 
+        @POST("/v1/post/{postId}/like")
+        fun postLike(@Path("postId") postId : Int) : Observable<PostLikeResponse>
+
+        @GET("/v1/posts/{postId}/comments")
+        fun getComment(@Path("postId") postId: Int) : Observable<CommentResponse>
+
+        @POST("/v1/posts/{postId}/comments")
+        fun postAddComment(@Path("postId") postId: Int, @Body params : AddCommentRequest) : Observable<DefaultResponse>
+
+        @GET("/v1/user/posts/like")
+        fun getLikedPost(@Query("pageNumber") pageNumber: Int, @Query("pageSize") pageSize: Int) : Observable<MainBoardResponse>
+
+        @GET("/v1/user/posts")
+        fun getMyPost(@Query("pageNumber") pageNumber: Int, @Query("pageSize") pageSize: Int) : Observable<MainBoardResponse>
+
+        @POST("/v1/recipe/{alcoholTagId}")
+        fun postSaveRecipe(@Path("alcoholTagId") alcoholTagId : Int) : Observable<RecipeSaveResponse>
     }
 }

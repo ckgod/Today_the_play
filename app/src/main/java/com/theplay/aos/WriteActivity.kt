@@ -7,6 +7,7 @@ import com.theplay.aos.databinding.ActivityWriteBinding
 import com.theplay.aos.fragment.setting.SettingFragment
 import com.theplay.aos.fragment.write.WriteFragment
 import com.theplay.aos.fragment.write.WriteRecipeFragment
+import com.theplay.aos.utils.DrinkUtil
 
 class WriteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWriteBinding
@@ -24,6 +25,7 @@ class WriteActivity : AppCompatActivity() {
         Log.d(TAG, "onBackPressed() currentFragment:$currentFragment")
         when (currentFragment) {
             is WriteFragment -> {
+                DrinkUtil.clearRecipeSaved()
                 currentFragment.removeActivity()
                 return
             }

@@ -1,6 +1,9 @@
 package com.theplay.aos.fragment.mypage
 
+import android.util.Log
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import com.theplay.aos.ApplicationClass.Companion.myLikedPost
 import com.theplay.aos.R
 import com.theplay.aos.base.BaseKotlinFragment
 import com.theplay.aos.databinding.FragmentMyPageGoodBinding
@@ -12,41 +15,49 @@ class MyPageGoodFragment() : BaseKotlinFragment<FragmentMyPageGoodBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_my_page_good
 
+    private val viewModel by lazy { MyPageGoodViewModel() }
+
     var itemList : MutableList<MyPageGoodItem> = mutableListOf()
 
     override fun initStartView() {
         binding.rv.layoutManager = GridLayoutManager(requireContext(), 3)
-        itemList.add(MyPageGoodItem("asdfasdf"))
-        itemList.add(MyPageGoodItem("asdfasdf"))
-        itemList.add(MyPageGoodItem("asdfasdf"))
-        itemList.add(MyPageGoodItem("asdfasdf"))
-        itemList.add(MyPageGoodItem("asdfasdf"))
-        itemList.add(MyPageGoodItem("asdfasdf"))
-        itemList.add(MyPageGoodItem("asdfasdf"))
-        itemList.add(MyPageGoodItem("asdfasdf"))
-        itemList.add(MyPageGoodItem("asdfasdf"))
-        itemList.add(MyPageGoodItem("asdfasdf"))
-        itemList.add(MyPageGoodItem("asdfasdf"))
-        itemList.add(MyPageGoodItem("asdfasdf"))
-        itemList.add(MyPageGoodItem("asdfasdf"))
-        itemList.add(MyPageGoodItem("asdfasdf"))
-        itemList.add(MyPageGoodItem("asdfasdf"))
-        itemList.add(MyPageGoodItem("asdfasdf"))
-        itemList.add(MyPageGoodItem("asdfasdf"))
-        binding.rv.adapter = MyPageGoodAdapter(requireActivity(), requireContext(), itemList)
     }
 
     override fun initDataBinding() {
+        viewModel.getLikedResponse.observe(this@MyPageGoodFragment, Observer {
+            if(it == null) showNetworkError()
+            else {
+                Log.d(TAG, it.msg)
+                if(it.code == 0) {
+                    myLikedPost = mutableListOf()
+                    for(content in it.data.content) {
+                        itemList.add(MyPageGoodItem(content.images[0].filePath, content.postId))
+                        myLikedPost?.add(content)
+                    }
+                    binding.rv.adapter = MyPageGoodAdapter(requireActivity(), requireContext(), itemList)
+                }
+            }
+            hideProgress()
+        })
 
     }
 
     override fun initAfterBinding() {
-
+        if(myLikedPost == null) {
+            showProgress()
+            viewModel.getLikedPost(0,30)
+        }
     }
 
     override fun reLoadUI() {
+        myLikedPost?.let {
+            itemList = mutableListOf()
+            for(content in it) {
+                itemList.add(MyPageGoodItem(content.images[0].filePath, content.postId))
+            }
+            binding.rv.adapter = MyPageGoodAdapter(requireActivity(), requireContext(), itemList)
+        }
     }
-
 
     companion object {
         const val TAG = "MyPageGoodFragment"

@@ -3,6 +3,8 @@ package com.theplay.aos.fragment.home
 import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.theplay.aos.ApplicationClass
 import com.theplay.aos.R
 import com.theplay.aos.api.model.MainBoardResponse
 import com.theplay.aos.base.BaseKotlinFragment
@@ -20,6 +22,10 @@ class MainBoardFragment() : BaseKotlinFragment<FragmentMainBoardBinding>() {
 
     override fun initStartView() {
         binding.rv.layoutManager = GridLayoutManager(requireContext(),2)
+        binding.refreshLayout.setOnRefreshListener {
+            viewModel.getMainBoard(0,10)
+//            showCustomToast("refresh")
+        }
     }
 
     override fun initDataBinding() {
@@ -28,22 +34,32 @@ class MainBoardFragment() : BaseKotlinFragment<FragmentMainBoardBinding>() {
             else {
                 Log.d(TAG, it.toString())
                 if(it.code == 0) {
+                    itemList = mutableListOf()
                     for(item in it.data.content) {
                         itemList.add(item)
                     }
+                    ApplicationClass.mainBoardList = itemList
                     binding.rv.adapter = MainBoardAdapter(requireActivity(), requireContext(), itemList)
                 }
             }
-            hideLottie()
+            hideProgress()
+            binding.refreshLayout.isRefreshing = false
         })
     }
 
     override fun initAfterBinding() {
-        showLottie()
+        showProgress()
         viewModel.getMainBoard(0,10)
     }
 
     override fun reLoadUI() {
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ApplicationClass.mainBoardList?.let {
+            binding.rv.adapter = MainBoardAdapter(requireActivity(),requireContext(),it)
+        }
     }
 
 

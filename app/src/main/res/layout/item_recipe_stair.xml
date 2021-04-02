@@ -6,7 +6,7 @@
         android:id="@+id/ctl_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="12dp">
+        android:paddingBottom="6dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ctl_number"
@@ -14,8 +14,9 @@
             android:layout_height="27dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="27dp"
+            android:layout_marginStart="17dp"
             android:background="@drawable/bg_rectangle_small"
+            android:backgroundTint="@color/mainBlack"
             android:layout_marginTop="6dp">
 
             <TextView
@@ -25,7 +26,7 @@
                 android:fontFamily="@font/noto_sans_medium"
                 android:textSize="15dp"
                 android:textColor="@color/subGray"
-                android:text="0"
+                android:text="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -33,24 +34,20 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <EditText
-            android:id="@+id/et_content"
-            android:textCursorDrawable="@drawable/cursor_color"
+        <TextView
+            android:id="@+id/tv_content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/colorNull"
-            android:hint="@string/write_recipe_info"
             android:fontFamily="@font/noto_sans_medium"
             android:textSize="12dp"
             android:textColor="@color/colorWhite"
-            android:textColorHint="@color/subGray"
             app:layout_constraintStart_toEndOf="@id/ctl_number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/ctl_number"
             android:layout_marginTop="5dp"
             android:layout_marginStart="7dp"
             android:layout_marginEnd="38dp"/>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

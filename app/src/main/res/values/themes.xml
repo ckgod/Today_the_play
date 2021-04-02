@@ -39,4 +39,15 @@
         <item name="android:textSize">15dp</item>
     </style>
 
+    <style name="numberPickerCustomSize">
+        <!--Display textSize-->
+        <item name="android:textSize">12dp</item>
+        <item name="android:colorControlNormal">@color/transparent</item>
+        <!--Display textColor-->
+        <item name="android:editTextColor">@color/colorWhite</item>
+        <item name="android:fontFamily">@font/noto_sans_medium</item>
+    </style>
+
+    출처: https://altongmon.tistory.com/823 [IOS를 Java]
+
 </resources>

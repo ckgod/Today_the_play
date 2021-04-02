@@ -28,6 +28,20 @@
             app:layout_constraintTop_toTopOf="@id/vp_pager"
             app:layout_constraintBottom_toBottomOf="@id/vp_pager"/>
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_like"
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="30dp"
+            android:scaleType="fitCenter"
+            app:lottie_rawRes="@raw/today_like_v1"
+            app:lottie_loop="false"
+            app:lottie_autoPlay="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/vp_pager"
+            app:layout_constraintTop_toTopOf="@id/vp_pager"/>
+
         <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
             android:id="@+id/worm_dots_indicator"
             android:layout_width="wrap_content"
@@ -52,7 +66,8 @@
             app:layout_constraintEnd_toEndOf="@id/vp_pager"
             app:layout_constraintTop_toBottomOf="@id/vp_pager_space"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="9dp">
+            android:layout_marginBottom="9dp"
+            android:paddingBottom="10dp">
 
             <TextView
                 android:id="@+id/tv_nick_name"
@@ -130,62 +145,137 @@
                 android:fontFamily="@font/noto_sans_medium"
                 android:textSize="12dp"
                 android:textColor="@color/colorWhite"
-                android:text="오늘은 보드카가 먹고싶은 날이다. 파이어볼이 땡기네.. "
-                />
+                android:text="오늘은 보드카가 먹고싶은 날이다. 파이어볼이 땡기네.. " />
 
             <View
                 android:id="@+id/v_line_dark"
                 android:layout_width="0dp"
-                android:layout_height="1dp"
+                android:layout_height="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_content"
-                android:background="@color/black1c"
+                android:background="@drawable/line_main_board_divider"
                 android:layout_marginTop="19.5dp"/>
 
-
-
-            <ImageView
-                android:id="@+id/btn_book_mark"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_book_mark_0"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ctl_recipe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/v_line_dark"
-                android:layout_marginTop="18dp"
-                android:layout_marginEnd="14dp"/>
+                app:layout_constraintStart_toStartOf="parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ctl_recipe_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:background="@drawable/custom_round_background_black_14dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="16dp"
+                    android:paddingEnd="3dp">
+                    <ImageView
+                        android:id="@+id/iv_recipe_icon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/drinks_beer_0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/tv_recipe_name"
+                        android:layout_marginStart="4dp"/>
+                    <TextView
+                        android:id="@+id/tv_recipe_name"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/noto_sans_medium"
+                        android:textSize="12dp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textColor="@color/mainForText"
+                        android:text="펜폴츠 뱅쇼"
+                        app:layout_constraintStart_toEndOf="@id/iv_recipe_icon"
+                        app:layout_constraintTop_toTopOf="@id/iv_recipe_icon"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_recipe_icon"/>
+                    <ImageView
+                        android:id="@+id/iv_recipe_under_arrow"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_under_arrow_0"
+                        app:layout_constraintTop_toTopOf="@id/iv_recipe_icon"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_recipe_icon"
+                        app:layout_constraintStart_toEndOf="@id/tv_recipe_name"/>
 
-            <LinearLayout
-                android:id="@+id/tmp"
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/v_line_dark"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/bg_blur_body"
-                android:backgroundTint="@color/mainBlack"
-                android:layout_marginStart="10.5dp"
-                android:gravity="center_vertical">
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <net.cachapa.expandablelayout.ExpandableLayout
+                    android:id="@+id/exl_recipe_detail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ctl_recipe_content"
+                    app:el_expanded="false">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_recipe_detail"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:overScrollMode="never"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginEnd="9dp"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_recipe_step"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:overScrollMode="never"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/rv_recipe_detail"
+                            android:layout_marginTop="8dp"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp"
+                            android:background="@drawable/line_main_board_divider"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/rv_recipe_step"
+                            android:layout_marginHorizontal="11dp"
+                            android:layout_marginTop="16dp"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </net.cachapa.expandablelayout.ExpandableLayout>
                 <ImageView
+                    android:id="@+id/btn_book_mark"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_drinks_wine_0"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginBottom="2dp"/>
-                <TextView
-                    android:gravity="center"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_medium"
-                    android:textSize="12dp"
-                    android:textColor="@color/colorWhite"
-                    android:text="펜폴츠 뱅쇼"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginEnd="16dp"/>
+                    android:src="@drawable/ic_book_mark_0"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/ctl_recipe_content"
+                    app:layout_constraintBottom_toBottomOf="@id/ctl_recipe_content"
+                    android:layout_marginEnd="14dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_tag"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                app:layout_constraintTop_toBottomOf="@id/ctl_recipe"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="9dp"
+                android:layout_marginTop="16dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ctl_comment_container"
@@ -194,10 +284,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tmp"
+                app:layout_constraintTop_toBottomOf="@id/rv_tag"
                 android:layout_marginBottom="17dp"
-                android:layout_marginTop="22.5dp">
-
+                android:layout_marginTop="22.5dp"
+                android:visibility="gone">
                 <TextView
                     android:id="@+id/tv_comment_cnt"
                     android:layout_width="wrap_content"
@@ -209,8 +299,6 @@
                     app:layout_constraintStart_toStartOf="@id/ctl_et_container"
                     app:layout_constraintBottom_toTopOf="@id/tv_first_comment_name"
                     android:layout_marginBottom="5dp"/>
-
-
                 <TextView
                     android:id="@+id/tv_first_comment_name"
                     android:layout_width="wrap_content"
@@ -222,7 +310,6 @@
                     app:layout_constraintStart_toStartOf="@id/ctl_et_container"
                     app:layout_constraintBottom_toTopOf="@id/ctl_et_container"
                     android:layout_marginBottom="10dp"/>
-
                 <TextView
                     android:id="@+id/tv_first_comment_content"
                     android:layout_width="0dp"
@@ -249,6 +336,19 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginHorizontal="14dp">
+
+                    <TextView
+                        android:id="@+id/tv_go_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/noto_sans_medium"
+                        android:textSize="10dp"
+                        android:textColor="@color/subGray"
+                        android:text="@string/add_comment"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="13dp"/>
 
                     <ImageView
                         android:id="@+id/btn_add_comment"

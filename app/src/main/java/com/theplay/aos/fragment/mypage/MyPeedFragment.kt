@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import com.theplay.aos.ApplicationClass
 import com.theplay.aos.ApplicationClass.Companion.userInfo
 import com.theplay.aos.R
 import com.theplay.aos.base.BaseKotlinFragment
@@ -148,7 +149,6 @@ class MyPeedFragment() : BaseKotlinFragment<FragmentMyPeedBinding>() {
     }
 
     override fun reLoadUI() {
-
     }
 
     private inner class ViewPagerAdapter(fa: Fragment) : FragmentStateAdapter(fa) {

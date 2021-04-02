@@ -41,7 +41,7 @@ class ImageFragment() : BaseKotlinFragment<FragmentImageBinding>() {
                 .into(binding.ivImage)
         }
         else {
-            Glide.with(requireContext()).load(R.drawable.dummy_image1)
+            Glide.with(requireContext()).load(imageString)
                 .apply(RequestOptions().transform(CenterCrop(), RoundedCorners(ViewUtils.convertDpToPixel(8f,requireContext()).toInt())))
                 .into(binding.ivImage)
         }

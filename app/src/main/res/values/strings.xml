@@ -39,6 +39,7 @@
 
     <!-- main -->
     <string name="main_follow">팔로잉</string>
+    <string name="add_comment">댓글 달기..</string>
 
     <!-- search -->
     <string name="search_hing">술이나 레시피를 입력해주세요</string>

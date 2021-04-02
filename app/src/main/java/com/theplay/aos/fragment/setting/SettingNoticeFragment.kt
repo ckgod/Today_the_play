@@ -2,6 +2,7 @@ package com.theplay.aos.fragment.setting
 
 import android.util.Log
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.theplay.aos.R
 import com.theplay.aos.api.model.NoticeResponse
@@ -18,7 +19,10 @@ class SettingNoticeFragment() : BaseKotlinFragment<FragmentSettingNoticeBinding>
     private var noticeList : MutableList<NoticeResponse.NoticeId> = mutableListOf()
 
     override fun initStartView() {
-        showLottie()
+        showProgress()
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
         binding.rvNotice.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
@@ -36,7 +40,7 @@ class SettingNoticeFragment() : BaseKotlinFragment<FragmentSettingNoticeBinding>
                 else {
                 }
             }
-            hideLottie()
+            hideProgress()
         })
 
     }

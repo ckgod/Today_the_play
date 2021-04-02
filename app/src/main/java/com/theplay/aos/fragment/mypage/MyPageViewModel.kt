@@ -34,6 +34,7 @@ class MyPageViewModel() : ViewModel() {
 
 
 
+
     companion object{
         const val TAG = "MyPageViewModel"
     }

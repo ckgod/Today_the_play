@@ -45,6 +45,8 @@ data class MainBoardResponse(
         var comment: String,
         @SerializedName("commentCnt")
         var commentCnt: Int,
+        @SerializedName("commentNickname")
+        var commentNickname: String,
         @SerializedName("content")
         var content: String,
         @SerializedName("createdDate")
@@ -61,6 +63,8 @@ data class MainBoardResponse(
         var postId: Int,
         @SerializedName("postLikeYn")
         var postLikeYn: String,
+        @SerializedName("postLikeCnt")
+        var postLikeCnt: Int,
         @SerializedName("saveRecipeYn")
         var saveRecipeYn: String,
         @SerializedName("steps")

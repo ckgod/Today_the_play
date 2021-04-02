@@ -52,6 +52,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.4'
     implementation "androidx.navigation:navigation-runtime-ktx:2.3.4"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    implementation 'com.google.android:flexbox:2.0.1'
 
     implementation 'com.hannesdorfmann:adapterdelegates3:3.0.0'
 

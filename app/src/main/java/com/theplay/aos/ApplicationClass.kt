@@ -3,6 +3,7 @@ package com.theplay.aos
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import com.theplay.aos.api.model.MainBoardResponse
 import com.theplay.aos.api.model.MyPageTopResponse
 
 
@@ -47,6 +48,10 @@ class ApplicationClass : Application() {
 
         // user정보 저장
         var userInfo : MyPageTopResponse? = null
+        // mainboard 게시글들 저장
+        var mainBoardList : MutableList<MainBoardResponse.Content>? = null
+        var myLikedPost : MutableList<MainBoardResponse.Content>? = null
+        var myPostedPost : MutableList<MainBoardResponse.Content>? = null
 
         // jwt Token 저장
         var spToken : SharedPreferences? = null
@@ -59,7 +64,7 @@ class ApplicationClass : Application() {
         var alarmAllowToken : SharedPreferences? = null
 
         val colorHashMap = mapOf<Int,Int>(
-            0 to R.color.white,
+            0 to R.color.colorWhite,
             1 to R.color.ingre,
             2 to R.color.ingre2,
             3 to R.color.ingre3,
@@ -71,7 +76,29 @@ class ApplicationClass : Application() {
             9 to R.color.mainColor
         )
 
+        val colorToCodeHashMap = mapOf<Int,Int>(
+            R.color.colorWhite to 0,
+            R.color.ingre to 1,
+            R.color.ingre2 to 2,
+            R.color.ingre3 to 3,
+            R.color.ingre4 to 4,
+            R.color.ingre5 to 5,
+            R.color.ingre6 to 6,
+            R.color.ingre7 to 7,
+            R.color.ingre8 to 8,
+            R.color.mainColor to 9
+        )
+
         val iconHashMap = mapOf<String, Int>(
+            "1" to R.drawable.ic_drinks_soju_main,
+            "2" to R.drawable.drinks_soju_0,
+            "3" to R.drawable.drinks_soju_1,
+            "4" to R.drawable.drinks_soju_2,
+            "5" to R.drawable.drinks_soju_3,
+            "6" to R.drawable.drinks_soju_4,
+            "7" to R.drawable.drinks_soju_5,
+            "8" to R.drawable.drinks_soju_6,
+            "9" to R.drawable.drinks_soju_7,
             "01" to R.drawable.ic_drinks_soju_main,
             "02" to R.drawable.drinks_soju_0,
             "03" to R.drawable.drinks_soju_1,

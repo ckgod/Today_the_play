@@ -4,5 +4,6 @@ class DrinkItem (
     var icon : Int,
     var name : String,
     var hasRecipe : Boolean,
-    var colorType : Int
+    var colorType : Int,
+    var materialList : MutableList<RecipeMaterialItem>
 ){}

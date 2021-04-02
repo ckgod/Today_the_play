@@ -56,13 +56,13 @@ class RecipeMainFragment() : BaseKotlinFragment<FragmentRecipeMainBinding>() {
                     binding.rv.adapter = RecipeAdapter(requireActivity(), requireContext(), itemList)
                 }
             }
-            hideLottie()
+            hideProgress()
         })
 
     }
 
     override fun initAfterBinding() {
-        showLottie()
+        showProgress()
         viewModel.getHotRecipe(0,10)
     }
 

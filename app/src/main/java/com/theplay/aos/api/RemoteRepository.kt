@@ -2,6 +2,8 @@ package com.theplay.aos.api
 
 import com.theplay.aos.api.model.*
 import io.reactivex.Observable
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class RemoteRepository{
 
@@ -82,4 +84,48 @@ class RemoteRepository{
             UserApi.UserApiImpl::class.java
         ).getPrivacyYn()
     }
+
+    fun postAddPost(request : HashMap<String, RequestBody>, files : List<MultipartBody.Part>) : Observable<DefaultResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).postAddPost(request, files)
+    }
+
+    fun postLike(postId : Int) : Observable<PostLikeResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).postLike(postId)
+    }
+
+    fun getComment(postId: Int) : Observable<CommentResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getComment(postId)
+    }
+
+    fun postComment(postId: Int, addCommentRequest: AddCommentRequest) : Observable<DefaultResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).postAddComment(postId, addCommentRequest)
+    }
+
+    fun getLikedPost(pageNumber: Int,pageSize: Int) : Observable<MainBoardResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getLikedPost(pageNumber, pageSize)
+    }
+
+    fun getMyPost(pageNumber: Int,pageSize: Int) : Observable<MainBoardResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getMyPost(pageNumber, pageSize)
+    }
+
+    fun postSaveRecipe(alcoholTagId : Int) : Observable<RecipeSaveResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).postSaveRecipe(alcoholTagId)
+    }
+
+
 }

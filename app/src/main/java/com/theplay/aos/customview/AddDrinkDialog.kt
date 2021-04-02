@@ -9,6 +9,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -18,6 +19,7 @@ import com.theplay.aos.databinding.CustomDialogAddDrinkBinding
 import com.theplay.aos.iadapter.AddIconAdapter
 import com.theplay.aos.item.AddIconItem
 import com.theplay.aos.item.DrinkItem
+import com.theplay.aos.item.RecipeMaterialItem
 import com.theplay.aos.utils.ViewUtils
 import kotlin.math.sqrt
 
@@ -44,7 +46,6 @@ class AddDrinkDialog(
         initView()
     }
 
-
     private fun initView(){
         binding.etName.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(s: Editable?) {}
@@ -55,7 +56,12 @@ class AddDrinkDialog(
             }
         })
         binding.btnComplete.setOnClickListener {
-            val item = DrinkItem(curIcon, binding.etName.text.toString(), false, curColor)
+            if(binding.etName.text.isEmpty()) {
+                Toast.makeText(mContext, "술이름을 입력해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            val tmpList : MutableList<RecipeMaterialItem> = mutableListOf()
+            val item = DrinkItem(curIcon, binding.etName.text.toString(), false, curColor, tmpList)
             listener.onComplete(item)
         }
         binding.rvIcon.layoutManager = SliderLayoutManager(binding.rvIcon, mContext).apply {

@@ -5,6 +5,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.theplay.aos.databinding.ItemMyPageBoardAllBinding
 import com.theplay.aos.databinding.ItemMyPageGoodBinding
 import com.theplay.aos.item.MyPageBoardAllItem
@@ -28,16 +32,10 @@ class MyPageGoodAdapter(private val activity : Activity, private val context: Co
     inner class MyPageGoodVH(var binding: ItemMyPageGoodBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MyPageGoodItem) {
             var imageHeight = ((ViewUtils.getStandardSize_X(activity)/3 * 0.93) / 104) * 139
-////            Log.d(TAG, imageHeight.toString())
             binding.ivMyPageGood.layoutParams.height = ViewUtils.convertDpToPixel(imageHeight.toFloat(),context).toInt()
-//            binding.ivMyPageBoardAll.layoutParams.height = ViewUtils.convertDpToPixel(imageHeight.toFloat(),context).toInt()
-
-//            binding.tvName.text = item.userName
-//            //binding.ivProfile.setImageDrawable() -> 여기 서버에서 url받아오고 글라이드나 피카소로 뿌리기
-//            //binding.ivProfile.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.img_profile_defalt))
-//            Glide.with(context).load(item.userSelfie)
-//                    .apply(RequestOptions().transform(CircleCrop(), CenterCrop()))
-//                    .into(binding.ivProfile)
+            Glide.with(context).load(item.image)
+                .apply(RequestOptions().transform(CenterCrop(), RoundedCorners(ViewUtils.convertDpToPixel(8f,context).toInt())))
+                .into(binding.ivMyPageGood)
         }
     }
 
