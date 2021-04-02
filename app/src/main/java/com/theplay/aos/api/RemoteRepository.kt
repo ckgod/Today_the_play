@@ -127,5 +127,16 @@ class RemoteRepository{
         ).postSaveRecipe(alcoholTagId)
     }
 
+    fun getFollower() : Observable<FollowListResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getFollower()
+    }
+
+    fun getFollowing() : Observable<FollowListResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getFollowing()
+    }
 
 }

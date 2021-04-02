@@ -68,5 +68,11 @@ class UserApi {
 
         @POST("/v1/recipe/{alcoholTagId}")
         fun postSaveRecipe(@Path("alcoholTagId") alcoholTagId : Int) : Observable<RecipeSaveResponse>
+
+        @GET("/v1/user/followers")
+        fun getFollower() : Observable<FollowListResponse>
+
+        @GET("/v1/user/followings")
+        fun getFollowing() : Observable<FollowListResponse>
     }
 }

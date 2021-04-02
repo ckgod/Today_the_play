@@ -33,6 +33,19 @@
             android:layout_marginStart="6dp"
             android:layout_marginBottom="2dp"/>
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_like"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="fitCenter"
+            app:lottie_rawRes="@raw/today_like_v1"
+            app:lottie_loop="false"
+            app:lottie_autoPlay="false"
+            app:layout_constraintStart_toStartOf="@id/iv_main_content"
+            app:layout_constraintEnd_toEndOf="@id/iv_main_content"
+            app:layout_constraintBottom_toBottomOf="@id/iv_main_content"
+            app:layout_constraintTop_toTopOf="@id/iv_main_content"/>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ctl_first"
             android:layout_width="26dp"

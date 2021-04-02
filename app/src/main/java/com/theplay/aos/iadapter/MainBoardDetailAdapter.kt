@@ -163,6 +163,7 @@ class MainBoardDetailAdapter(private val rootfa : Fragment, private val activity
                 binding.rvTag.adapter = MainBoardTagFlexAdapter(activity,context,tagList)
             }
             binding.btnHeart.setOnClickListener {
+
                 listener?.clickLike(item.postId)
                 if(item.postLikeYn == "Y") {
                     binding.btnHeart.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_false))

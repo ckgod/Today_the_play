@@ -1,12 +1,15 @@
 package com.theplay.aos.iadapter
 
+import android.animation.Animator
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.view.animation.AlphaAnimation
 import androidx.core.content.ContextCompat
+import androidx.core.view.GestureDetectorCompat
+import androidx.core.view.MotionEventCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +17,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.theplay.aos.ApplicationClass
 import com.theplay.aos.ApplicationClass.Companion.iconHashMap
 import com.theplay.aos.R
 import com.theplay.aos.api.model.MainBoardResponse
@@ -21,8 +25,17 @@ import com.theplay.aos.databinding.ItemMainBoardBinding
 import com.theplay.aos.fragment.home.HomeFragmentDirections
 import com.theplay.aos.utils.ViewUtils
 
+interface MainBoardAdapterListener{
+    fun DoubleTap(postId : Int)
+}
 
 class MainBoardAdapter(private val activity : Activity, private val context: Context, private val items: MutableList<MainBoardResponse.Content>) : RecyclerView.Adapter<MainBoardAdapter.MainBoardVH>() {
+    var listener : MainBoardAdapterListener? = null
+
+    fun setInterface(mainBoardAdapterListener: MainBoardAdapterListener) {
+        this.listener = mainBoardAdapterListener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainBoardVH {
         val itemBinding = ItemMainBoardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MainBoardVH(itemBinding)
@@ -33,13 +46,15 @@ class MainBoardAdapter(private val activity : Activity, private val context: Con
 
     override fun onBindViewHolder(holder: MainBoardVH, position: Int) {
         val item: MainBoardResponse.Content = items[position]
-        holder.bind(item)
+        holder.bind(item, position)
     }
 
     inner class MainBoardVH(var binding: ItemMainBoardBinding) : RecyclerView.ViewHolder(binding.root) {
         var visibleTag = false
+        private lateinit var mDetector: GestureDetectorCompat
 
-        fun bind(item: MainBoardResponse.Content) {
+        @SuppressLint("ClickableViewAccessibility")
+        fun bind(item: MainBoardResponse.Content, position: Int) {
             var imageHeight = ((ViewUtils.getStandardSize_X(activity)/2 * 0.93) / 161) * 214
 //            Log.d(TAG, imageHeight.toString())
             binding.ivMainContent.layoutParams.height = ViewUtils.convertDpToPixel(imageHeight.toFloat(),context).toInt()
@@ -93,7 +108,57 @@ class MainBoardAdapter(private val activity : Activity, private val context: Con
                 }
             }
             binding.ivMainContent.setOnClickListener {
-                activity.findNavController(R.id.main_nav_host_fragment).navigate(HomeFragmentDirections.actionHomeFragmentToMainBoardDetailFragment())
+//                activity.findNavController(R.id.main_nav_host_fragment).navigate(HomeFragmentDirections.actionHomeFragmentToMainBoardDetailFragment(position))
+            }
+            binding.lottieLike.addAnimatorListener(object : Animator.AnimatorListener{
+                override fun onAnimationRepeat(animation: Animator?) {}
+                override fun onAnimationEnd(animation: Animator?) {
+                    binding.lottieLike.visibility = View.INVISIBLE
+                }
+                override fun onAnimationCancel(animation: Animator?) {}
+                override fun onAnimationStart(animation: Animator?) {}
+            })
+            mDetector = GestureDetectorCompat(context,MyGestureListener(item.postId))
+            mDetector.setOnDoubleTapListener(object : GestureDetector.OnDoubleTapListener{
+                override fun onDoubleTap(e: MotionEvent?): Boolean {
+                    Log.d(TAG, "double tap")
+                    listener?.DoubleTap(item.postId)
+                    if(item.postLikeYn == "Y") {
+                        binding.ivGood.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_false))
+                        item.postLikeYn = "N"
+                        item.postLikeCnt -= 1
+                    }
+                    else {
+                        binding.ivGood.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_true))
+                        item.postLikeYn = "Y"
+                        item.postLikeCnt += 1
+                        binding.lottieLike.playAnimation()
+                    }
+                    ApplicationClass.mainBoardList = items
+                    return true
+                }
+
+                override fun onDoubleTapEvent(e: MotionEvent?): Boolean {
+                    return true
+                }
+
+                override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
+                    Log.d(TAG, "single tap")
+                    activity.findNavController(R.id.main_nav_host_fragment).navigate(HomeFragmentDirections.actionHomeFragmentToMainBoardDetailFragment(position))
+                    return true
+                }
+            })
+            binding.ivMainContent.setOnTouchListener { v, event ->
+                mDetector.onTouchEvent(event)
+            }
+        }
+        inner class MyGestureListener(var postId: Int) : GestureDetector.SimpleOnGestureListener() {
+            override fun onDoubleTap(e: MotionEvent?): Boolean {
+                return super.onDoubleTap(e)
+            }
+
+            override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
+                return super.onSingleTapConfirmed(e)
             }
         }
         private fun clickTag() {

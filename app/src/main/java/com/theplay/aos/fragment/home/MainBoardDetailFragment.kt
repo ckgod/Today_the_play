@@ -2,6 +2,7 @@ package com.theplay.aos.fragment.home
 
 import android.util.Log
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.theplay.aos.ApplicationClass
 import com.theplay.aos.R
@@ -19,22 +20,19 @@ class MainBoardDetailFragment() : BaseKotlinFragment<FragmentMainBoardDetailBind
         get() = R.layout.fragment_main_board_detail
 
     private val viewModel by lazy { MainBoardViewModel() }
+    private val safeArgs : MainBoardDetailFragmentArgs by navArgs()
 
     var itemList : MutableList<MainBoardResponse.Content> = mutableListOf()
 
+
     override fun initStartView() {
         binding.rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-//        var imageList : MutableList<String> = mutableListOf()
-//        imageList.add("dafsdf")
-//        imageList.add("dafsdf")
-//        imageList.add("dafsdf")
-//        imageList.add("dafsdf")
-//        itemList.add(FollowItem(imageList,"sss"))
-//        itemList.add(FollowItem(imageList,"sss"))
-//        itemList.add(FollowItem(imageList,"sss"))
-//        itemList.add(FollowItem(imageList,"sss"))
         ApplicationClass.mainBoardList?.let {
-            binding.rv.adapter = MainBoardDetailAdapter(this, requireActivity(), requireContext(), it).apply {
+            var selectList : MutableList<MainBoardResponse.Content> = mutableListOf()
+            for (i in safeArgs.selectIdx until it.size-1) {
+                selectList.add(it[i])
+            }
+            binding.rv.adapter = MainBoardDetailAdapter(this, requireActivity(), requireContext(), selectList).apply {
                 setInterface(object : MainBoardDetailInterface{
                     override fun clickLike(postId: Int) {
                         viewModel.postLike(postId)

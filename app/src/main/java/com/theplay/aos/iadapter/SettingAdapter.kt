@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.theplay.aos.ApplicationClass
 import com.theplay.aos.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.theplay.aos.R
 import com.theplay.aos.SplashActivity
@@ -64,6 +65,10 @@ class SettingAdapter(
                                     val nextIntent = Intent(context, SplashActivity::class.java)
                                     nextIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                                     nextIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    ApplicationClass.userInfo = null
+                                    ApplicationClass.myPostedPost = null
+                                    ApplicationClass.mainBoardList = null
+                                    ApplicationClass.myLikedPost = null
                                     context.startActivity(nextIntent)
                                     dismiss()
                                 }
@@ -101,6 +106,10 @@ class SettingAdapter(
                                     var editor = preferences.edit()
                                     editor.clear()
                                     editor.apply()
+                                    ApplicationClass.userInfo = null
+                                    ApplicationClass.myPostedPost = null
+                                    ApplicationClass.mainBoardList = null
+                                    ApplicationClass.myLikedPost = null
                                     val nextIntent = Intent(context, SplashActivity::class.java)
                                     nextIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                                     nextIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
