@@ -50,6 +50,7 @@ class ApplicationClass : Application() {
         var userInfo : MyPageTopResponse? = null
         // mainboard 게시글들 저장
         var mainBoardList : MutableList<MainBoardResponse.Content>? = null
+        var followingPostList : MutableList<MainBoardResponse.Content>? = null
         var myLikedPost : MutableList<MainBoardResponse.Content>? = null
         var myPostedPost : MutableList<MainBoardResponse.Content>? = null
 

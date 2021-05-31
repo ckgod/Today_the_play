@@ -17,14 +17,6 @@ class FollowingFragment() : BaseKotlinFragment<FragmentFollowingBinding>() {
     override fun initStartView() {
         binding.rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         var imageList : MutableList<String> = mutableListOf()
-        imageList.add("dafsdf")
-        imageList.add("dafsdf")
-        imageList.add("dafsdf")
-        imageList.add("dafsdf")
-        itemList.add(FollowItem(imageList,"sss"))
-        itemList.add(FollowItem(imageList,"sss"))
-        itemList.add(FollowItem(imageList,"sss"))
-        itemList.add(FollowItem(imageList,"sss"))
         binding.rv.adapter = FollowAdapter(this, requireActivity(), requireContext(), itemList)
     }
 
@@ -38,9 +30,6 @@ class FollowingFragment() : BaseKotlinFragment<FragmentFollowingBinding>() {
 
     override fun reLoadUI() {
     }
-
-
-
 
     companion object {
         const val TAG = "FollowingFragment"

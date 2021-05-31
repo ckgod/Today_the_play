@@ -38,6 +38,8 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:scaleType="fitCenter"
+            android:background="@drawable/custom_lottie_rounded_background"
+            android:visibility="invisible"
             app:lottie_rawRes="@raw/today_like_v1"
             app:lottie_loop="false"
             app:lottie_autoPlay="false"

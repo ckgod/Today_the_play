@@ -108,6 +108,12 @@
     <string name="quit_title">계정 탈퇴</string>
     <string name="quit_content">모든 정보를 지우고\n우아한 보드카 계정을 탈퇴하실건가요?</string>
 
+    <!-- menu -->
+    <string name="menu_save_recipe">레시피 저장</string>
+    <string name="menu_follow">팔로우 하기</string>
+    <string name="menu_share">공유하기</string>
+    <string name="menu_report">신고하기</string>
+
 
 
 

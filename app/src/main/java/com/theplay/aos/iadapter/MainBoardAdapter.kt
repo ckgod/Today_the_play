@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.theplay.aos.ApplicationClass
 import com.theplay.aos.ApplicationClass.Companion.iconHashMap
@@ -27,6 +28,7 @@ import com.theplay.aos.utils.ViewUtils
 
 interface MainBoardAdapterListener{
     fun DoubleTap(postId : Int)
+    fun clickedLike(postId : Int)
 }
 
 class MainBoardAdapter(private val activity : Activity, private val context: Context, private val items: MutableList<MainBoardResponse.Content>) : RecyclerView.Adapter<MainBoardAdapter.MainBoardVH>() {
@@ -73,6 +75,7 @@ class MainBoardAdapter(private val activity : Activity, private val context: Con
 
             Glide.with(context).load(item.images[0].filePath)
                 .apply(RequestOptions().transform(CenterCrop(), RoundedCorners(ViewUtils.convertDpToPixel(8f,context).toInt())))
+                .transition(DrawableTransitionOptions.withCrossFade(200))
                 .into(binding.ivMainContent)
 
             if(item.postLikeYn == "Y"){
@@ -110,6 +113,22 @@ class MainBoardAdapter(private val activity : Activity, private val context: Con
             binding.ivMainContent.setOnClickListener {
 //                activity.findNavController(R.id.main_nav_host_fragment).navigate(HomeFragmentDirections.actionHomeFragmentToMainBoardDetailFragment(position))
             }
+            binding.ivGood.setOnClickListener {
+                Log.d(TAG, "heart clicked!!")
+                listener?.clickedLike(postId = item.postId)
+                if(item.postLikeYn == "Y") {
+                    binding.ivGood.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_false))
+                    item.postLikeYn = "N"
+                    item.postLikeCnt -= 1
+                }
+                else {
+                    binding.ivGood.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_true))
+                    item.postLikeYn = "Y"
+                    item.postLikeCnt += 1
+                    binding.lottieLike.playAnimation()
+                }
+                ApplicationClass.mainBoardList = items
+            }
             binding.lottieLike.addAnimatorListener(object : Animator.AnimatorListener{
                 override fun onAnimationRepeat(animation: Animator?) {}
                 override fun onAnimationEnd(animation: Animator?) {
@@ -125,11 +144,13 @@ class MainBoardAdapter(private val activity : Activity, private val context: Con
                     listener?.DoubleTap(item.postId)
                     if(item.postLikeYn == "Y") {
                         binding.ivGood.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_false))
+                        binding.lottieLike.visibility = View.INVISIBLE
                         item.postLikeYn = "N"
                         item.postLikeCnt -= 1
                     }
                     else {
                         binding.ivGood.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_true))
+                        binding.lottieLike.visibility = View.VISIBLE
                         item.postLikeYn = "Y"
                         item.postLikeCnt += 1
                         binding.lottieLike.playAnimation()

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.theplay.aos.databinding.ItemMyPageBoardAllBinding
 import com.theplay.aos.databinding.ItemRecipeImageBinding
@@ -33,6 +34,7 @@ class RecipeImageAdapter(private val activity : Activity, private val context: C
         fun bind(item: RecipeImageItem) {
             Glide.with(context).load(item.image)
                 .apply(RequestOptions().transform(CenterCrop(), RoundedCorners(ViewUtils.convertDpToPixel(8f,context).toInt())))
+                .transition(DrawableTransitionOptions.withCrossFade(200))
                 .into(binding.ivRecipeImage)
         }
     }

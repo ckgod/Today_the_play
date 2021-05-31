@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import com.theplay.aos.ApplicationClass.Companion.followingPostList
 import com.theplay.aos.ApplicationClass.Companion.userInfo
 import com.theplay.aos.R
+import com.theplay.aos.api.model.MainBoardResponse
 import com.theplay.aos.base.BaseKotlinFragment
 import com.theplay.aos.databinding.FragmentHomeBinding
 
@@ -16,6 +18,7 @@ class HomeFragment() : BaseKotlinFragment<FragmentHomeBinding>() {
 
     private val viewModel by lazy { HomeViewModel() }
     private var viewPagerAdapter: ViewPagerAdapter? = null
+
 
     override fun initStartView() {
         binding.vpPager.isSaveEnabled = false
@@ -44,10 +47,29 @@ class HomeFragment() : BaseKotlinFragment<FragmentHomeBinding>() {
                 }
             }
         })
+        viewModel.followingPostResponse.observe(this@HomeFragment, Observer {
+            if(it == null) {
+                showNetworkError()
+            }
+            else {
+                Log.d(TAG, "팔로우 피드 받아오기 ${it.msg}")
+                if(it.code == 0) {
+                    var tmp : MutableList<MainBoardResponse.Content> = mutableListOf()
+                    for(i in it.data.content) {
+                        tmp.add(i)
+                    }
+                    followingPostList = tmp
+                    followingPostList?.let {
+                        Log.d(TAG, "following post size : ${it.size}")
+                    }
+                }
+            }
+        })
     }
 
     override fun initAfterBinding() {
         viewModel.getMyPageTopInfo()
+        viewModel.getFollowingPostResponse(0,20)
     }
 
     override fun reLoadUI() {

@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -90,7 +91,7 @@ class SettingAdapter(
                         activity.startActivity(browserIntent)
                     }
                     SET_ALARM -> {
-
+                        Toast.makeText(context, "준비중인 기능입니다.", Toast.LENGTH_SHORT).show()
                     }
                     QUIT_ACCOUNT -> {
                         var dialog = CustomDialogTwoButton(

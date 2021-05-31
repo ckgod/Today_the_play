@@ -139,4 +139,10 @@ class RemoteRepository{
         ).getFollowing()
     }
 
+    fun getFollowPeed(pageNumber: Int, pageSize: Int) :Observable<MainBoardResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getFollowPeed(pageNumber, pageSize)
+    }
+
 }

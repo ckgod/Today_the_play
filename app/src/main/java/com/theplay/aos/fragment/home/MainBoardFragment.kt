@@ -19,9 +19,14 @@ class MainBoardFragment() : BaseKotlinFragment<FragmentMainBoardBinding>() {
     var itemList : MutableList<MainBoardResponse.Content> = mutableListOf()
     var mainBoardAdapterListener : MainBoardAdapterListener? = null
 
+
     override fun initStartView() {
         mainBoardAdapterListener = object : MainBoardAdapterListener{
             override fun DoubleTap(postId: Int) {
+                viewModel.postLike(postId)
+            }
+
+            override fun clickedLike(postId: Int) {
                 viewModel.postLike(postId)
             }
         }
@@ -84,6 +89,7 @@ class MainBoardFragment() : BaseKotlinFragment<FragmentMainBoardBinding>() {
     }
 
     override fun reLoadUI() {
+
     }
 
     override fun onResume() {

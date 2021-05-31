@@ -51,6 +51,25 @@ class HomeViewModel() : ViewModel() {
         )
     }
 
+    private var _followingPostResponse : MutableLiveData<MainBoardResponse> = MutableLiveData()
+    val followingPostResponse get() = _followingPostResponse
+
+    fun getFollowingPostResponse(pageNumber: Int, pageSize: Int) {
+        CompositeDisposable().add(
+            remoteRepository.getFollowPeed(pageNumber, pageSize)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        followingPostResponse.postValue(response)
+                    }, { throwable ->
+                        Log.d(TAG,"throwable.localizedMessage${throwable.localizedMessage}")
+                        followingPostResponse.postValue(null)
+                    }
+                )
+        )
+    }
+
     private var _postLikeResponse : MutableLiveData<PostLikeResponse> = MutableLiveData()
     val postLikeResponse get() = _postLikeResponse
 

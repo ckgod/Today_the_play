@@ -48,8 +48,6 @@ class MainFragment() : BaseKotlinFragment<FragmentMainBinding>() {
     override fun reLoadUI() {
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

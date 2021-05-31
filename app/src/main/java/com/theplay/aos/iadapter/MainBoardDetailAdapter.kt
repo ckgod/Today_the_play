@@ -24,9 +24,11 @@ import com.theplay.aos.api.model.MainBoardResponse
 import com.theplay.aos.databinding.ItemFollowingBinding
 import com.theplay.aos.fragment.home.ImageFragment
 import com.theplay.aos.fragment.home.MainBoardDetailFragmentDirections
+import com.theplay.aos.fragment.home.MenuBottomSheetListener
 
 interface MainBoardDetailInterface {
     fun clickLike(postId : Int)
+    fun clickMore(postId : Int, userId : Int)
 }
 
 class MainBoardDetailAdapter(private val rootfa : Fragment, private val activity : Activity, private val context: Context, private val items: MutableList<MainBoardResponse.Content>) : RecyclerView.Adapter<MainBoardDetailAdapter.MainBoardDetailVH>() {
@@ -185,6 +187,10 @@ class MainBoardDetailAdapter(private val rootfa : Fragment, private val activity
             }
             binding.ctlCommentContainer.setOnClickListener {
                 activity.findNavController(R.id.main_nav_host_fragment).navigate(MainBoardDetailFragmentDirections.actionMainBoardDetailFragmentToCommentFragment(item.postId, item.nickname))
+            }
+            binding.btnMore.setOnClickListener {
+                // plan 더보기 바텀시트 띄우기
+                listener?.clickMore(item.postId, item.userId)
             }
         }
     }

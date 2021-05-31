@@ -15,9 +15,10 @@
     </style>
 
     <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsFloating">true</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
+        <item name="android:statusBarColor">@color/mainBlack</item>
     </style>
 
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
@@ -47,7 +48,5 @@
         <item name="android:editTextColor">@color/colorWhite</item>
         <item name="android:fontFamily">@font/noto_sans_medium</item>
     </style>
-
-    출처: https://altongmon.tistory.com/823 [IOS를 Java]
 
 </resources>

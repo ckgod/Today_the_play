@@ -160,7 +160,7 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
         mLottieLoading?.cancel()
     }
 
-    fun showProgress() {
+    fun showProgress() { // 이걸써야 제대로 나옴
         if(progress == null) {
             progress = com.theplay.aos.customview.ProgressDialog(requireContext())
         }

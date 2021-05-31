@@ -24,18 +24,42 @@ class MainBoardDetailFragment() : BaseKotlinFragment<FragmentMainBoardDetailBind
 
     var itemList : MutableList<MainBoardResponse.Content> = mutableListOf()
 
-
     override fun initStartView() {
         binding.rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         ApplicationClass.mainBoardList?.let {
             var selectList : MutableList<MainBoardResponse.Content> = mutableListOf()
-            for (i in safeArgs.selectIdx until it.size-1) {
+            for (i in safeArgs.selectIdx until it.size) {
                 selectList.add(it[i])
             }
             binding.rv.adapter = MainBoardDetailAdapter(this, requireActivity(), requireContext(), selectList).apply {
-                setInterface(object : MainBoardDetailInterface{
+                setInterface(object : MainBoardDetailInterface {
                     override fun clickLike(postId: Int) {
                         viewModel.postLike(postId)
+                    }
+
+                    override fun clickMore(postId: Int, userId: Int) {
+                        // plan 더보기 메뉴 바텀시트 띄우기
+                        var bottomSheet = BottomSheetMainPost().apply {
+                            setMenuBottomSheetInterface(object : MenuBottomSheetListener {
+                                override fun clickMenu(type: Int) {
+                                    Log.d(TAG, "$type clicked!")
+                                    when(type) {
+                                        1-> { // plan 레시피 저장
+
+                                        }
+                                        2-> { // plan 팔로우 하기
+
+                                        }
+                                        3-> { // plan 공유하기
+
+                                        }
+                                        4-> { // plan 신고하기
+
+                                        }
+                                    }
+                                }
+                            })
+                        }.show(requireActivity().supportFragmentManager, BottomSheetMainPost.TAG)
                     }
                 })
             }

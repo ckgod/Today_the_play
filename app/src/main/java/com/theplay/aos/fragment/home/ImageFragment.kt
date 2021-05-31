@@ -6,6 +6,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.FitCenter
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.theplay.aos.R
 import com.theplay.aos.base.BaseKotlinFragment
@@ -38,11 +39,13 @@ class ImageFragment() : BaseKotlinFragment<FragmentImageBinding>() {
         if(isFile) {
             Glide.with(requireContext()).load(imageFile)
                 .apply(RequestOptions().transform(CenterCrop(), RoundedCorners(ViewUtils.convertDpToPixel(8f,requireContext()).toInt())))
+                .transition(DrawableTransitionOptions.withCrossFade(200))
                 .into(binding.ivImage)
         }
         else {
             Glide.with(requireContext()).load(imageString)
                 .apply(RequestOptions().transform(CenterCrop(), RoundedCorners(ViewUtils.convertDpToPixel(8f,requireContext()).toInt())))
+                .transition(DrawableTransitionOptions.withCrossFade(200))
                 .into(binding.ivImage)
         }
 

@@ -117,7 +117,6 @@ class MyPageBoardFragment() : BaseKotlinFragment<FragmentMyPageBoardBinding>() {
             return fragments[rePos]!!
         }
 
-
         fun addFragment(status: Int, fragment: Fragment) {
             fragments[status] = fragment
             notifyItemInserted(fragments.size - 1)

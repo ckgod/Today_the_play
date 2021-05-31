@@ -30,6 +30,9 @@ class RecipeMainFragment() : BaseKotlinFragment<FragmentRecipeMainBinding>() {
         binding.rv.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 //        setDummy()
+        binding.refreshLayout.setOnRefreshListener {
+            viewModel.getHotRecipe(0,10)
+        }
     }
 
     override fun initDataBinding() {
@@ -57,6 +60,7 @@ class RecipeMainFragment() : BaseKotlinFragment<FragmentRecipeMainBinding>() {
                 }
             }
             hideProgress()
+            binding.refreshLayout.isRefreshing = false
         })
 
     }

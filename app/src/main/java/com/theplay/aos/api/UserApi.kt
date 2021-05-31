@@ -74,5 +74,8 @@ class UserApi {
 
         @GET("/v1/user/followings")
         fun getFollowing() : Observable<FollowListResponse>
+
+        @GET("/v1/following-posts")
+        fun getFollowPeed(@Query("pageNumber") pageNumber: Int, @Query("pageSize") pageSize: Int) : Observable<MainBoardResponse>
     }
 }
