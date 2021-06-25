@@ -13,7 +13,6 @@ data class RecipeSaveResponse(
     @SerializedName("success")
     var success: Boolean
 ) {
-
     data class Data(
         @SerializedName("saveYn")
         var saveYn: String

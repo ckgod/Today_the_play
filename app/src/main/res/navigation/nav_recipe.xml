@@ -9,6 +9,23 @@
         android:id="@+id/recipeMainFragment"
         android:name="com.theplay.aos.fragment.recipe.RecipeMainFragment"
         android:label="RecipeMainFragment"
-        tools:layout="@layout/fragment_recipe_main"/>
+        tools:layout="@layout/fragment_recipe_main">
+        <action
+            android:id="@+id/action_recipeMainFragment_to_hotRecipeActivity"
+            app:destination="@id/hotRecipeActivity"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
+    </fragment>
+    <activity
+        android:id="@+id/hotRecipeActivity"
+        android:name="com.theplay.aos.HotRecipeActivity"
+        android:label="HotRecipeActivity"
+        tools:layout="@layout/fragment_hot_recipe" >
+        <argument
+            android:name="tagName"
+            app:argType="string" />
+    </activity>
 
 </navigation>

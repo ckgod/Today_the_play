@@ -37,7 +37,7 @@ class MainBoardDetailFragment() : BaseKotlinFragment<FragmentMainBoardDetailBind
                         viewModel.postLike(postId)
                     }
 
-                    override fun clickMore(postId: Int, userId: Int) {
+                    override fun clickMore(postId: Int, userId: Int, tagId : Int) {
                         // plan 더보기 메뉴 바텀시트 띄우기
                         var bottomSheet = BottomSheetMainPost().apply {
                             setMenuBottomSheetInterface(object : MenuBottomSheetListener {
@@ -45,10 +45,16 @@ class MainBoardDetailFragment() : BaseKotlinFragment<FragmentMainBoardDetailBind
                                     Log.d(TAG, "$type clicked!")
                                     when(type) {
                                         1-> { // plan 레시피 저장
-
+                                            Log.d(TAG, "tag id : $tagId")
+                                            if(tagId == -1) showCustomToast("레시피가 없는 게시글입니다.")
+                                            else {
+                                                viewModel.postSaveRecipe(tagId)
+                                            }
+                                            dismiss()
                                         }
                                         2-> { // plan 팔로우 하기
-
+                                            viewModel.postFollow(userId)
+                                            dismiss()
                                         }
                                         3-> { // plan 공유하기
 
@@ -88,6 +94,34 @@ class MainBoardDetailFragment() : BaseKotlinFragment<FragmentMainBoardDetailBind
                 if(it.code == 0) {
                     viewModel.getLikedPost(0,30)
                 }
+            }
+        })
+        viewModel.postFollowingResponse.observe(this@MainBoardDetailFragment, Observer{
+            if(it == null) showNetworkError()
+            else {
+                if(it.code == 0) {
+                    showCustomToast("팔로잉 되었습니다.")
+                }
+                else {
+                    showCustomToast(it.msg)
+                }
+            }
+        })
+        viewModel.postSaveRecipeResponse.observe(this@MainBoardDetailFragment, Observer {
+            if(it == null) showNetworkError()
+            else {
+                Log.d(TAG, it.msg)
+                if(it.code == 0) {
+                    if(it.data.saveYn.equals("N")) {
+                        showCustomToast("삭제되었습니다.")
+                        ApplicationClass.userInfo!!.data.recipes -= 1
+                    }
+                    else {
+                        showCustomToast("저장되었습니다.")
+                        ApplicationClass.userInfo!!.data.recipes += 1
+                    }
+                }
+                else showCustomToast(it.msg)
             }
         })
     }

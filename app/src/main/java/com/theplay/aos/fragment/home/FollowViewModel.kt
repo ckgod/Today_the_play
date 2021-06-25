@@ -7,9 +7,11 @@ import com.theplay.aos.api.RemoteRepository
 import com.theplay.aos.api.model.MainBoardResponse
 import com.theplay.aos.api.model.MyPageTopResponse
 import com.theplay.aos.api.model.PostLikeResponse
+import com.theplay.aos.api.model.RecipeSaveResponse
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import retrofit2.HttpException
 
 class FollowViewModel() : ViewModel() {
     private val remoteRepository: RemoteRepository =
@@ -33,6 +35,25 @@ class FollowViewModel() : ViewModel() {
         )
     }
 
+    private var _followingPostResponse : MutableLiveData<MainBoardResponse> = MutableLiveData()
+    val followingPostResponse get() = _followingPostResponse
+
+    fun getFollowingPostResponse(pageNumber: Int, pageSize: Int) {
+        CompositeDisposable().add(
+            remoteRepository.getFollowPeed(pageNumber, pageSize)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        followingPostResponse.postValue(response)
+                    }, { throwable ->
+                        Log.d(HomeViewModel.TAG,"throwable.localizedMessage${throwable.localizedMessage}")
+                        followingPostResponse.postValue(null)
+                    }
+                )
+        )
+    }
+
     private var _followPeedResponse : MutableLiveData<MainBoardResponse> = MutableLiveData()
     val followPeedResponse get() = _followPeedResponse
 
@@ -47,6 +68,48 @@ class FollowViewModel() : ViewModel() {
                     }, { throwable ->
                         Log.d(TAG,"throwable.localizedMessage${throwable.localizedMessage}")
                         followPeedResponse.postValue(null)
+                    })
+        )
+    }
+
+    private var _postLikeResponse : MutableLiveData<PostLikeResponse> = MutableLiveData()
+    val postLikeResponse get() = _postLikeResponse
+
+    fun postLike(postId : Int) {
+        CompositeDisposable().add(
+            remoteRepository.postLike(postId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        postLikeResponse.postValue(response)
+                    }, { throwable ->
+                        Log.d(TAG,"throwable.localizedMessage${throwable.localizedMessage}")
+                        postLikeResponse.postValue(null)
+                    })
+        )
+    }
+
+    private var _postSaveRecipeResponse : MutableLiveData<RecipeSaveResponse> = MutableLiveData()
+    val postSaveRecipeResponse get() = _postSaveRecipeResponse
+
+    fun postSaveRecipe(tagId : Int) {
+        CompositeDisposable().add(
+            remoteRepository.postSaveRecipe(tagId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        postSaveRecipeResponse.postValue(response)
+                    }, { throwable ->
+                        if(throwable is HttpException) {
+                            when(throwable.code()) {
+                            }
+                        }
+                        else {
+                            Log.d(TAG, "throwable.localizedMessage${throwable.localizedMessage}")
+                            postSaveRecipeResponse.postValue(null)
+                        }
                     })
         )
     }

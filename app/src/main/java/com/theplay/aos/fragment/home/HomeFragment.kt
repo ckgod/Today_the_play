@@ -69,7 +69,7 @@ class HomeFragment() : BaseKotlinFragment<FragmentHomeBinding>() {
 
     override fun initAfterBinding() {
         viewModel.getMyPageTopInfo()
-        viewModel.getFollowingPostResponse(0,20)
+//        viewModel.getFollowingPostResponse(0,20)
     }
 
     override fun reLoadUI() {

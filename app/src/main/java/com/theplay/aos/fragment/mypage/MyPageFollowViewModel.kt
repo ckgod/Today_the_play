@@ -50,6 +50,60 @@ class MyPageFollowViewModel() : ViewModel() {
         )
     }
 
+    private var _cancelFollowingResponse : MutableLiveData<DefaultResponse> = MutableLiveData()
+    val cancelFollowingResponse get() = _cancelFollowingResponse
+
+    fun cancelFollowing(userId :Int) {
+        CompositeDisposable().add(
+            remoteRepository.cancelFollowing(userId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        cancelFollowingResponse.postValue(response)
+                    }, { throwable ->
+                        Log.d(TAG,"throwable.localizedMessage${throwable.localizedMessage}")
+                        cancelFollowingResponse.postValue(null)
+                    })
+        )
+    }
+
+    private var _deleteFollowerResponse : MutableLiveData<DefaultResponse> = MutableLiveData()
+    val deleteFollowerResponse get() = _deleteFollowerResponse
+
+    fun deleteFollower(userId :Int) {
+        CompositeDisposable().add(
+            remoteRepository.deleteFollower(userId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        deleteFollowerResponse.postValue(response)
+                    }, { throwable ->
+                        Log.d(TAG,"throwable.localizedMessage${throwable.localizedMessage}")
+                        deleteFollowerResponse.postValue(null)
+                    })
+        )
+    }
+
+    private var _banFollowerResponse : MutableLiveData<DefaultResponse> = MutableLiveData()
+    val banFollowerResponse get() = _banFollowerResponse
+
+    fun banFollower(userId :Int) {
+        CompositeDisposable().add(
+            remoteRepository.banFollower(userId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        banFollowerResponse.postValue(response)
+                    }, { throwable ->
+                        Log.d(TAG,"throwable.localizedMessage${throwable.localizedMessage}")
+                        banFollowerResponse.postValue(null)
+                    })
+        )
+    }
+
 
     companion object{
         const val TAG = "MyPageFollowViewModel"

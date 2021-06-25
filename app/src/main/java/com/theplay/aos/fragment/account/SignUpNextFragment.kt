@@ -160,6 +160,7 @@ class SignUpNextFragment() : BaseKotlinFragment<FragmentSignUpNextBinding>() {
                     requireActivity().finish()
                 }
                 else {
+                    showCustomToast(it.msg)
                     Log.d(TAG, it.msg)
                 }
             }

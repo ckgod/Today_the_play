@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dialog_body"
+        android:minWidth="314dp"
+        android:minHeight="279dp"
+        android:padding="0dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_black"
+            android:textSize="18dp"
+            android:textColor="@color/colorWhite"
+            android:text="@string/my_page_follow_ban"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="44dp"/>
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_medium"
+            android:textSize="15dp"
+            android:textColor="@color/colorWhite"
+            android:text="@string/my_page_follow_ban_explain"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            android:layout_marginTop="26dp"/>
+
+        <TextView
+            android:id="@+id/tv_content_explain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/my_page_follow_ban_explain_ex"
+            android:fontFamily="@font/noto_sans_medium"
+            android:textSize="10dp"
+            android:textColor="@color/subGray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_content"
+            android:layout_marginTop="19dp"/>
+
+        <TextView
+            android:id="@+id/btn_left"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_medium"
+            android:textSize="15dp"
+            android:textColor="@color/colorWhite"
+            android:text="@string/my_page_follow_ban"
+            app:layout_constraintEnd_toStartOf="@id/iv_line"
+            app:layout_constraintTop_toTopOf="@id/iv_line"
+            app:layout_constraintBottom_toBottomOf="@id/iv_line"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="18dp"/>
+
+        <ImageView
+            android:id="@+id/iv_line"
+            android:layout_width="6dp"
+            android:layout_height="39dp"
+            android:src="@drawable/line_dialog"
+            app:layout_constraintTop_toBottomOf="@id/tv_content_explain"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="25dp"/>
+
+        <TextView
+            android:id="@+id/btn_right"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_medium"
+            android:textSize="15dp"
+            android:textColor="@color/mainForText"
+            android:text="@string/no_ban"
+            app:layout_constraintStart_toEndOf="@id/iv_line"
+            app:layout_constraintTop_toTopOf="@id/iv_line"
+            app:layout_constraintBottom_toBottomOf="@id/iv_line"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="18dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -4,6 +4,9 @@ import com.theplay.aos.api.model.*
 import io.reactivex.Observable
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.http.DELETE
+import retrofit2.http.POST
+import retrofit2.http.Path
 
 class RemoteRepository{
 
@@ -143,6 +146,42 @@ class RemoteRepository{
         return RetrofitCreator.create(
             UserApi.UserApiImpl::class.java
         ).getFollowPeed(pageNumber, pageSize)
+    }
+
+    fun postFollow(userId : Int) : Observable<DefaultResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).postFollow(userId)
+    }
+
+    fun cancelFollowing(userId : Int) : Observable<DefaultResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).cancelFollowing(userId)
+    }
+
+    fun deleteFollower(userId: Int) : Observable<DefaultResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).deleteFollower(userId)
+    }
+
+    fun banFollower(userId: Int) : Observable<DefaultResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).banFollower(userId)
+    }
+
+    fun getMyRecipes(pageNumber: Int, pageSize: Int) : Observable<MyRecipeResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getMyRecipes(pageNumber, pageSize)
+    }
+
+    fun getHotRecipeDetail(tagName : String, pageNumber : Int, pageSize : Int) : Observable<HotRecipeDetailResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getHotRecipesDetail(tagName, pageNumber, pageSize)
     }
 
 }

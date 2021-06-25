@@ -79,7 +79,22 @@
 
     <!-- notice -->
     <string name="notice">공지사항</string>
-    
+
+    <!-- my page -->
+    <string name="my_page_follow_delete">삭제하기</string>
+    <string name="my_page_follow_delete_explain">님을\n팔로워에서 삭제하시겠습니까?</string>
+    <string name="delete">삭제</string>
+    <string name="no_delete">삭제 안 함</string>
+    <string name="my_page_follow_ban">차단하기</string>
+    <string name="my_page_follow_ban_explain">님을\n차단하시겠습니까?</string>
+    <string name="my_page_follow_ban_explain_ex">차단된 사용자 목록은 설정에서 복원할 수 있습니다</string>
+    <string name="delete_and_ban">삭제 및 차단</string>
+    <string name="no_ban">차단 안 함</string>
+    <string name="my_page_follow_cancel">팔로우 취소</string>
+    <string name="my_page_follow_cancel_title">팔로우 취소하기</string>
+    <string name="my_page_follow_cancel_explain">님을\n더 이상 팔로우하지 않겠습니까?</string>
+    <string name="no_cancel">취소 안 함</string>
+
     <!-- setting profile -->
     <string name="setting_profile_nick_name">닉네임</string>
     <string name="setting_profile_id">아이디</string>
@@ -113,12 +128,6 @@
     <string name="menu_follow">팔로우 하기</string>
     <string name="menu_share">공유하기</string>
     <string name="menu_report">신고하기</string>
-
-
-
-
-
-
 
 
 </resources>

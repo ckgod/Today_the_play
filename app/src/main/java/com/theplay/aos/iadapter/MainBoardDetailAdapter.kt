@@ -6,6 +6,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -22,13 +23,11 @@ import com.theplay.aos.ApplicationClass.Companion.iconHashMap
 import com.theplay.aos.R
 import com.theplay.aos.api.model.MainBoardResponse
 import com.theplay.aos.databinding.ItemFollowingBinding
-import com.theplay.aos.fragment.home.ImageFragment
-import com.theplay.aos.fragment.home.MainBoardDetailFragmentDirections
-import com.theplay.aos.fragment.home.MenuBottomSheetListener
+import com.theplay.aos.fragment.home.*
 
 interface MainBoardDetailInterface {
     fun clickLike(postId : Int)
-    fun clickMore(postId : Int, userId : Int)
+    fun clickMore(postId : Int, userId : Int, tagId : Int)
 }
 
 class MainBoardDetailAdapter(private val rootfa : Fragment, private val activity : Activity, private val context: Context, private val items: MutableList<MainBoardResponse.Content>) : RecyclerView.Adapter<MainBoardDetailAdapter.MainBoardDetailVH>() {
@@ -54,8 +53,14 @@ class MainBoardDetailAdapter(private val rootfa : Fragment, private val activity
 
     inner class MainBoardDetailVH(var binding: ItemFollowingBinding) : RecyclerView.ViewHolder(binding.root) {
         var isExpanded = false
+        private var tagId : Int = -1
+        // -1 : 레시피없음
 
         fun bind(item: MainBoardResponse.Content) {
+            binding.tvNickName.setOnClickListener {
+                Toast.makeText(context,"${item.userId}", Toast.LENGTH_SHORT).show()
+                activity.findNavController(R.id.main_nav_host_fragment).navigate(MainBoardDetailFragmentDirections.actionMainBoardDetailFragmentToNavMyPeed())
+            }
             if(item.postLikeYn == "Y") {
                 binding.btnHeart.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_true))
             }
@@ -68,12 +73,12 @@ class MainBoardDetailAdapter(private val rootfa : Fragment, private val activity
             else {
                 binding.btnBookMark.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_book_mark_0))
             }
-
             // 레시피 세팅 ---------------------------------------------------------------
             if(item.haveRecipeYn == "Y") {
                 binding.ctlRecipe.visibility = View.VISIBLE
                 for(tag in item.alcoholTags) {
                     if(tag.recipeYn == "Y") {
+                        tagId = tag.id
                         binding.tvRecipeName.text = tag.name
                         binding.tvRecipeName.setTextColor(ContextCompat.getColor(context, colorHashMap[tag.color]!!))
                         binding.ivRecipeIcon.setImageDrawable(ContextCompat.getDrawable(context, iconHashMap[tag.iconName]!!))
@@ -165,7 +170,6 @@ class MainBoardDetailAdapter(private val rootfa : Fragment, private val activity
                 binding.rvTag.adapter = MainBoardTagFlexAdapter(activity,context,tagList)
             }
             binding.btnHeart.setOnClickListener {
-
                 listener?.clickLike(item.postId)
                 if(item.postLikeYn == "Y") {
                     binding.btnHeart.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_false))
@@ -183,14 +187,26 @@ class MainBoardDetailAdapter(private val rootfa : Fragment, private val activity
                 ApplicationClass.mainBoardList = items
             }
             binding.btnComment.setOnClickListener {
-                activity.findNavController(R.id.main_nav_host_fragment).navigate(MainBoardDetailFragmentDirections.actionMainBoardDetailFragmentToCommentFragment(item.postId, item.nickname))
+                // plan 여기 팔로잉 피드에서도 이동가능하게 분기하기
+                if(rootfa is MainBoardDetailFragment) {
+                    activity.findNavController(R.id.main_nav_host_fragment).navigate(MainBoardDetailFragmentDirections.actionMainBoardDetailFragmentToCommentFragment(item.postId, item.nickname))
+                }
+                else if(rootfa is FollowingFragment) {
+                    activity.findNavController(R.id.main_nav_host_fragment).navigate(HomeFragmentDirections.actionHomeFragmentToCommentFragment(item.postId, item.nickname))
+                }
             }
             binding.ctlCommentContainer.setOnClickListener {
-                activity.findNavController(R.id.main_nav_host_fragment).navigate(MainBoardDetailFragmentDirections.actionMainBoardDetailFragmentToCommentFragment(item.postId, item.nickname))
+                // plan 여기 팔로잉 피드에서도 이동가능하게 분기하기
+                if(rootfa is MainBoardDetailFragment) {
+                    activity.findNavController(R.id.main_nav_host_fragment).navigate(MainBoardDetailFragmentDirections.actionMainBoardDetailFragmentToCommentFragment(item.postId, item.nickname))
+                }
+                else if(rootfa is FollowingFragment) {
+                    activity.findNavController(R.id.main_nav_host_fragment).navigate(HomeFragmentDirections.actionHomeFragmentToCommentFragment(item.postId, item.nickname))
+                }
             }
             binding.btnMore.setOnClickListener {
                 // plan 더보기 바텀시트 띄우기
-                listener?.clickMore(item.postId, item.userId)
+                listener?.clickMore(item.postId, item.userId, tagId)
             }
         }
     }

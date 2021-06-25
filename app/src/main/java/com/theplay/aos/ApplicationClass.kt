@@ -3,6 +3,7 @@ package com.theplay.aos
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import com.theplay.aos.api.model.HotRecipeDetailResponse
 import com.theplay.aos.api.model.MainBoardResponse
 import com.theplay.aos.api.model.MyPageTopResponse
 
@@ -53,6 +54,9 @@ class ApplicationClass : Application() {
         var followingPostList : MutableList<MainBoardResponse.Content>? = null
         var myLikedPost : MutableList<MainBoardResponse.Content>? = null
         var myPostedPost : MutableList<MainBoardResponse.Content>? = null
+
+        // 인기 레시피 태그 목록 저장
+        var hotRecipeListTmp : MutableList<HotRecipeDetailResponse.Content>? = null
 
         // jwt Token 저장
         var spToken : SharedPreferences? = null

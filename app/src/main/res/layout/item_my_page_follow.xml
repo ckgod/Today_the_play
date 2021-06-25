@@ -23,6 +23,46 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginStart="24dp"/>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ctl_button_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toEndOf="@id/tv_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_ban"
+                android:layout_width="95dp"
+                android:layout_height="34dp"
+                android:text="@string/my_page_follow_ban"
+                android:textColor="@color/colorWhite"
+                android:fontFamily="@font/noto_sans_medium"
+                android:textSize="15dp"
+                android:background="@drawable/custom_round_background_dark_blue_8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="19dp"
+                />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_delete"
+                android:layout_width="95dp"
+                android:layout_height="34dp"
+                android:text="@string/my_page_follow_delete"
+                android:textColor="@color/colorWhite"
+                android:fontFamily="@font/noto_sans_medium"
+                android:textSize="15dp"
+                android:background="@drawable/custom_round_background_dark_blue_8dp"
+                app:layout_constraintEnd_toStartOf="@id/btn_ban"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="8dp"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

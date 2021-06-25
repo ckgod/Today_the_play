@@ -77,5 +77,29 @@ class UserApi {
 
         @GET("/v1/following-posts")
         fun getFollowPeed(@Query("pageNumber") pageNumber: Int, @Query("pageSize") pageSize: Int) : Observable<MainBoardResponse>
+
+        // 팔로우하기
+        @POST("/v1/user/following/{userId}")
+        fun postFollow(@Path("userId") userID : Int) : Observable<DefaultResponse>
+
+        // 팔로잉취소
+        @DELETE("/v1/user/followings/{userId}")
+        fun cancelFollowing(@Path("userId") userID: Int) : Observable<DefaultResponse>
+
+        // 팔로워삭제
+        @DELETE("/v1/user/followers/{userId}")
+        fun deleteFollower(@Path("userId") userID: Int) : Observable<DefaultResponse>
+
+        // 팔로워차단
+        @POST("/v1/user/followers/block/{userId}")
+        fun banFollower(@Path("userId") userID : Int) : Observable<DefaultResponse>
+
+        // 나의 레시피 조회
+        @GET("/v1/user/recipes")
+        fun getMyRecipes(@Query("pageNumber") pageNumber: Int, @Query("pageSize") pageSize: Int) : Observable<MyRecipeResponse>
+
+        // 인기레시피 태그별 조회
+        @GET("/v1/popular-recipes/{tagName}")
+        fun getHotRecipesDetail(@Path("tagName") tagName : String, @Query("pageNumber") pageNumber: Int, @Query("pageSize") pageSize : Int) : Observable<HotRecipeDetailResponse>
     }
 }

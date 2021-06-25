@@ -47,11 +47,66 @@ class MainBoardViewModel() : ViewModel() {
                     { response ->
                         getLikedResponse.postValue(response)
                     }, { throwable ->
-                        Log.d(MyPageGoodViewModel.TAG,"throwable.localizedMessage${throwable.localizedMessage}")
+                        Log.d(TAG,"throwable.localizedMessage${throwable.localizedMessage}")
                         getLikedResponse.postValue(null)
                     })
         )
     }
+
+    private var _postFollowingResponse : MutableLiveData<DefaultResponse> = MutableLiveData()
+    val postFollowingResponse get() = _postFollowingResponse
+
+    fun postFollow(userId: Int) {
+        CompositeDisposable().add(
+            remoteRepository.postFollow(userId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        postFollowingResponse.postValue(response)
+                    }, { throwable ->
+                        if(throwable is HttpException) {
+                            when(throwable.code()) {
+                                409 -> { // 이미 팔로우 되어있을때
+                                    postFollowingResponse.postValue(DefaultResponse(409,"이미 팔로우 중인 사용자입니다.", true))
+                                }
+                                else -> {
+                                    postFollowingResponse.postValue(null)
+                                }
+                            }
+                        }
+                        else {
+                            Log.d(TAG, "throwable.localizedMessage${throwable.localizedMessage}")
+                            postFollowingResponse.postValue(null)
+                        }
+                    })
+        )
+    }
+
+    private var _postSaveRecipeResponse : MutableLiveData<RecipeSaveResponse> = MutableLiveData()
+    val postSaveRecipeResponse get() = _postSaveRecipeResponse
+
+    fun postSaveRecipe(tagId : Int) {
+        CompositeDisposable().add(
+            remoteRepository.postSaveRecipe(tagId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        postSaveRecipeResponse.postValue(response)
+                    }, { throwable ->
+                        if(throwable is HttpException) {
+                            when(throwable.code()) {
+                            }
+                        }
+                        else {
+                            Log.d(TAG, "throwable.localizedMessage${throwable.localizedMessage}")
+                            postSaveRecipeResponse.postValue(null)
+                        }
+                    })
+        )
+    }
+
 
 
     companion object{
