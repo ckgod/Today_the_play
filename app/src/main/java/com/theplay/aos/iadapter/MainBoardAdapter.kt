@@ -28,6 +28,7 @@ import com.theplay.aos.utils.ViewUtils
 
 interface MainBoardAdapterListener{
     fun DoubleTap(postId : Int)
+    fun singleTap(position : Int)
     fun clickedLike(postId : Int)
 }
 
@@ -42,7 +43,6 @@ class MainBoardAdapter(private val activity : Activity, private val context: Con
         val itemBinding = ItemMainBoardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MainBoardVH(itemBinding)
     }
-
 
     override fun getItemCount(): Int = items.size
 
@@ -165,7 +165,7 @@ class MainBoardAdapter(private val activity : Activity, private val context: Con
 
                 override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
                     Log.d(TAG, "single tap")
-                    activity.findNavController(R.id.main_nav_host_fragment).navigate(HomeFragmentDirections.actionHomeFragmentToMainBoardDetailFragment(position))
+                    listener?.singleTap(position)
                     return true
                 }
             })

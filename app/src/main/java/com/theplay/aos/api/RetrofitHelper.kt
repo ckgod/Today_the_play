@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 class RetrofitCreator {
     companion object {
         // 실서버 주소
-        var TEST_URL = "http://ec2-15-164-83-29.ap-northeast-2.compute.amazonaws.com:8081/v2/api-docs/"
+        var TEST_URL = "http://13.125.103.172:8081/v2/api-docs/"
         var REAL_URL = "http://ec2-15-164-83-29.ap-northeast-2.compute.amazonaws.com:8081/v2/api-docs/"
 
         private fun defaultRetrofit(): Retrofit {

@@ -34,9 +34,9 @@
             android:visibility="gone">
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_ban"
-                android:layout_width="95dp"
+                android:layout_width="wrap_content"
                 android:layout_height="34dp"
-                android:text="@string/my_page_follow_ban"
+                android:text="차단"
                 android:textColor="@color/colorWhite"
                 android:fontFamily="@font/noto_sans_medium"
                 android:textSize="15dp"
@@ -44,13 +44,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginEnd="19dp"
+                android:layout_marginEnd="15dp"
                 />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_delete"
-                android:layout_width="95dp"
+                android:layout_width="wrap_content"
                 android:layout_height="34dp"
-                android:text="@string/my_page_follow_delete"
+                android:text="삭제"
                 android:textColor="@color/colorWhite"
                 android:fontFamily="@font/noto_sans_medium"
                 android:textSize="15dp"

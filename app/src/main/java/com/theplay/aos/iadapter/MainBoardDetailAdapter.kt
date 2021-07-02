@@ -51,6 +51,7 @@ class MainBoardDetailAdapter(private val rootfa : Fragment, private val activity
         holder.bind(item)
     }
 
+
     inner class MainBoardDetailVH(var binding: ItemFollowingBinding) : RecyclerView.ViewHolder(binding.root) {
         var isExpanded = false
         private var tagId : Int = -1
@@ -58,8 +59,14 @@ class MainBoardDetailAdapter(private val rootfa : Fragment, private val activity
 
         fun bind(item: MainBoardResponse.Content) {
             binding.tvNickName.setOnClickListener {
-                Toast.makeText(context,"${item.userId}", Toast.LENGTH_SHORT).show()
-                activity.findNavController(R.id.main_nav_host_fragment).navigate(MainBoardDetailFragmentDirections.actionMainBoardDetailFragmentToNavMyPeed())
+//                Toast.makeText(context,"${item.userId}", Toast.LENGTH_SHORT).show()
+                // plan 여기 한번씩 다운될 때가 있는데 원인 알아보기
+                if(rootfa is MainBoardDetailFragment) {
+                    activity.findNavController(R.id.main_nav_host_fragment).navigate(MainBoardDetailFragmentDirections.actionMainBoardDetailFragmentToUserPeedActivity(item.userId))
+                }
+                else if(rootfa is FollowingFragment) {
+
+                }
             }
             if(item.postLikeYn == "Y") {
                 binding.btnHeart.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_true))

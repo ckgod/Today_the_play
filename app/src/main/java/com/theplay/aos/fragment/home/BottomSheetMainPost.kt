@@ -2,7 +2,9 @@ package com.theplay.aos.fragment.home
 
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.theplay.aos.ApplicationClass
 import com.theplay.aos.R
 import com.theplay.aos.base.BaseBottomSheetFragment
 import com.theplay.aos.databinding.BottomSheetPostMenuBinding
@@ -14,7 +16,7 @@ interface MenuBottomSheetListener {
     fun clickMenu(type : Int)
 }
 
-class BottomSheetMainPost() : BaseBottomSheetFragment<BottomSheetPostMenuBinding>() {
+class BottomSheetMainPost(private var userId : Int, private var rootFragment : Fragment) : BaseBottomSheetFragment<BottomSheetPostMenuBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.bottom_sheet_post_menu
 
@@ -30,10 +32,21 @@ class BottomSheetMainPost() : BaseBottomSheetFragment<BottomSheetPostMenuBinding
         binding.btnClose.setOnClickListener {
             dismiss()
         }
-        menuItemList.add(PostMenuItem(getString(R.string.menu_save_recipe),1))
-        menuItemList.add(PostMenuItem(getString(R.string.menu_follow),2))
-        menuItemList.add(PostMenuItem(getString(R.string.menu_share),3))
-        menuItemList.add(PostMenuItem(getString(R.string.menu_report),4))
+
+        when(rootFragment) {
+            is FollowingFragment -> {
+                menuItemList.add(PostMenuItem(getString(R.string.menu_save_recipe),1))
+                menuItemList.add(PostMenuItem(getString(R.string.menu_share),2))
+                menuItemList.add(PostMenuItem(getString(R.string.menu_report),3))
+            }
+            is MainBoardDetailFragment -> {
+                menuItemList.add(PostMenuItem(getString(R.string.menu_save_recipe),1))
+                menuItemList.add(PostMenuItem(getString(R.string.menu_follow),2))
+                menuItemList.add(PostMenuItem(getString(R.string.menu_share),3))
+                menuItemList.add(PostMenuItem(getString(R.string.menu_report),4))
+            }
+        }
+
 
         binding.rv.adapter = PostMenuAdapter(requireActivity(),requireContext(),menuItemList).apply {
             setMenuInterface(object : PostMenuInterface{

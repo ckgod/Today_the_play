@@ -53,6 +53,7 @@ class RecipeMainFragment() : BaseKotlinFragment<FragmentRecipeMainBinding>() {
             else {
                 Log.d(TAG, it.toString())
                 if(it.code == 0) {
+                    itemList = mutableListOf()
                     for(item in it.data.content) {
                         imageList = mutableListOf()
                         colorList = mutableListOf()
@@ -83,44 +84,6 @@ class RecipeMainFragment() : BaseKotlinFragment<FragmentRecipeMainBinding>() {
     }
 
     override fun reLoadUI() {
-    }
-
-    fun setDummy() {
-        itemList = mutableListOf()
-
-        imageList = mutableListOf(
-            RecipeImageItem("tmp"),
-            RecipeImageItem("tmp"),
-            RecipeImageItem("tmp"),
-            RecipeImageItem("tmp"),
-            RecipeImageItem("tmp")
-        )
-
-        colorList = mutableListOf(
-            RecipeColorItem(R.color.ingre7),
-            RecipeColorItem(R.color.mainColor),
-            RecipeColorItem(R.color.ingre8)
-        )
-
-        nameList = mutableListOf(
-            RecipeNameItem("카스", R.color.ingre7),
-            RecipeNameItem("참이슬", R.color.mainColor),
-            RecipeNameItem("콜라", R.color.ingre8)
-        )
-
-        itemList.add(RecipeItem("고진감래", imageList, colorList, nameList))
-
-        colorList = mutableListOf(
-            RecipeColorItem(R.color.ingre4),
-            RecipeColorItem(R.color.colorWhite)
-        )
-
-        nameList = mutableListOf(
-            RecipeNameItem("사이다", R.color.ingre4),
-            RecipeNameItem("스미노프", R.color.colorWhite)
-        )
-
-        itemList.add(RecipeItem("모히또",imageList,colorList,nameList))
     }
 
 

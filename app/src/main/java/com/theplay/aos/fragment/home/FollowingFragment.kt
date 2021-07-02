@@ -28,7 +28,7 @@ class FollowingFragment() : BaseKotlinFragment<FragmentFollowingBinding>() {
             }
             override fun clickMore(postId: Int, userId: Int, tagId : Int) {
                 // plan 더보기 메뉴 바텀시트 띄우기
-                var bottomSheet = BottomSheetMainPost().apply {
+                var bottomSheet = BottomSheetMainPost(userId, this@FollowingFragment).apply {
                     setMenuBottomSheetInterface(object : MenuBottomSheetListener {
                         override fun clickMenu(type: Int) {
                             Log.d(MainBoardDetailFragment.TAG, "$type clicked!")
@@ -40,13 +40,9 @@ class FollowingFragment() : BaseKotlinFragment<FragmentFollowingBinding>() {
 
                                     }
                                 }
-                                2-> { // plan 팔로우 하기
-                                    showCustomToast("이미 팔로우중인 사용자입니다.")
+                                2-> { // plan 공유하기
                                 }
-                                3-> { // plan 공유하기
-
-                                }
-                                4-> { // plan 신고하기
+                                3-> { // plan 신고하기
 
                                 }
                             }

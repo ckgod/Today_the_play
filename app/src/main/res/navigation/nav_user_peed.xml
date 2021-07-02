@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_user_peed"
+    app:startDestination="@id/userPeedFragment">
+
+    <fragment
+        android:id="@+id/userPeedFragment"
+        android:name="com.theplay.aos.fragment.userpage.UserPeedFragment"
+        android:label="UserPeedFragment"
+        tools:layout="@layout/fragment_user_peed"/>
+</navigation>

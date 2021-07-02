@@ -44,18 +44,20 @@ class MyPageFollowAdapter(private val FragmentType : Int, private val activity :
             if (FragmentType == FRAG_RIGHT) {
                 binding.btnDelete.text = context.getString(R.string.my_page_follow_cancel)
             }
-            itemView.setOnClickListener {
-                if(visible_button) binding.ctlButtonContainer.visibility = View.GONE
-                else binding.ctlButtonContainer.visibility = View.VISIBLE
-                visible_button = !visible_button
-            }
-            binding.btnDelete.setOnClickListener {
-                Log.d(TAG, "clicked delete")
-                listener?.clickedLeft(item.userId, item.name)
-            }
-            binding.btnBan.setOnClickListener{
-                Log.d(TAG, "clicked ban")
-                listener?.clickedRight(item.userId, item.name)
+            if (FragmentType == 1 || FragmentType == 2) {
+                itemView.setOnClickListener {
+                    if(visible_button) binding.ctlButtonContainer.visibility = View.GONE
+                    else binding.ctlButtonContainer.visibility = View.VISIBLE
+                    visible_button = !visible_button
+                }
+                binding.btnDelete.setOnClickListener {
+                    Log.d(TAG, "clicked delete")
+                    listener?.clickedLeft(item.userId, item.name)
+                }
+                binding.btnBan.setOnClickListener{
+                    Log.d(TAG, "clicked ban")
+                    listener?.clickedRight(item.userId, item.name)
+                }
             }
         }
     }

@@ -25,7 +25,7 @@ class HotRecipeFragment() : BaseKotlinFragment<FragmentHotRecipeBinding>() {
                 tagName = act.returnArgs().tagName
             }
         }
-        binding.tvTag.text = "#$tagName"
+        binding.tvTag.text = "#${tagName}"
         binding.btnBack.setOnClickListener {
             requireActivity().finish()
             requireActivity().overridePendingTransition(R.anim.right_in, R.anim.right_out)
@@ -54,10 +54,12 @@ class HotRecipeFragment() : BaseKotlinFragment<FragmentHotRecipeBinding>() {
                 }
                 else showCustomToast(it.msg)
             }
+            hideProgressNoShadow()
         })
     }
 
     override fun initAfterBinding() {
+        showProgressNoShadow()
         viewModel.getHotRecipeDetail(tagName, 0,20)
     }
 

@@ -58,6 +58,9 @@ class ApplicationClass : Application() {
         // 인기 레시피 태그 목록 저장
         var hotRecipeListTmp : MutableList<HotRecipeDetailResponse.Content>? = null
 
+        // 게시글 tmp
+        var tmpPostList : MutableList<MainBoardResponse.Content>? = null
+
         // jwt Token 저장
         var spToken : SharedPreferences? = null
 

@@ -13,10 +13,10 @@
         <action
             android:id="@+id/action_homeFragment_to_mainBoardDetailFragment"
             app:destination="@id/mainBoardDetailFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right"
             />
         <action
             android:id="@+id/action_homeFragment_to_commentFragment"
@@ -42,8 +42,12 @@
             android:name="selectIdx"
             app:argType="integer" />
         <action
-            android:id="@+id/action_mainBoardDetailFragment_to_nav_my_peed"
-            app:destination="@id/nav_my_peed" />
+            android:id="@+id/action_mainBoardDetailFragment_to_userPeedActivity"
+            app:destination="@id/userPeedActivity"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
     </fragment>
     <fragment
         android:id="@+id/commentFragment"
@@ -57,5 +61,13 @@
             android:name="nickname"
             app:argType="string" />
     </fragment>
-    <include app:graph="@navigation/nav_my_peed" />
+    <activity
+        android:id="@+id/userPeedActivity"
+        android:name="com.theplay.aos.UserPeedActivity"
+        android:label="UserPeedActivity">
+        <argument
+            android:name="userId"
+            app:argType="integer" />
+    </activity>
+
 </navigation>

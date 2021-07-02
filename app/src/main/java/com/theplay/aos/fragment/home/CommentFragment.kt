@@ -55,6 +55,7 @@ class CommentFragment() : BaseKotlinFragment<FragmentCommentBinding>() {
                     binding.etWriteComment.clearFocus()
                 }
             }
+            hideProgressNoShadow()
             hideProgress()
         })
 
@@ -71,7 +72,7 @@ class CommentFragment() : BaseKotlinFragment<FragmentCommentBinding>() {
     }
 
     override fun initAfterBinding() {
-        showProgress()
+        showProgressNoShadow()
         viewModel.getComment(safeArgs.postId)
     }
 

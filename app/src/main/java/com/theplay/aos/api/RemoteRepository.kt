@@ -184,4 +184,35 @@ class RemoteRepository{
         ).getHotRecipesDetail(tagName, pageNumber, pageSize)
     }
 
+    fun getUserTopInfo(userId : Int) : Observable<MyPageTopResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getUserTopInfo(userId)
+    }
+
+    fun getUserPosts(userId : Int, pageNumber: Int, pageSize: Int) : Observable<MainBoardResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getUserPosts(userId, pageNumber, pageSize)
+    }
+
+    fun getUserLikes(userId : Int, pageNumber: Int, pageSize: Int) : Observable<MainBoardResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getUserLikes(userId, pageNumber, pageSize)
+    }
+
+    fun getUserFollowers(userId: Int) : Observable<FollowListResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getUserFollowers(userId)
+    }
+
+    fun getUserMyRecipes(userId : Int, pageNumber: Int, pageSize: Int) : Observable<MyRecipeResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getUserMyRecipe(userId,pageNumber, pageSize)
+    }
+
+
 }

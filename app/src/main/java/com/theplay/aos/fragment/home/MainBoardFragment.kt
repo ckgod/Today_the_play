@@ -2,6 +2,8 @@ package com.theplay.aos.fragment.home
 
 import android.util.Log
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.theplay.aos.ApplicationClass
 import com.theplay.aos.R
@@ -19,11 +21,15 @@ class MainBoardFragment() : BaseKotlinFragment<FragmentMainBoardBinding>() {
     var itemList : MutableList<MainBoardResponse.Content> = mutableListOf()
     var mainBoardAdapterListener : MainBoardAdapterListener? = null
 
-
     override fun initStartView() {
         mainBoardAdapterListener = object : MainBoardAdapterListener{
             override fun DoubleTap(postId: Int) {
                 viewModel.postLike(postId)
+            }
+
+            override fun singleTap(position: Int) {
+                requireActivity().findNavController(R.id.main_nav_host_fragment).navigate(HomeFragmentDirections.actionHomeFragmentToMainBoardDetailFragment(position))
+//                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMainBoardDetailFragment(position))
             }
 
             override fun clickedLike(postId: Int) {

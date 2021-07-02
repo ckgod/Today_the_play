@@ -39,7 +39,7 @@ class MainBoardDetailFragment() : BaseKotlinFragment<FragmentMainBoardDetailBind
 
                     override fun clickMore(postId: Int, userId: Int, tagId : Int) {
                         // plan 더보기 메뉴 바텀시트 띄우기
-                        var bottomSheet = BottomSheetMainPost().apply {
+                        var bottomSheet = BottomSheetMainPost(userId, this@MainBoardDetailFragment).apply {
                             setMenuBottomSheetInterface(object : MenuBottomSheetListener {
                                 override fun clickMenu(type: Int) {
                                     Log.d(TAG, "$type clicked!")

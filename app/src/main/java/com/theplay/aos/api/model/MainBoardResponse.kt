@@ -15,7 +15,7 @@ data class MainBoardResponse(
 ) {
     data class Data(
         @SerializedName("content")
-        var content: List<Content>,
+        var content: MutableList<Content>,
         @SerializedName("empty")
         var empty: Boolean,
         @SerializedName("first")
@@ -40,7 +40,7 @@ data class MainBoardResponse(
 
     data class Content(
         @SerializedName("alcoholTags")
-        var alcoholTags: List<AlcoholTag>,
+        var alcoholTags: MutableList<AlcoholTag>,
         @SerializedName("comment")
         var comment: String,
         @SerializedName("commentCnt")
@@ -54,9 +54,9 @@ data class MainBoardResponse(
         @SerializedName("haveRecipeYn")
         var haveRecipeYn: String,
         @SerializedName("images")
-        var images: List<Image>,
+        var images: MutableList<Image>,
         @SerializedName("ingredients")
-        var ingredients: List<Ingredient>,
+        var ingredients: MutableList<Ingredient>,
         @SerializedName("nickname")
         var nickname: String,
         @SerializedName("postId")
@@ -68,7 +68,7 @@ data class MainBoardResponse(
         @SerializedName("saveRecipeYn")
         var saveRecipeYn: String,
         @SerializedName("steps")
-        var steps: List<Step>,
+        var steps: MutableList<Step>,
         @SerializedName("userId")
         var userId: Int
     )

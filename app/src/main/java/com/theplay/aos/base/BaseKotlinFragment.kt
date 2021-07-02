@@ -19,12 +19,14 @@ import com.theplay.aos.MainActivity
 import com.theplay.aos.R
 import com.theplay.aos.customview.DelayedProgressDialog
 import com.theplay.aos.customview.LottieDialog
+import com.theplay.aos.customview.ProgressDialogNoShadow
 import com.theplay.aos.utils.ViewUtils
 
 abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
     var mProgressCircle: DelayedProgressDialog? = null
     var mLottieLoading: LottieDialog? = null
     var progress : com.theplay.aos.customview.ProgressDialog? = null
+    var progressNoShadow : com.theplay.aos.customview.ProgressDialogNoShadow? = null
 
 //    lateinit var binding: T
     var databinding: T? = null
@@ -169,6 +171,16 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
 
     fun hideProgress() {
         progress?.dismiss()
+    }
+
+    fun showProgressNoShadow() {
+        if(progressNoShadow == null) {
+            progressNoShadow = ProgressDialogNoShadow(requireContext())
+        }
+        progressNoShadow?.show()
+    }
+    fun hideProgressNoShadow() {
+        progressNoShadow?.dismiss()
     }
 
 

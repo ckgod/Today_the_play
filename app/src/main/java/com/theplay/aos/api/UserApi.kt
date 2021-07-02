@@ -23,7 +23,7 @@ class UserApi {
         @GET("/v1/user/notice/{noticeId}")
         fun getNoticeDetail(@Path("noticeId") noticeId : Int):Observable<NoticeDetailResponse>
 
-        @GET("/v1/sign-up")
+        @GET("/v1/random-nickname")
         fun getRandomNick():Observable<RandomNickNameResponse>
 
         @GET("/v1/user/main-info")
@@ -54,10 +54,10 @@ class UserApi {
         @POST("/v1/post/{postId}/like")
         fun postLike(@Path("postId") postId : Int) : Observable<PostLikeResponse>
 
-        @GET("/v1/posts/{postId}/comments")
+        @GET("/v1/post/{postId}/comments")
         fun getComment(@Path("postId") postId: Int) : Observable<CommentResponse>
 
-        @POST("/v1/posts/{postId}/comments")
+        @POST("/v1/post/{postId}/comment")
         fun postAddComment(@Path("postId") postId: Int, @Body params : AddCommentRequest) : Observable<DefaultResponse>
 
         @GET("/v1/user/posts/like")
@@ -101,5 +101,26 @@ class UserApi {
         // 인기레시피 태그별 조회
         @GET("/v1/popular-recipes/{tagName}")
         fun getHotRecipesDetail(@Path("tagName") tagName : String, @Query("pageNumber") pageNumber: Int, @Query("pageSize") pageSize : Int) : Observable<HotRecipeDetailResponse>
+
+        // 선택유저 상단정보 조회
+        @GET("/v1/user/{userId}/main-info")
+        fun getUserTopInfo(@Path("userId") userId : Int) : Observable<MyPageTopResponse>
+
+        // 선택유저 게시글 조회
+        @GET("/v1/user/{userId}/posts")
+        fun getUserPosts(@Path("userId") userId : Int, @Query("pageNumber") pageNumber: Int, @Query("pageSize") pageSize: Int) : Observable<MainBoardResponse>
+
+        // 선택유저 좋아요 게시글 조회
+        @GET("/v1/user/{userId}/posts/like")
+        fun getUserLikes(@Path("userId") userID: Int, @Query("pageNumber") pageNumber: Int, @Query("pageSize") pageSize: Int) : Observable<MainBoardResponse>
+
+        // 선ㅌ택유저 팔로워리스트 조회
+        @GET("/v1/user/{userId}/followers")
+        fun getUserFollowers(@Path("userId") userID: Int) : Observable<FollowListResponse>
+
+        // 선택유저 레시피저장한거 조회
+        @GET("/v1/user/{userId}/recipes")
+        fun getUserMyRecipe(@Path("userId") userID: Int, @Query("pageNumber") pageNumber: Int, @Query("pageSize") pageSize: Int) : Observable<MyRecipeResponse>
+
     }
 }
