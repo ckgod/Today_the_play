@@ -104,7 +104,7 @@ class UserApi {
 
         // 선택유저 상단정보 조회
         @GET("/v1/user/{userId}/main-info")
-        fun getUserTopInfo(@Path("userId") userId : Int) : Observable<MyPageTopResponse>
+        fun getUserTopInfo(@Path("userId") userId : Int) : Observable<UserPageTopResponse>
 
         // 선택유저 게시글 조회
         @GET("/v1/user/{userId}/posts")
@@ -114,13 +114,26 @@ class UserApi {
         @GET("/v1/user/{userId}/posts/like")
         fun getUserLikes(@Path("userId") userID: Int, @Query("pageNumber") pageNumber: Int, @Query("pageSize") pageSize: Int) : Observable<MainBoardResponse>
 
-        // 선ㅌ택유저 팔로워리스트 조회
+        // 선택유저 팔로워리스트 조회
         @GET("/v1/user/{userId}/followers")
         fun getUserFollowers(@Path("userId") userID: Int) : Observable<FollowListResponse>
 
         // 선택유저 레시피저장한거 조회
         @GET("/v1/user/{userId}/recipes")
         fun getUserMyRecipe(@Path("userId") userID: Int, @Query("pageNumber") pageNumber: Int, @Query("pageSize") pageSize: Int) : Observable<MyRecipeResponse>
+
+        // 신고하기
+        @POST("/v1/post/report")
+        fun postReportPost(@Body params : ReportRequest) : Observable<DefaultResponse>
+
+        // 비밀번호 찾기
+        @POST("/v1/user/password")
+        fun postFindPassword(@Body params : FindPasswordRequest) : Observable<DefaultResponse>
+
+        // 게시글 삭제
+        @DELETE("/v1/post/{postId}")
+        fun deletePost(@Path("postId") postId: Int) : Observable<DefaultResponse>
+
 
     }
 }

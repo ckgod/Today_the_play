@@ -16,7 +16,7 @@ interface MenuBottomSheetListener {
     fun clickMenu(type : Int)
 }
 
-class BottomSheetMainPost(private var userId : Int, private var rootFragment : Fragment) : BaseBottomSheetFragment<BottomSheetPostMenuBinding>() {
+class BottomSheetMainPost(private var nickName : String, private var rootFragment : Fragment) : BaseBottomSheetFragment<BottomSheetPostMenuBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.bottom_sheet_post_menu
 
@@ -40,10 +40,20 @@ class BottomSheetMainPost(private var userId : Int, private var rootFragment : F
                 menuItemList.add(PostMenuItem(getString(R.string.menu_report),3))
             }
             is MainBoardDetailFragment -> {
-                menuItemList.add(PostMenuItem(getString(R.string.menu_save_recipe),1))
-                menuItemList.add(PostMenuItem(getString(R.string.menu_follow),2))
-                menuItemList.add(PostMenuItem(getString(R.string.menu_share),3))
-                menuItemList.add(PostMenuItem(getString(R.string.menu_report),4))
+                ApplicationClass.userInfo?.let { userInfo ->
+                    if(userInfo.data.nickname.equals(nickName)) {
+                        menuItemList.add(PostMenuItem(getString(R.string.menu_share),1))
+                        menuItemList.add(PostMenuItem(getString(R.string.menu_modify),2))
+                        menuItemList.add(PostMenuItem(getString(R.string.menu_delete),3))
+                    }
+                    else {
+                        menuItemList.add(PostMenuItem(getString(R.string.menu_save_recipe),1))
+                        menuItemList.add(PostMenuItem(getString(R.string.menu_follow),2))
+                        menuItemList.add(PostMenuItem(getString(R.string.menu_share),3))
+                        menuItemList.add(PostMenuItem(getString(R.string.menu_report),4))
+                    }
+                }
+
             }
         }
 

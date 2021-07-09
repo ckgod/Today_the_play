@@ -41,7 +41,7 @@ class UserPageFollowerLeftFragment(private val userId : Int) : BaseKotlinFragmen
                     binding.rv.adapter = MyPageFollowAdapter(3, requireActivity(), requireContext(), itemList)
                 }
                 else {
-                    showCustomToast(it.msg)
+//                    showCustomToast(it.msg)
                 }
             }
         })

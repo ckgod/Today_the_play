@@ -30,8 +30,8 @@ class RetrofitCreator {
 
         private fun createOkHttpClient(): OkHttpClient {
             return OkHttpClient.Builder()
-                .readTimeout(5000, TimeUnit.MILLISECONDS)
-                .connectTimeout(5000, TimeUnit.MILLISECONDS)
+                .readTimeout(10000, TimeUnit.MILLISECONDS)
+                .connectTimeout(10000, TimeUnit.MILLISECONDS)
                 .addNetworkInterceptor(TokenInterceptor()) // JWT 자동 헤더 전송
                 .build()
         }

@@ -17,10 +17,25 @@
             app:exitAnim="@anim/slide_to_left"
             app:popEnterAnim="@anim/slide_from_left"
             app:popExitAnim="@anim/slide_to_right" />
+        <action
+            android:id="@+id/action_myPeedFragment_to_userPeedActivity"
+            app:destination="@id/userPeedActivity"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
     </fragment>
     <activity
         android:id="@+id/settingActivity"
         android:name="com.theplay.aos.SettingActivity"
         android:label="SettingActivity"
         tools:layout="@layout/fragment_setting"/>
+    <activity
+        android:id="@+id/userPeedActivity"
+        android:name="com.theplay.aos.UserPeedActivity"
+        android:label="UserPeedActivity">
+        <argument
+            android:name="userId"
+            app:argType="integer" />
+    </activity>
 </navigation>

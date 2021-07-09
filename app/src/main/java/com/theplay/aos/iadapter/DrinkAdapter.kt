@@ -9,18 +9,27 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.theplay.aos.R
+import com.theplay.aos.customview.CustomDialogDeleteTag
 import com.theplay.aos.databinding.ItemDrinksBinding
 import com.theplay.aos.fragment.write.WriteFragmentDirections
 import com.theplay.aos.item.DrinkItem
 
+interface DrinkAdapterInterface {
+    fun clickDelete(icon : Int, colorType : Int, name : String, position : Int)
+}
 
 class DrinkAdapter(private val activity : Activity, private val context: Context, private val items: MutableList<DrinkItem>) : RecyclerView.Adapter<DrinkAdapter.DrinkVH>() {
     var isExpanded : Boolean = false
+    private var listener : DrinkAdapterInterface? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DrinkVH {
         val itemBinding = ItemDrinksBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return DrinkVH(itemBinding)
+    }
+
+    fun setInterface(drinkAdapterInterface: DrinkAdapterInterface) {
+        this.listener = drinkAdapterInterface
     }
 
     override fun getItemCount(): Int = items.size
@@ -45,6 +54,9 @@ class DrinkAdapter(private val activity : Activity, private val context: Context
                     binding.expandedView.collapse()
                 }
                 isExpanded = !isExpanded
+            }
+            binding.btnDelete.setOnClickListener {
+                listener?.clickDelete(item.icon, item.colorType, item.name, adapterPosition)
             }
             if(item.hasRecipe) {
                 binding.btnRecipe.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_recipe_true))

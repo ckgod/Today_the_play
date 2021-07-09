@@ -26,6 +26,9 @@ class PrevLoginFragment() : BaseKotlinFragment<FragmentPrevLoginBinding>() {
                 findNavController().navigate(PrevLoginFragmentDirections.actionPrevLoginFragmentToSignUpFragment())
             }
         })
+        binding.btnFindPw.setOnClickListener {
+            findNavController().navigate(PrevLoginFragmentDirections.actionPrevLoginFragmentToFindPasswordFragment())
+        }
     }
 
     override fun initDataBinding() {

@@ -37,12 +37,27 @@
             app:popEnterAnim="@anim/slide_from_left"
             app:popExitAnim="@anim/slide_to_right"
             />
+        <action
+            android:id="@+id/action_prevLoginFragment_to_findPasswordFragment"
+            app:destination="@id/findPasswordFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.theplay.aos.fragment.account.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login"/>
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_findPasswordFragment"
+            app:destination="@id/findPasswordFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
+    </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.theplay.aos.fragment.account.SignUpFragment"
@@ -67,5 +82,37 @@
         <argument
             android:name="pw"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/findPasswordFragment"
+        android:name="com.theplay.aos.fragment.account.FindPasswordFragment"
+        android:label="FindPasswordFragment"
+        tools:layout="@layout/fragment_find_password">
+        <action
+            android:id="@+id/action_findPasswordFragment_to_findPasswordCompleteFragment"
+            app:destination="@id/findPasswordCompleteFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/findPasswordCompleteFragment"
+        android:name="com.theplay.aos.fragment.account.FindPasswordCompleteFragment"
+        android:label="FindPasswordCompleteFragment"
+        tools:layout="@layout/fragment_find_password_complete">
+        <argument
+            android:name="email"
+            app:argType="string"/>
+        <action
+            android:id="@+id/action_findPasswordCompleteFragment_to_prevLoginFragment"
+            app:destination="@id/prevLoginFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/prevLoginFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit"/>
+
     </fragment>
 </navigation>

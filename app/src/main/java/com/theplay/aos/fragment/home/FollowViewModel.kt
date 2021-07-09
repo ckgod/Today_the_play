@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.theplay.aos.api.RemoteRepository
-import com.theplay.aos.api.model.MainBoardResponse
-import com.theplay.aos.api.model.MyPageTopResponse
-import com.theplay.aos.api.model.PostLikeResponse
-import com.theplay.aos.api.model.RecipeSaveResponse
+import com.theplay.aos.api.model.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -114,6 +111,23 @@ class FollowViewModel() : ViewModel() {
         )
     }
 
+    private var _postReportResponse : MutableLiveData<DefaultResponse> = MutableLiveData()
+    val postReportResponse get() = _postReportResponse
+
+    fun postReport(reportRequest: ReportRequest) {
+        CompositeDisposable().add(
+            remoteRepository.postReport(reportRequest)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        postReportResponse.postValue(response)
+                    }, { throwable ->
+                        Log.d(TAG, "throwable.localizedMessage${throwable.localizedMessage}")
+                        postReportResponse.postValue(null)
+                    })
+        )
+    }
 
     companion object{
         const val TAG = "FollowViewModel"

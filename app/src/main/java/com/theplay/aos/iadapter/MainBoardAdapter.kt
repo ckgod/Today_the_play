@@ -118,11 +118,13 @@ class MainBoardAdapter(private val activity : Activity, private val context: Con
                 listener?.clickedLike(postId = item.postId)
                 if(item.postLikeYn == "Y") {
                     binding.ivGood.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_false))
+                    binding.lottieLike.visibility = View.INVISIBLE
                     item.postLikeYn = "N"
                     item.postLikeCnt -= 1
                 }
                 else {
                     binding.ivGood.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_true))
+                    binding.lottieLike.visibility = View.VISIBLE
                     item.postLikeYn = "Y"
                     item.postLikeCnt += 1
                     binding.lottieLike.playAnimation()

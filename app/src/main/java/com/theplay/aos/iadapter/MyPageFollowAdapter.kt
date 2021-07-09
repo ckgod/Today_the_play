@@ -7,11 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.theplay.aos.R
 import com.theplay.aos.databinding.ItemMyPageBoardAllBinding
 import com.theplay.aos.databinding.ItemMyPageFollowBinding
 import com.theplay.aos.databinding.ItemMyPageGoodBinding
+import com.theplay.aos.fragment.mypage.MyPeedFragmentDirections
+import com.theplay.aos.fragment.userpage.UserPeedFragmentDirections
 import com.theplay.aos.item.MyPageBoardAllItem
 import com.theplay.aos.item.MyPageFollowItem
 import com.theplay.aos.item.MyPageGoodItem
@@ -38,17 +41,15 @@ class MyPageFollowAdapter(private val FragmentType : Int, private val activity :
     }
 
     inner class MyPageFollowVH(var binding: ItemMyPageFollowBinding) : RecyclerView.ViewHolder(binding.root) {
-        private var visible_button : Boolean = false
         fun bind(item: MyPageFollowItem) {
             binding.tvName.text = item.name
             if (FragmentType == FRAG_RIGHT) {
                 binding.btnDelete.text = context.getString(R.string.my_page_follow_cancel)
             }
-            if (FragmentType == 1 || FragmentType == 2) {
+            if (FragmentType == 1 || FragmentType == 2) { // Fragment 가 MyPage 일때만
                 itemView.setOnClickListener {
-                    if(visible_button) binding.ctlButtonContainer.visibility = View.GONE
-                    else binding.ctlButtonContainer.visibility = View.VISIBLE
-                    visible_button = !visible_button
+                    // plan 클릭시 유저 페이지로 이동
+                    activity.findNavController(R.id.main_nav_host_fragment).navigate(MyPeedFragmentDirections.actionMyPeedFragmentToUserPeedActivity(item.userId))
                 }
                 binding.btnDelete.setOnClickListener {
                     Log.d(TAG, "clicked delete")
@@ -57,6 +58,12 @@ class MyPageFollowAdapter(private val FragmentType : Int, private val activity :
                 binding.btnBan.setOnClickListener{
                     Log.d(TAG, "clicked ban")
                     listener?.clickedRight(item.userId, item.name)
+                }
+            }
+            else { // UserPage 일때는 버튼 작동 x
+                binding.ctlButtonContainer.visibility = View.GONE
+                itemView.setOnClickListener {
+                    activity.findNavController(R.id.main_nav_host_fragment).navigate(UserPeedFragmentDirections.actionUserPeedFragmentToUserPeedActivity(item.userId))
                 }
             }
         }

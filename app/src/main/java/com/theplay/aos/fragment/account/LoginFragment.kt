@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.theplay.aos.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.theplay.aos.MainActivity
 import com.theplay.aos.R
@@ -29,6 +30,9 @@ class LoginFragment() : BaseKotlinFragment<FragmentLoginBinding>() {
                 viewModel.postLogin(LoginRequest(binding.etEmail.text.toString(), binding.etPw.text.toString()))
             }
         })
+        binding.btnFindPw.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToFindPasswordFragment())
+        }
         binding.etEmail.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}

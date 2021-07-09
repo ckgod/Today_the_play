@@ -7,21 +7,44 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_dialog_body"
         android:minWidth="314dp"
-        android:minHeight="233dp"
+        android:minHeight="188dp"
         android:padding="0dp">
 
-        <TextView
-            android:id="@+id/tv_title"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ctl_tag_container"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/noto_sans_black"
-            android:textSize="18dp"
-            android:textColor="@color/colorWhite"
-            android:text="@string/logout_title"
+            android:layout_height="28dp"
+            android:background="@drawable/custom_round_background_black_14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="44dp"/>
+            android:layout_marginTop="30dp"
+            android:paddingEnd="10dp">
+
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_drinks_wine_0"
+                android:backgroundTint="@color/mainColor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_name"
+                android:layout_marginStart="4dp"/>
+            <TextView
+                android:id="@+id/tv_name"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_medium"
+                android:textSize="12dp"
+                android:textColor="@color/mainForText"
+                android:text="펜폴츠 뱅쇼"
+                app:layout_constraintStart_toEndOf="@id/iv_icon"
+                app:layout_constraintTop_toTopOf="@id/iv_icon"
+                app:layout_constraintBottom_toBottomOf="@id/iv_icon"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/tv_content"
@@ -29,13 +52,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans_medium"
-            android:textSize="15dp"
+            android:textSize="12dp"
             android:textColor="@color/colorWhite"
-            android:text="@string/logout_content"
+            android:text="@string/write_delete_tag"
+            app:layout_constraintTop_toBottomOf="@id/ctl_tag_container"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="15dp"/>
 
         <TextView
             android:id="@+id/btn_left"
@@ -45,7 +68,7 @@
             android:fontFamily="@font/noto_sans_medium"
             android:textSize="15dp"
             android:textColor="@color/colorWhite"
-            android:text="@string/logout_title"
+            android:text="@string/delete"
             app:layout_constraintEnd_toStartOf="@id/iv_line"
             app:layout_constraintTop_toTopOf="@id/iv_line"
             app:layout_constraintBottom_toBottomOf="@id/iv_line"
@@ -57,10 +80,10 @@
             android:layout_width="6dp"
             android:layout_height="39dp"
             android:src="@drawable/line_dialog"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="45dp"/>
+            android:layout_marginTop="25dp"/>
 
         <TextView
             android:id="@+id/btn_right"
@@ -76,10 +99,6 @@
             app:layout_constraintBottom_toBottomOf="@id/iv_line"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="18dp"/>
-
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -27,7 +27,7 @@ import com.theplay.aos.fragment.home.*
 
 interface MainBoardDetailInterface {
     fun clickLike(postId : Int)
-    fun clickMore(postId : Int, userId : Int, tagId : Int)
+    fun clickMore(postId : Int, userId : Int, tagId : Int, nickName : String)
 }
 
 class MainBoardDetailAdapter(private val rootfa : Fragment, private val activity : Activity, private val context: Context, private val items: MutableList<MainBoardResponse.Content>) : RecyclerView.Adapter<MainBoardDetailAdapter.MainBoardDetailVH>() {
@@ -65,7 +65,7 @@ class MainBoardDetailAdapter(private val rootfa : Fragment, private val activity
                     activity.findNavController(R.id.main_nav_host_fragment).navigate(MainBoardDetailFragmentDirections.actionMainBoardDetailFragmentToUserPeedActivity(item.userId))
                 }
                 else if(rootfa is FollowingFragment) {
-
+                    activity.findNavController(R.id.main_nav_host_fragment).navigate(HomeFragmentDirections.actionHomeFragmentToUserPeedActivity(item.userId))
                 }
             }
             if(item.postLikeYn == "Y") {
@@ -213,7 +213,7 @@ class MainBoardDetailAdapter(private val rootfa : Fragment, private val activity
             }
             binding.btnMore.setOnClickListener {
                 // plan 더보기 바텀시트 띄우기
-                listener?.clickMore(item.postId, item.userId, tagId)
+                listener?.clickMore(item.postId, item.userId, tagId, item.nickname)
             }
         }
     }

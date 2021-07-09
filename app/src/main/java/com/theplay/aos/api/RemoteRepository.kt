@@ -184,7 +184,7 @@ class RemoteRepository{
         ).getHotRecipesDetail(tagName, pageNumber, pageSize)
     }
 
-    fun getUserTopInfo(userId : Int) : Observable<MyPageTopResponse> {
+    fun getUserTopInfo(userId : Int) : Observable<UserPageTopResponse> {
         return RetrofitCreator.create(
             UserApi.UserApiImpl::class.java
         ).getUserTopInfo(userId)
@@ -214,5 +214,22 @@ class RemoteRepository{
         ).getUserMyRecipe(userId,pageNumber, pageSize)
     }
 
+    fun postReport(reportRequest: ReportRequest) : Observable<DefaultResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).postReportPost(reportRequest)
+    }
+
+    fun postFindPassword(findPasswordRequest: FindPasswordRequest) : Observable<DefaultResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).postFindPassword(findPasswordRequest)
+    }
+
+    fun deletePost(postId: Int) : Observable<DefaultResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).deletePost(postId)
+    }
 
 }

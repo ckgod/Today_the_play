@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.theplay.aos.api.RemoteRepository
 import com.theplay.aos.api.model.*
+import com.theplay.aos.fragment.home.HomeViewModel
 import com.theplay.aos.fragment.mypage.MyPageBoardViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -67,6 +68,24 @@ class WriteViewModel() : ViewModel() {
                     }, { throwable ->
                         Log.d(MyPageBoardViewModel.TAG,"throwable.localizedMessage${throwable.localizedMessage}")
                         getMyPostResponse.postValue(null)
+                    })
+        )
+    }
+
+    private var _mainBoardResponse : MutableLiveData<MainBoardResponse> = MutableLiveData()
+    val mainBoardResponse get() = _mainBoardResponse
+
+    fun getMainBoard(pageNumber : Int, pageSize : Int) {
+        CompositeDisposable().add(
+            remoteRepository.getMainBoard(pageNumber, pageSize)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        mainBoardResponse.postValue(response)
+                    }, { throwable ->
+                        Log.d(HomeViewModel.TAG,"throwable.localizedMessage${throwable.localizedMessage}")
+                        mainBoardResponse.postValue(null)
                     })
         )
     }

@@ -25,6 +25,9 @@ import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
 import com.theplay.aos.ApplicationClass.Companion.userInfo
 import com.theplay.aos.api.model.MainBoardResponse
+import com.theplay.aos.customview.CustomDialogDeleteTag
+import com.theplay.aos.customview.CustomDialogDeleteTagInterface
+import com.theplay.aos.iadapter.DrinkAdapterInterface
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -46,6 +49,7 @@ class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
     var stepList : MutableList<AddPostRequest.Step> = mutableListOf()
     var alcoholTagList : MutableList<AddPostRequest.AlcoholTag> = mutableListOf()
     lateinit var images: List<File>
+    lateinit var drinkAdapterListener : DrinkAdapterInterface
 
     override fun initStartView() {
         binding.btnBack.setOnClickListener {
@@ -73,7 +77,25 @@ class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
             dialog.show()
         }
         binding.rvDrinks.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.rvDrinks.adapter = DrinkAdapter(requireActivity(), requireContext(), drinkList)
+        binding.rvDrinks.adapter = DrinkAdapter(requireActivity(), requireContext(), drinkList).apply {
+            setInterface(object : DrinkAdapterInterface{
+                override fun clickDelete(icon: Int, colorType: Int, name: String, position: Int) {
+                    val dialog = CustomDialogDeleteTag(requireContext(), icon, name, colorType).apply {
+                        setDialogListener(object : CustomDialogDeleteTagInterface{
+                            override fun onFirstClicked() { // plan 삭제
+                                drinkList.removeAt(position)
+                                binding.rvDrinks.adapter?.notifyDataSetChanged()
+                                dismiss()
+                            }
+
+                            override fun onSecondClicked() { // plan 취소
+                                dismiss()
+                            }
+                        })
+                    }.show()
+                }
+            })
+        }
         //https://github.com/akvelon/android-image-picker
         ImagePicker.launch(this)
 
@@ -143,11 +165,21 @@ class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
                 Log.d(TAG, it.toString())
                 if(it.code == 0) {
                     DrinkUtil.clearRecipeSaved()
-                    viewModel.getMyPost(0,30)
+                    viewModel.getMainBoard(0,30)
 //                    removeActivity()
                 }
             }
 //            hideProgress()
+        })
+        viewModel.mainBoardResponse.observe(this@WriteFragment, Observer {
+            if(it == null) showNetworkError()
+            else {
+                Log.d(TAG, it.toString())
+                if(it.code == 0) {
+                    ApplicationClass.mainBoardList = it.data.content
+                    viewModel.getMyPost(0,30)
+                }
+            }
         })
 
     }

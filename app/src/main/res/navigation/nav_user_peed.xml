@@ -9,5 +9,21 @@
         android:id="@+id/userPeedFragment"
         android:name="com.theplay.aos.fragment.userpage.UserPeedFragment"
         android:label="UserPeedFragment"
-        tools:layout="@layout/fragment_user_peed"/>
+        tools:layout="@layout/fragment_user_peed">
+        <action
+            android:id="@+id/action_userPeedFragment_to_userPeedActivity"
+            app:destination="@id/userPeedActivity"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
+    </fragment>
+    <activity
+        android:id="@+id/userPeedActivity"
+        android:name="com.theplay.aos.UserPeedActivity"
+        android:label="UserPeedActivity">
+        <argument
+            android:name="userId"
+            app:argType="integer" />
+    </activity>
 </navigation>

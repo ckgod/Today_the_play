@@ -15,7 +15,6 @@ class ProgressDialog(context: Context) : Dialog(context) {
         setContentView(R.layout.custom_today_loading)
     }
 
-
     override fun onStart() {
         super.onStart()
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

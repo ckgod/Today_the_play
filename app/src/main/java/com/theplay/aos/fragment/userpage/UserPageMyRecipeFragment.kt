@@ -40,7 +40,7 @@ class UserPageMyRecipeFragment(private val userId : Int) : BaseKotlinFragment<Fr
                     }
                     binding.rv.adapter = MyRecipeAdapter(requireActivity(), requireContext(), recipeList)
                 }
-                else showCustomToast(it.msg)
+//                else showCustomToast(it.msg)
             }
         })
     }

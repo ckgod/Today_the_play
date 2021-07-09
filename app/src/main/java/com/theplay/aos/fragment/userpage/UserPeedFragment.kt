@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
@@ -18,6 +19,7 @@ import com.theplay.aos.ApplicationClass.Companion.userInfo
 import com.theplay.aos.R
 import com.theplay.aos.UserPeedActivity
 import com.theplay.aos.base.BaseKotlinFragment
+import com.theplay.aos.customview.CustomDialogFollowLottie
 import com.theplay.aos.databinding.FragmentMyPeedBinding
 import com.theplay.aos.databinding.FragmentUserPeedBinding
 import kotlin.properties.Delegates
@@ -29,6 +31,7 @@ class UserPeedFragment() : BaseKotlinFragment<FragmentUserPeedBinding>() {
     private val viewModel by lazy { UserPageViewModel() }
 //    private val safeArgs : UserPeedFragmentArgs by navArgs()
     private var userId : Int = 1
+    private var isFollowing = false
 
     private var viewPagerAdapter: ViewPagerAdapter? = null
 
@@ -38,6 +41,23 @@ class UserPeedFragment() : BaseKotlinFragment<FragmentUserPeedBinding>() {
                 userId = act.getUserId()
             }
         }
+        binding.btnFollow.setOnClickListener {
+            if(isFollowing) {
+                binding.btnFollow.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.ingre7)
+                binding.btnFollow.setTextColor(ContextCompat.getColor(requireContext(), R.color.mainBlack))
+                binding.btnFollow.text = "팔로우"
+                viewModel.cancelFollowing(userId)
+            }
+            else {
+                binding.btnFollow.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.body)
+                binding.btnFollow.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorWhite))
+                binding.btnFollow.text = "팔로잉"
+                viewModel.postFollow(userId)
+                val dialog = CustomDialogFollowLottie(requireContext()).show()
+            }
+            isFollowing = !isFollowing
+        }
+
         binding.btnBack.setOnClickListener { removeActivity() }
         binding.btnSetting.visibility = View.INVISIBLE
         binding.vpPager.isSaveEnabled = false
@@ -61,6 +81,22 @@ class UserPeedFragment() : BaseKotlinFragment<FragmentUserPeedBinding>() {
                 Log.d(TAG, it.msg)
                 if(it.code == 0) {
                     binding.tvNickName.text = it.data.nickname
+                    ApplicationClass.userInfo?.let { myInfo ->
+                        if(myInfo.data.nickname.equals(it.data.nickname)) binding.btnFollow.visibility = View.INVISIBLE
+                        else binding.btnFollow.visibility = View.VISIBLE
+                    }
+                    if(it.data.followingYn == "Y") {
+                        isFollowing = true
+                        binding.btnFollow.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.body)
+                        binding.btnFollow.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorWhite))
+                        binding.btnFollow.text = "팔로잉"
+                    }
+                    else {
+                        isFollowing = false
+                        binding.btnFollow.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.ingre7)
+                        binding.btnFollow.setTextColor(ContextCompat.getColor(requireContext(), R.color.mainBlack))
+                        binding.btnFollow.text = "팔로우"
+                    }
                     TabLayoutMediator(binding.tlTab, binding.vpPager) { tab, position ->
                         when(position) {
                             0 -> {
@@ -97,6 +133,33 @@ class UserPeedFragment() : BaseKotlinFragment<FragmentUserPeedBinding>() {
                             }
                         }
                     }.attach()
+                }
+            }
+        })
+        viewModel.postFollowingResponse.observe(this@UserPeedFragment, Observer {
+            if(it == null) showNetworkError()
+            else {
+                Log.d(TAG, it.msg)
+                if(it.code == 0) {
+                    viewModel.getFollowPeed(0,30)
+                }
+            }
+        })
+        viewModel.followPeedResponse.observe(this@UserPeedFragment, Observer {
+            if(it == null) showNetworkError()
+            else {
+                Log.d(TAG, it.msg)
+                if(it.code == 0) {
+                    ApplicationClass.followingPostList = it.data.content
+                }
+            }
+        })
+        viewModel.cancelFollowingResponse.observe(this@UserPeedFragment, Observer {
+            if(it == null) showNetworkError()
+            else {
+                Log.d(TAG, it.msg)
+                if(it.code == 0) {
+                    viewModel.getFollowPeed(0,30)
                 }
             }
         })

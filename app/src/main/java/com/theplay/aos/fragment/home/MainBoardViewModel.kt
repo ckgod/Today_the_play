@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.theplay.aos.api.RemoteRepository
 import com.theplay.aos.api.model.*
+import com.theplay.aos.fragment.mypage.MyPageBoardViewModel
 import com.theplay.aos.fragment.mypage.MyPageGoodViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -107,7 +108,77 @@ class MainBoardViewModel() : ViewModel() {
         )
     }
 
+    private var _postReportResponse : MutableLiveData<DefaultResponse> = MutableLiveData()
+    val postReportResponse get() = _postReportResponse
 
+    fun postReport(reportRequest: ReportRequest) {
+        CompositeDisposable().add(
+            remoteRepository.postReport(reportRequest)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        postReportResponse.postValue(response)
+                    }, { throwable ->
+                        Log.d(TAG, "throwable.localizedMessage${throwable.localizedMessage}")
+                        postReportResponse.postValue(null)
+                    })
+        )
+    }
+
+    private var _deletePostResponse : MutableLiveData<DefaultResponse> = MutableLiveData()
+    val deletePostResponse get() = _deletePostResponse
+
+    fun deletePost(postId: Int) {
+        CompositeDisposable().add(
+            remoteRepository.deletePost(postId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        deletePostResponse.postValue(response)
+                    }, { throwable ->
+                        Log.d(TAG, "throwable.localizedMessage${throwable.localizedMessage}")
+                        deletePostResponse.postValue(null)
+                    })
+        )
+    }
+
+    private var _getMyPostResponse : MutableLiveData<MainBoardResponse> = MutableLiveData()
+    val getMyPostResponse get() = _getMyPostResponse
+
+    fun getMyPost(pageNumber : Int, pageSize : Int) {
+        CompositeDisposable().add(
+            remoteRepository.getMyPost(pageNumber, pageSize)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        getMyPostResponse.postValue(response)
+                    }, { throwable ->
+                        Log.d(TAG,"throwable.localizedMessage${throwable.localizedMessage}")
+                        getMyPostResponse.postValue(null)
+                    })
+        )
+    }
+
+    private var _mainBoardResponse : MutableLiveData<MainBoardResponse> = MutableLiveData()
+    val mainBoardResponse get() = _mainBoardResponse
+
+    fun getMainBoard(pageNumber : Int, pageSize : Int) {
+        CompositeDisposable().add(
+            remoteRepository.getMainBoard(pageNumber, pageSize)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        mainBoardResponse.postValue(response)
+                    }, { throwable ->
+                        Log.d(HomeViewModel.TAG,"throwable.localizedMessage${throwable.localizedMessage}")
+                        mainBoardResponse.postValue(null)
+                    })
+        )
+    }
 
     companion object{
         const val TAG = "MainBoardViewModel"

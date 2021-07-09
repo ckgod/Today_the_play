@@ -24,6 +24,8 @@
     <string name="login_pw_hint">6자리 이상, 12자리 미만 비밀번호</string>
     <string name="login_pw_info">비밀번호를 입력해주세요</string>
     <string name="login_find_pw">비밀번호 찾기</string>
+    <string name="find_pw_use_email">이메일로 비밀번호 찾기</string>
+    <string name="find_pw_complete_info">임시 비밀번호를 메일로 전송하였습니다.\n\n임시 비밀번호로 로그인후\n설정에서 비밀번호 변경을진행해주세요.</string>
     <string name="sign_title">회원가입</string>
     <string name="sign_email_info">비밀번호 찾기를 우해 수신 가능한 이메일을 입력해주세요</string>
     <string name="sign_email_hint">이메일을 입력해주세요</string>
@@ -40,6 +42,11 @@
     <!-- main -->
     <string name="main_follow">팔로잉</string>
     <string name="add_comment">댓글 달기..</string>
+    <string name="start_follow">팔로우를 시작합니다</string>
+    <string name="delete_post_title">삭제하기</string>
+    <string name="delete_post_content">해당 술자리를 삭제하시겠어요?</string>
+    <string name="delete_post_delete">삭제</string>
+    <string name="delete_post_no_delete">삭제 안 함</string>
 
     <!-- search -->
     <string name="search_hing">술이나 레시피를 입력해주세요</string>
@@ -61,6 +68,7 @@
     <string name="write_recipe_content_hint">레시피 작성</string>
     <string name="write_recipe_tag_exist">재료 태그하기</string>
     <string name="write_recipe_info">오늘 제조한 술의 제조법을 설명해주세요</string>
+    <string name="write_delete_tag">해당 술 태그를 삭제하시겠습니까?</string>
 
 
     <!-- setting -->
@@ -128,6 +136,13 @@
     <string name="menu_follow">팔로우 하기</string>
     <string name="menu_share">공유하기</string>
     <string name="menu_report">신고하기</string>
+    <string name="menu_delete">삭제하기</string>
+    <string name="menu_modify">수정하기</string>
+    <string name="menu_report_reason">이 게시물을 신고하는 이유</string>
+    <string name="menu_report_spam">스팸</string>
+    <string name="menu_report_19">선정적입니다</string>
+    <string name="menu_report_not_match">부적절합니다</string>
+    <string name="menu_report_cancel">취소하기</string>
 
 
 </resources>
