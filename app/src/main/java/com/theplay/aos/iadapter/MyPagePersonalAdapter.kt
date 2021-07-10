@@ -23,9 +23,12 @@ import com.theplay.aos.api.model.MainBoardResponse
 import com.theplay.aos.databinding.ItemFollowingBinding
 import com.theplay.aos.fragment.home.ImageFragment
 import com.theplay.aos.fragment.home.MainBoardDetailFragmentDirections
+import com.theplay.aos.fragment.mypage.MyPageBoardPersonalFragment
+import com.theplay.aos.fragment.userpage.UserPageBoardPersonalFragment
 
 interface MyPagePersonalInterface {
     fun clickLike(postId : Int)
+    fun clickComment(postId : Int, nickName : String)
 }
 
 class MyPagePersonalAdapter(private val rootfa : Fragment, private val activity : Activity, private val context: Context, private val items: MutableList<MainBoardResponse.Content>) : RecyclerView.Adapter<MyPagePersonalAdapter.MyPagePersonalVH>() {
@@ -36,6 +39,7 @@ class MyPagePersonalAdapter(private val rootfa : Fragment, private val activity 
     fun setInterface(myPagePersonalInterface: MyPagePersonalInterface) {
         this.listener = myPagePersonalInterface
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyPagePersonalVH {
         val itemBinding = ItemFollowingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -154,25 +158,29 @@ class MyPagePersonalAdapter(private val rootfa : Fragment, private val activity 
             }
             binding.btnHeart.setOnClickListener {
                 listener?.clickLike(item.postId)
-//                if(item.postLikeYn == "Y") {
-//                    binding.btnHeart.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_false))
-//                    item.postLikeYn = "N"
-//                    item.postLikeCnt -= 1
-//                    binding.tvGoodCnt.text = "좋아요 ${item.postLikeCnt}개"
-//                }
-//                else {
-//                    binding.btnHeart.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_true))
-//                    item.postLikeYn = "Y"
-//                    item.postLikeCnt += 1
-//                    binding.tvGoodCnt.text = "좋아요 ${item.postLikeCnt}개"
-//                }
-//                ApplicationClass.mainBoardList = items
+                if(item.postLikeYn == "Y") {
+                    binding.btnHeart.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_false))
+                    item.postLikeYn = "N"
+                    item.postLikeCnt -= 1
+                    binding.tvGoodCnt.text = "좋아요 ${item.postLikeCnt}개"
+                }
+                else {
+                    binding.btnHeart.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_true))
+                    item.postLikeYn = "Y"
+                    item.postLikeCnt += 1
+                    binding.tvGoodCnt.text = "좋아요 ${item.postLikeCnt}개"
+                }
+                if(rootfa is MyPageBoardPersonalFragment) {
+                    ApplicationClass.myPostedPost = items
+                }
             }
             binding.btnComment.setOnClickListener {
                 // 댓글창으로 이동
+                listener?.clickComment(item.postId, item.nickname)
             }
             binding.ctlCommentContainer.setOnClickListener {
                 // 댓글창으로 이동
+                listener?.clickComment(item.postId, item.nickname)
             }
         }
     }

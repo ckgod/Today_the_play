@@ -24,6 +24,13 @@
             app:exitAnim="@anim/slide_to_left"
             app:popEnterAnim="@anim/slide_from_left"
             app:popExitAnim="@anim/slide_to_right" />
+        <action
+            android:id="@+id/action_myPeedFragment_to_commentFragment"
+            app:destination="@id/commentFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
     </fragment>
     <activity
         android:id="@+id/settingActivity"
@@ -38,4 +45,16 @@
             android:name="userId"
             app:argType="integer" />
     </activity>
+    <fragment
+        android:id="@+id/commentFragment"
+        android:name="com.theplay.aos.fragment.home.CommentFragment"
+        android:label="CommentFragment"
+        tools:layout="@layout/fragment_comment">
+        <argument
+            android:name="postId"
+            app:argType="integer" />
+        <argument
+            android:name="nickname"
+            app:argType="string" />
+    </fragment>
 </navigation>

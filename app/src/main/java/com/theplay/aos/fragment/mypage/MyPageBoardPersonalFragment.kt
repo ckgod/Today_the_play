@@ -1,5 +1,9 @@
 package com.theplay.aos.fragment.mypage
 
+import android.util.Log
+import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.theplay.aos.ApplicationClass
 import com.theplay.aos.R
@@ -16,6 +20,7 @@ class MyPageBoardPersonalFragment() : BaseKotlinFragment<FragmentMyPageBoardPers
     override val layoutResourceId: Int
         get() = R.layout.fragment_my_page_board_personal
 
+    private val viewModel by lazy { MyPageBoardViewModel() }
     var itemList : MutableList<MainBoardResponse.Content> = mutableListOf()
 
     override fun initStartView() {
@@ -28,7 +33,15 @@ class MyPageBoardPersonalFragment() : BaseKotlinFragment<FragmentMyPageBoardPers
     }
 
     override fun initAfterBinding() {
+        viewModel.postLikeResponse.observe(this@MyPageBoardPersonalFragment, Observer {
+            if(it == null) showNetworkError()
+            else {
+                Log.d(TAG, it.msg)
+                if(it.code == 0) {
 
+                }
+            }
+        })
     }
 
     override fun reLoadUI() {
@@ -40,7 +53,11 @@ class MyPageBoardPersonalFragment() : BaseKotlinFragment<FragmentMyPageBoardPers
             binding.rv.adapter = MyPagePersonalAdapter(this, requireActivity(), requireContext(), itemList).apply {
                 setInterface(object : MyPagePersonalInterface{
                     override fun clickLike(postId: Int) {
+                        viewModel.postLike(postId)
+                    }
 
+                    override fun clickComment(postId: Int, nickName: String) {
+                        requireActivity().findNavController(R.id.main_nav_host_fragment).navigate(MyPeedFragmentDirections.actionMyPeedFragmentToCommentFragment(postId,nickName))
                     }
                 })
             }

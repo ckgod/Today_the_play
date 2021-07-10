@@ -1,5 +1,6 @@
 package com.theplay.aos.fragment.userpage
 
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.theplay.aos.ApplicationClass
 import com.theplay.aos.R
@@ -37,6 +38,10 @@ class UserPageBoardPersonalFragment() : BaseKotlinFragment<FragmentUserPageBoard
                 setInterface(object : MyPagePersonalInterface {
                     override fun clickLike(postId: Int) {
 
+                    }
+
+                    override fun clickComment(postId: Int, nickName: String) {
+                        requireActivity().findNavController(R.id.main_nav_host_fragment).navigate(UserPeedFragmentDirections.actionUserPeedFragmentToCommentFragment(postId,nickName))
                     }
                 })
             }
