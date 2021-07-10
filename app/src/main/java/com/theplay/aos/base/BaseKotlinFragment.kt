@@ -145,10 +145,10 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
     }
 
     fun showCustomToast(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
     fun showNetworkError() {
-        Toast.makeText(context, getString(R.string.network_error), Toast.LENGTH_LONG).show()
+        Toast.makeText(context, getString(R.string.network_error), Toast.LENGTH_SHORT).show()
     }
 
     fun showLottie() {

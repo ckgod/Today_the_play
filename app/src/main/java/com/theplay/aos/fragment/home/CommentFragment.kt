@@ -1,6 +1,8 @@
 package com.theplay.aos.fragment.home
 
 import android.util.Log
+import android.view.View
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -14,6 +16,7 @@ import com.theplay.aos.base.BaseKotlinFragment
 import com.theplay.aos.databinding.FragmentCommentBinding
 import com.theplay.aos.databinding.FragmentTmpBinding
 import com.theplay.aos.iadapter.CommentAdapter
+import com.theplay.aos.iadapter.CommentAdapterListener
 
 class CommentFragment() : BaseKotlinFragment<FragmentCommentBinding>() {
     override val layoutResourceId: Int
@@ -21,8 +24,22 @@ class CommentFragment() : BaseKotlinFragment<FragmentCommentBinding>() {
 
     private val safeArgs : CommentFragmentArgs by navArgs()
     private val viewModel by lazy { CommentViewModel() }
+    private var isAddCommentCommentMode : MutableLiveData<Boolean> = MutableLiveData<Boolean>().apply {
+        postValue(false)
+    }
+    private var currentCommentId = 0
+    lateinit var commentAdapterListener : CommentAdapterListener
 
     override fun initStartView() {
+        commentAdapterListener = object : CommentAdapterListener{
+            override fun clickAddComment(commentId: Int) {
+                isAddCommentCommentMode.postValue(true)
+            }
+
+            override fun clickLike(commentId: Int) {
+                viewModel.postCommentLike(commentId)
+            }
+        }
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -41,16 +58,23 @@ class CommentFragment() : BaseKotlinFragment<FragmentCommentBinding>() {
     }
 
     override fun initDataBinding() {
+        isAddCommentCommentMode.observe(this, Observer {
+            if(it) {
+                binding.ctlCommentOfComment.visibility = View.VISIBLE
+            }
+            else {
+                binding.ctlCommentOfComment.visibility = View.GONE
+            }
+        })
         viewModel.commentResponse.observe(this@CommentFragment, Observer {
             if(it == null) showNetworkError()
             else {
                 Log.d(TAG, it.toString())
                 if(it.code == 0) {
-                    var comList : MutableList<CommentResponse.Comment> = mutableListOf()
-                    for(c in it.list) {
-                        comList.add(c)
+                    var comList : MutableList<CommentResponse.Comment> = it.list
+                    binding.rvComment.adapter = CommentAdapter(requireActivity(), requireContext(), comList).apply {
+                        setAdapterListener(commentAdapterListener)
                     }
-                    binding.rvComment.adapter = CommentAdapter(requireActivity(), requireContext(), comList)
                     binding.etWriteComment.setText("")
                     binding.etWriteComment.clearFocus()
                 }
@@ -65,6 +89,15 @@ class CommentFragment() : BaseKotlinFragment<FragmentCommentBinding>() {
                 Log.d(TAG, it.toString())
                 if(it.code == 0) {
                     viewModel.getComment(safeArgs.postId)
+                }
+            }
+        })
+        viewModel.postCommentLikResponse.observe(this@CommentFragment, Observer {
+            if(it == null) showNetworkError()
+            else {
+                Log.d(TAG, it.msg)
+                if(it.code == 0) {
+
                 }
             }
         })

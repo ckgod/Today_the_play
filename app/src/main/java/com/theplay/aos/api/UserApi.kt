@@ -134,6 +134,10 @@ class UserApi {
         @DELETE("/v1/post/{postId}")
         fun deletePost(@Path("postId") postId: Int) : Observable<DefaultResponse>
 
+        // 댓글 좋아요
+        @POST("/v1/comment/{postCommentId}/like")
+        fun postCommentLike(@Path("postCommentId") commentId : Int) : Observable<CommentLikeResponse>
+
 
     }
 }

@@ -232,4 +232,9 @@ class RemoteRepository{
         ).deletePost(postId)
     }
 
+    fun postLikeComment(commentId : Int) : Observable<CommentLikeResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).postCommentLike(commentId)
+    }
 }

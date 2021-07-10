@@ -32,7 +32,7 @@ class CommentViewModel() : ViewModel() {
 
                         if (throwable is HttpException) {
                             if(throwable.code() == 404) {
-                                commentResponse.postValue(CommentResponse(404, listOf(),"댓글이 없습니다.",true))
+                                commentResponse.postValue(CommentResponse(404, mutableListOf(),"댓글이 없습니다.",true))
                             }
                             else {
                                 commentResponse.postValue(null)
@@ -59,6 +59,24 @@ class CommentViewModel() : ViewModel() {
                     }, { throwable ->
                         Log.d(TAG,"throwable.localizedMessage${throwable.localizedMessage}")
                         addCommentResponse.postValue(null)
+                    })
+        )
+    }
+
+    private var _postCommentLikResponse : MutableLiveData<CommentLikeResponse> = MutableLiveData()
+    val postCommentLikResponse get() = _postCommentLikResponse
+
+    fun postCommentLike(commentId : Int) {
+        CompositeDisposable().add(
+            remoteRepository.postLikeComment(commentId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        postCommentLikResponse.postValue(response)
+                    }, { throwable ->
+                        Log.d(TAG,"throwable.localizedMessage${throwable.localizedMessage}")
+                        postCommentLikResponse.postValue(null)
                     })
         )
     }

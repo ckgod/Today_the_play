@@ -7,7 +7,7 @@ data class CommentResponse(
     @SerializedName("code")
     var code: Int,
     @SerializedName("list")
-    var list: List<Comment>,
+    var list: MutableList<Comment>,
     @SerializedName("msg")
     var msg: String,
     @SerializedName("success")
@@ -25,7 +25,7 @@ data class CommentResponse(
         @SerializedName("postCommentId")
         var postCommentId: Int,
         @SerializedName("secondComments")
-        var secondComments: List<SecondComment>,
+        var secondComments: MutableList<SecondComment>,
         @SerializedName("userId")
         var userId: Int
     )

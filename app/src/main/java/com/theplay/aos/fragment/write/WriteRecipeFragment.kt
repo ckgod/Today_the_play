@@ -14,9 +14,12 @@ import com.theplay.aos.api.model.AddPostRequest
 import com.theplay.aos.base.BaseKotlinFragment
 import com.theplay.aos.customview.AddMaterialDialog
 import com.theplay.aos.customview.AddMaterialListener
+import com.theplay.aos.customview.CustomDialogDeleteIngredient
+import com.theplay.aos.customview.CustomDialogDeleteIngredientInterface
 import com.theplay.aos.databinding.FragmentTmpBinding
 import com.theplay.aos.databinding.FragmentWriteRecipeBinding
 import com.theplay.aos.iadapter.MaterialAdapter
+import com.theplay.aos.iadapter.MaterialAdapterListener
 import com.theplay.aos.iadapter.RecipeStepAdapter
 import com.theplay.aos.item.DrinkItem
 import com.theplay.aos.item.WriteRecipeStepItem
@@ -44,7 +47,30 @@ class WriteRecipeFragment() : BaseKotlinFragment<FragmentWriteRecipeBinding>() {
         binding.ivIcon.backgroundTintList = ContextCompat.getColorStateList(requireContext(), safeArgs.colorType)
         binding.tvName.setTextColor(ContextCompat.getColor(requireContext(), safeArgs.colorType))
         binding.rvRecipes.layoutManager =LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.rvRecipes.adapter = MaterialAdapter(requireActivity(),requireContext(),materialList)
+        binding.rvRecipes.adapter = MaterialAdapter(requireActivity(),requireContext(),materialList).apply {
+            setAdapterListener(object : MaterialAdapterListener{
+                override fun clickDelete(
+                    itemPosition: Int,
+                    icon: Int,
+                    name: String,
+                    colorType: Int
+                ) {
+                    val dialog = CustomDialogDeleteIngredient(requireContext(),icon,name,colorType).apply {
+                        setDialogListener(object : CustomDialogDeleteIngredientInterface{
+                            override fun onFirstClicked() {
+                                materialList.removeAt(itemPosition)
+                                binding.rvRecipes.adapter?.notifyDataSetChanged()
+                                dismiss()
+                            }
+
+                            override fun onSecondClicked() {
+                                dismiss()
+                            }
+                        })
+                    }.show()
+                }
+            })
+        }
 
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()

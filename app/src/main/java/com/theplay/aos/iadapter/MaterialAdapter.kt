@@ -19,9 +19,13 @@ import com.theplay.aos.fragment.write.WriteFragmentDirections
 import com.theplay.aos.item.DrinkItem
 import com.theplay.aos.utils.DrinkUtil
 
+interface MaterialAdapterListener{
+    fun clickDelete(itemPosition : Int, icon : Int, name : String, colorType : Int)
+}
 
 class MaterialAdapter(private val activity : Activity, private val context: Context, private val items: MutableList<AddPostRequest.Ingredient>) : RecyclerView.Adapter<MaterialAdapter.MaterialVH>() {
     var isExpanded : Boolean = false
+    lateinit var listener : MaterialAdapterListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MaterialVH {
         val itemBinding = ItemRecipeContentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -34,6 +38,10 @@ class MaterialAdapter(private val activity : Activity, private val context: Cont
     override fun onBindViewHolder(holder: MaterialVH, position: Int) {
         val item: AddPostRequest.Ingredient = items[position]
         holder.bind(item)
+    }
+
+    fun setAdapterListener(materialAdapterListener: MaterialAdapterListener) {
+        this.listener = materialAdapterListener
     }
 
     inner class MaterialVH(var binding: ItemRecipeContentBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -51,6 +59,9 @@ class MaterialAdapter(private val activity : Activity, private val context: Cont
                     binding.expandedView.collapse()
                 }
                 isExpanded = !isExpanded
+            }
+            binding.btnDelete.setOnClickListener {
+                listener.clickDelete(adapterPosition, iconHashMap[item.iconName]!!,item.name, colorHashMap[item.color]!!)
             }
 
             binding.color1.setOnClickListener {

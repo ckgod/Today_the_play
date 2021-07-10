@@ -6,7 +6,8 @@
         android:id="@+id/ctl_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/mainBlack">
+        android:background="@color/mainBlack"
+        android:paddingBottom="7dp">
 
         <TextView
             android:id="@+id/tv_nick_name"
@@ -18,7 +19,7 @@
             android:text="nickname"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="51dp"
             android:layout_marginTop="8dp"/>
 
         <TextView
@@ -47,19 +48,6 @@
             app:layout_constraintTop_toBottomOf="@id/tv_content"
             android:layout_marginTop="4dp"/>
 
-        <TextView
-            android:id="@+id/tv_add_res"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/noto_sans_medium"
-            android:textSize="10dp"
-            android:textColor="@color/subGray"
-            android:text="답글달기"
-            app:layout_constraintStart_toEndOf="@id/tv_like_cnt"
-            app:layout_constraintTop_toBottomOf="@id/tv_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="11dp"/>
-
         <ImageView
             android:id="@+id/iv_like"
             android:layout_width="16dp"
@@ -69,47 +57,9 @@
             app:layout_constraintTop_toTopOf="@id/tv_nick_name"
             android:layout_marginEnd="25dp"/>
 
-        <View
-            android:id="@+id/line_add"
-            android:layout_width="25dp"
-            android:layout_height="1dp"
-            android:background="@color/dividerGray"
-            app:layout_constraintTop_toBottomOf="@id/tv_like_cnt"
-            app:layout_constraintStart_toStartOf="@id/tv_nick_name"
-            android:layout_marginTop="16.5dp"
-            android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/tv_show_res"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/noto_sans_medium"
-            android:textSize="10dp"
-            android:text="답글보기"
-            android:textColor="@color/subGray"
-            app:layout_constraintStart_toEndOf="@id/line_add"
-            app:layout_constraintTop_toTopOf="@id/line_add"
-            app:layout_constraintBottom_toBottomOf="@id/line_add"
-            android:layout_marginStart="9dp"
-            android:visibility="gone"/>
 
 
-        <net.cachapa.expandablelayout.ExpandableLayout
-            android:id="@+id/exv_comment"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/line_add"
-            android:layout_marginTop="16.5dp"
-            app:el_expanded="false">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:overScrollMode="never"/>
 
-        </net.cachapa.expandablelayout.ExpandableLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
