@@ -39,13 +39,11 @@ class MyPageGoodFragment() : BaseKotlinFragment<FragmentMyPageGoodBinding>() {
                     binding.rv.adapter = MyPageGoodAdapter(requireActivity(), requireContext(), itemList)
                 }
             }
-            hideProgress()
         })
     }
 
     override fun initAfterBinding() {
         if(myLikedPost == null) {
-            showProgress()
             viewModel.getLikedPost(0,30)
         }
     }

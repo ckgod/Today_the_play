@@ -1,5 +1,7 @@
 package com.theplay.aos.fragment.recipe
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -72,15 +74,17 @@ class RecipeMainFragment() : BaseKotlinFragment<FragmentRecipeMainBinding>() {
                     }
                 }
             }
-            hideProgress()
+            hideProgressNoShadow()
             binding.refreshLayout.isRefreshing = false
         })
 
     }
 
     override fun initAfterBinding() {
-        showProgress()
-        viewModel.getHotRecipe(0,10)
+        showProgressNoShadow()
+        val handler = Handler(Looper.getMainLooper()).postDelayed({
+            viewModel.getHotRecipe(0,20)
+        },100)
     }
 
     override fun reLoadUI() {

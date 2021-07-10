@@ -7,16 +7,17 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.theplay.aos.ApplicationClass
 import com.theplay.aos.ApplicationClass.Companion.userInfo
 import com.theplay.aos.R
 import com.theplay.aos.api.model.AddCommentRequest
 import com.theplay.aos.api.model.CommentResponse
 import com.theplay.aos.base.BaseKotlinFragment
 import com.theplay.aos.databinding.FragmentCommentBinding
-import com.theplay.aos.databinding.FragmentTmpBinding
 import com.theplay.aos.iadapter.CommentAdapter
 import com.theplay.aos.iadapter.CommentAdapterListener
+import kotlinx.coroutines.*
+import android.os.Handler
+import android.os.Looper
 
 class CommentFragment() : BaseKotlinFragment<FragmentCommentBinding>() {
     override val layoutResourceId: Int
@@ -105,8 +106,11 @@ class CommentFragment() : BaseKotlinFragment<FragmentCommentBinding>() {
     }
 
     override fun initAfterBinding() {
-        showProgressNoShadow()
-        viewModel.getComment(safeArgs.postId)
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed({
+            showProgressNoShadow()
+            viewModel.getComment(safeArgs.postId)
+        },200)
     }
 
     override fun reLoadUI() {

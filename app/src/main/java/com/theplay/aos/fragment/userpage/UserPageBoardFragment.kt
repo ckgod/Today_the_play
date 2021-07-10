@@ -1,5 +1,7 @@
 package com.theplay.aos.fragment.userpage
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
@@ -21,7 +23,7 @@ class UserPageBoardFragment(private val userId : Int) : BaseKotlinFragment<Fragm
     private var viewPagerAdapter: ViewPagerAdapter? = null
 
     override fun initStartView() {
-        showProgress()
+
     }
 
     override fun initDataBinding() {
@@ -59,12 +61,16 @@ class UserPageBoardFragment(private val userId : Int) : BaseKotlinFragment<Fragm
                     binding.tlTab.tabIconTint = null
                 }
             }
-            hideProgress()
+            hideProgressNoShadow()
         })
     }
 
     override fun initAfterBinding() {
-        viewModel.getUserPosts(userId,0,25)
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed({
+            showProgressNoShadow()
+            viewModel.getUserPosts(userId,0,25)
+        },200)
     }
 
     override fun reLoadUI() {

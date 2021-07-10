@@ -1,5 +1,7 @@
 package com.theplay.aos.fragment.mypage
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
@@ -59,6 +61,7 @@ class MyPageBoardFragment() : BaseKotlinFragment<FragmentMyPageBoardBinding>() {
                     binding.tlTab.tabIconTint = null
                 }
             }
+            hideProgressNoShadow()
         })
     }
 
@@ -67,7 +70,11 @@ class MyPageBoardFragment() : BaseKotlinFragment<FragmentMyPageBoardBinding>() {
 
     override fun initAfterBinding() {
         if(myPostedPost == null) {
-            viewModel.getMyPost(0,30)
+            showProgressNoShadow()
+            val handler = Handler(Looper.getMainLooper())
+            handler.postDelayed({
+                viewModel.getMyPost(0,30)
+            },100)
         }
         else {
             binding.vpPager.isSaveEnabled = false
