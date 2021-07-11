@@ -25,7 +25,6 @@ class MyPageBoardPersonalFragment() : BaseKotlinFragment<FragmentMyPageBoardPers
 
     override fun initStartView() {
         binding.rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
     }
 
     override fun initDataBinding() {

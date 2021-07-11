@@ -116,6 +116,9 @@ class SettingChangePwFragment() : BaseKotlinFragment<FragmentSettingChangePwBind
                     showCustomToast("비밀번호가 변경되었습니다.")
                     findNavController().popBackStack()
                 }
+                else if(it.code == -1) {
+                    showCustomToast("비밀번호는 영어와 숫자로 포함해서 6~12자리 이내로 입력해주세요.")
+                }
                 else {
                     showCustomToast(it.msg)
                 }

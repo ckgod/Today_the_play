@@ -47,6 +47,7 @@
     <string name="delete_post_content">해당 술자리를 삭제하시겠어요?</string>
     <string name="delete_post_delete">삭제</string>
     <string name="delete_post_no_delete">삭제 안 함</string>
+    <string name="following_empty_title">팔로잉중인 유저가 없습니다\n\n마음에 드는 게시물을 팔로우 하면,\n내 친구들의 새로운 글을 모아볼 수 있어요 :)</string>
 
     <!-- search -->
     <string name="search_hing">술이나 레시피를 입력해주세요</string>

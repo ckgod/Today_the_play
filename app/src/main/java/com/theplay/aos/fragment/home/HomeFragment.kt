@@ -19,7 +19,6 @@ class HomeFragment() : BaseKotlinFragment<FragmentHomeBinding>() {
     private val viewModel by lazy { HomeViewModel() }
     private var viewPagerAdapter: ViewPagerAdapter? = null
 
-
     override fun initStartView() {
         binding.vpPager.isSaveEnabled = false
         binding.vpPager.isUserInputEnabled = false

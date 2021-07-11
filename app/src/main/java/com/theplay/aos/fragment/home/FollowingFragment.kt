@@ -1,6 +1,7 @@
 package com.theplay.aos.fragment.home
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.theplay.aos.ApplicationClass
@@ -72,7 +73,6 @@ class FollowingFragment() : BaseKotlinFragment<FragmentFollowingBinding>() {
                     })
                 }.show(requireActivity().supportFragmentManager, TAG)
             }
-
         }
         binding.rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         viewModel.getFollowPeed(0,20)
@@ -87,6 +87,12 @@ class FollowingFragment() : BaseKotlinFragment<FragmentFollowingBinding>() {
                     var tmp : MutableList<MainBoardResponse.Content> = mutableListOf()
                     for(i in it.data.content) {
                         tmp.add(i)
+                    }
+                    if(tmp.isEmpty()) {
+                        binding.ctlEmpty.visibility = View.VISIBLE
+                    }
+                    else {
+                        binding.ctlEmpty.visibility = View.GONE
                     }
                     ApplicationClass.followingPostList = tmp
                     binding.rv.adapter = MainBoardDetailAdapter(this, requireActivity(), requireContext(), tmp).apply {
@@ -124,6 +130,12 @@ class FollowingFragment() : BaseKotlinFragment<FragmentFollowingBinding>() {
         super.onResume()
         ApplicationClass.followingPostList?.let {
             var itemList = it
+            if(itemList.isEmpty()) {
+                binding.ctlEmpty.visibility = View.VISIBLE
+            }
+            else {
+                binding.ctlEmpty.visibility = View.GONE
+            }
             binding.rv.adapter = MainBoardDetailAdapter(this, requireActivity(), requireContext(), itemList).apply {
                 mainBoardDetailInterface?.let { mainBoardDetailInterface -> setInterface(mainBoardDetailInterface) }
             }
