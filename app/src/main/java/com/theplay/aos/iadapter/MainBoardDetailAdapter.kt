@@ -191,7 +191,9 @@ class MainBoardDetailAdapter(private val rootfa : Fragment, private val activity
                     binding.tvGoodCnt.text = "좋아요 ${item.postLikeCnt}개"
                     binding.lottieLike.playAnimation()
                 }
-                ApplicationClass.mainBoardList = items
+                if(rootfa is MainBoardDetailFragment) {
+                    ApplicationClass.mainBoardList = items
+                }
             }
             binding.btnComment.setOnClickListener {
                 // plan 여기 팔로잉 피드에서도 이동가능하게 분기하기

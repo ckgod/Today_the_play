@@ -58,6 +58,10 @@ class MyPageBoardPersonalFragment() : BaseKotlinFragment<FragmentMyPageBoardPers
                     override fun clickComment(postId: Int, nickName: String) {
                         requireActivity().findNavController(R.id.main_nav_host_fragment).navigate(MyPeedFragmentDirections.actionMyPeedFragmentToCommentFragment(postId,nickName))
                     }
+
+                    override fun clickMore(postId: Int, userId: Int, nickName: String) {
+
+                    }
                 })
             }
         }

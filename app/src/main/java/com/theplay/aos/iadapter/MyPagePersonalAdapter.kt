@@ -29,6 +29,7 @@ import com.theplay.aos.fragment.userpage.UserPageBoardPersonalFragment
 interface MyPagePersonalInterface {
     fun clickLike(postId : Int)
     fun clickComment(postId : Int, nickName : String)
+    fun clickMore(postId: Int, userId: Int, nickName: String)
 }
 
 class MyPagePersonalAdapter(private val rootfa : Fragment, private val activity : Activity, private val context: Context, private val items: MutableList<MainBoardResponse.Content>) : RecyclerView.Adapter<MyPagePersonalAdapter.MyPagePersonalVH>() {
@@ -181,6 +182,9 @@ class MyPagePersonalAdapter(private val rootfa : Fragment, private val activity 
             binding.ctlCommentContainer.setOnClickListener {
                 // 댓글창으로 이동
                 listener?.clickComment(item.postId, item.nickname)
+            }
+            binding.btnMore.setOnClickListener {
+                listener?.clickMore(item.postId,item.userId,item.nickname)
             }
         }
     }

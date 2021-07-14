@@ -53,7 +53,7 @@ class MainBoardFragment() : BaseKotlinFragment<FragmentMainBoardBinding>() {
                     for(item in it.data.content) {
                         itemList.add(item)
                     }
-                    ApplicationClass.mainBoardList = itemList
+                    ApplicationClass.mainBoardList = it.data.content
                     binding.rv.adapter = MainBoardAdapter(requireActivity(), requireContext(), itemList).apply {
                         mainBoardAdapterListener?.let {listener ->
                             setInterface(listener)
@@ -83,7 +83,7 @@ class MainBoardFragment() : BaseKotlinFragment<FragmentMainBoardBinding>() {
             else {
                 Log.d(TAG, it.msg)
                 if(it.code == 0) {
-                    viewModel.getLikedPost(0,30)
+                    viewModel.getLikedPost(0,50)
                 }
             }
         })
@@ -91,7 +91,7 @@ class MainBoardFragment() : BaseKotlinFragment<FragmentMainBoardBinding>() {
 
     override fun initAfterBinding() {
         showProgress()
-        viewModel.getMainBoard(0,25)
+        viewModel.getMainBoard(0,50)
     }
 
     override fun reLoadUI() {

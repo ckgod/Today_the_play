@@ -71,30 +71,56 @@ class ApplicationClass : Application() {
         var fcmToken : SharedPreferences? = null
         var alarmAllowToken : SharedPreferences? = null
 
+//        val colorHashMap = mapOf<Int,Int>(
+//            0 to R.color.colorWhite,
+//            1 to R.color.ingre,
+//            2 to R.color.ingre2,
+//            3 to R.color.ingre3,
+//            4 to R.color.ingre4,
+//            5 to R.color.ingre5,
+//            6 to R.color.ingre6,
+//            7 to R.color.ingre7,
+//            8 to R.color.ingre8,
+//            9 to R.color.mainColor
+//        )
+//
+//        val colorToCodeHashMap = mapOf<Int,Int>(
+//            R.color.colorWhite to 0,
+//            R.color.ingre to 1,
+//            R.color.ingre2 to 2,
+//            R.color.ingre3 to 3,
+//            R.color.ingre4 to 4,
+//            R.color.ingre5 to 5,
+//            R.color.ingre6 to 6,
+//            R.color.ingre7 to 7,
+//            R.color.ingre8 to 8,
+//            R.color.mainColor to 9
+//        )
+
         val colorHashMap = mapOf<Int,Int>(
-            0 to R.color.colorWhite,
-            1 to R.color.ingre,
-            2 to R.color.ingre2,
-            3 to R.color.ingre3,
-            4 to R.color.ingre4,
-            5 to R.color.ingre5,
-            6 to R.color.ingre6,
-            7 to R.color.ingre7,
-            8 to R.color.ingre8,
-            9 to R.color.mainColor
+            0 to R.color.mainColor,
+            1 to R.color.colorWhite,
+            2 to R.color.ingre,
+            3 to R.color.ingre2,
+            4 to R.color.ingre3,
+            5 to R.color.ingre4,
+            6 to R.color.ingre5,
+            7 to R.color.ingre6,
+            8 to R.color.ingre7,
+            9 to R.color.ingre8
         )
 
         val colorToCodeHashMap = mapOf<Int,Int>(
-            R.color.colorWhite to 0,
-            R.color.ingre to 1,
-            R.color.ingre2 to 2,
-            R.color.ingre3 to 3,
-            R.color.ingre4 to 4,
-            R.color.ingre5 to 5,
-            R.color.ingre6 to 6,
-            R.color.ingre7 to 7,
-            R.color.ingre8 to 8,
-            R.color.mainColor to 9
+            R.color.mainColor to 0,
+            R.color.colorWhite to 1,
+            R.color.ingre to 2,
+            R.color.ingre2 to 3,
+            R.color.ingre3 to 4,
+            R.color.ingre4 to 5,
+            R.color.ingre5 to 6,
+            R.color.ingre6 to 7,
+            R.color.ingre7 to 8,
+            R.color.ingre8 to 9
         )
 
         val iconHashMap = mapOf<String, Int>(

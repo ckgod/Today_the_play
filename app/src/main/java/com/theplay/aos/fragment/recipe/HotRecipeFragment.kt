@@ -43,11 +43,11 @@ class HotRecipeFragment() : BaseKotlinFragment<FragmentHotRecipeBinding>() {
                     binding.rv.adapter = HotRecipeAdapter(requireActivity(),requireContext(),it.data.content).apply {
                         setInterface(object : HotRecipeAdapterListener{
                             override fun DoubleTap(postId: Int) {
-                                showCustomToast("double Tap")
+//                                showCustomToast("double Tap")
                             }
 
                             override fun clickedLike(postId: Int) {
-                                showCustomToast("lick click")
+//                                showCustomToast("lick click")
                             }
                         })
                     }
