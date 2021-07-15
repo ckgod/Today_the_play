@@ -3,18 +3,20 @@ package com.theplay.aos
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.theplay.aos.databinding.ActivityModifyBinding
 import com.theplay.aos.databinding.ActivityWriteBinding
 import com.theplay.aos.fragment.setting.SettingFragment
+import com.theplay.aos.fragment.write.ModifyFragment
 import com.theplay.aos.fragment.write.WriteFragment
 import com.theplay.aos.fragment.write.WriteRecipeFragment
 import com.theplay.aos.utils.DrinkUtil
 
-class WriteActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityWriteBinding
+class ModifyActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityModifyBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityWriteBinding.inflate(layoutInflater)
+        binding = ActivityModifyBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
     }
@@ -24,7 +26,7 @@ class WriteActivity : AppCompatActivity() {
         val currentFragment = navHostFragment?.childFragmentManager?.fragments?.get(0)
         Log.d(TAG, "onBackPressed() currentFragment:$currentFragment")
         when (currentFragment) {
-            is WriteFragment -> {
+            is ModifyFragment -> {
                 DrinkUtil.clearRecipeSaved()
                 currentFragment.removeActivity()
                 return
@@ -41,6 +43,6 @@ class WriteActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val TAG = "WriteActivity"
+        const val TAG = "ModifyActivity"
     }
 }

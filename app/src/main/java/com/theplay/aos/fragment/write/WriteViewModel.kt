@@ -66,7 +66,7 @@ class WriteViewModel() : ViewModel() {
                     { response ->
                         getMyPostResponse.postValue(response)
                     }, { throwable ->
-                        Log.d(MyPageBoardViewModel.TAG,"throwable.localizedMessage${throwable.localizedMessage}")
+                        Log.d(TAG,"throwable.localizedMessage${throwable.localizedMessage}")
                         getMyPostResponse.postValue(null)
                     })
         )
@@ -84,8 +84,26 @@ class WriteViewModel() : ViewModel() {
                     { response ->
                         mainBoardResponse.postValue(response)
                     }, { throwable ->
-                        Log.d(HomeViewModel.TAG,"throwable.localizedMessage${throwable.localizedMessage}")
+                        Log.d(TAG,"throwable.localizedMessage${throwable.localizedMessage}")
                         mainBoardResponse.postValue(null)
+                    })
+        )
+    }
+
+    private var _putModifyResponse : MutableLiveData<DefaultResponse> = MutableLiveData()
+    val putModifyResponse get() = _putModifyResponse
+
+    fun putModifyPost(postId : Int, params : ModifyPostRequest) {
+        CompositeDisposable().add(
+            remoteRepository.putModifyPost(postId, params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        putModifyResponse.postValue(response)
+                    }, { throwable ->
+                        Log.d(TAG,"throwable.localizedMessage${throwable.localizedMessage}")
+                        putModifyResponse.postValue(null)
                     })
         )
     }

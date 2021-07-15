@@ -51,7 +51,7 @@ class MainBoardDetailFragment() : BaseKotlinFragment<FragmentMainBoardDetailBind
                                         if(userInfo.data.nickname == nickName) {
                                             when(type) {
                                                 1 -> { // plan 공유하기
-
+                                                    showCustomToast(getString(R.string.not_implementation))
                                                 }
                                                 2 -> { // plan 게시물 수정
 
@@ -102,7 +102,7 @@ class MainBoardDetailFragment() : BaseKotlinFragment<FragmentMainBoardDetailBind
                                                     dismiss()
                                                 }
                                                 3-> { // plan 공유하기
-
+                                                    showCustomToast(getString(R.string.not_implementation))
                                                 }
                                                 4-> { // plan 신고하기
                                                     val dialog =  CustomDialogReportPost(requireContext()).apply {

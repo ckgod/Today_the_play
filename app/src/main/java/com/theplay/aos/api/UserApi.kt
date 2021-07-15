@@ -138,6 +138,10 @@ class UserApi {
         @POST("/v1/comment/{postCommentId}/like")
         fun postCommentLike(@Path("postCommentId") commentId : Int) : Observable<CommentLikeResponse>
 
+        // 게시글 수정
+        @PUT("/v1/post/{postId}")
+        fun putModifyPost(@Path("postId") postId: Int, @Body params: ModifyPostRequest) : Observable<DefaultResponse>
+
 
     }
 }

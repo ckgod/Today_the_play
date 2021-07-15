@@ -31,6 +31,13 @@
             app:exitAnim="@anim/slide_to_left"
             app:popEnterAnim="@anim/slide_from_left"
             app:popExitAnim="@anim/slide_to_right" />
+        <action
+            android:id="@+id/action_myPeedFragment_to_modifyActivity"
+            app:destination="@id/modifyActivity"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
     <activity
         android:id="@+id/settingActivity"
@@ -57,4 +64,8 @@
             android:name="nickname"
             app:argType="string" />
     </fragment>
+    <activity
+        android:id="@+id/modifyActivity"
+        android:name="com.theplay.aos.ModifyActivity"
+        android:label="ModifyActivity" />
 </navigation>

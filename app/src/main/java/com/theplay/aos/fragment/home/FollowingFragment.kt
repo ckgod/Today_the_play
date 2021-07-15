@@ -45,7 +45,7 @@ class FollowingFragment() : BaseKotlinFragment<FragmentFollowingBinding>() {
                                     }
                                 }
                                 2-> { // plan 공유하기
-
+                                    showCustomToast(getString(R.string.not_implementation))
                                 }
                                 3-> { // plan 신고하기
                                     val dialog =  CustomDialogReportPost(requireContext()).apply {

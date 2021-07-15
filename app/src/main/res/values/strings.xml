@@ -4,6 +4,7 @@
     <string name="loading">로딩중입니다...</string>
     <string name="send_data">데이터 전송중입니다.</string>
     <string name="network_error">네트워크 연결이 원활하지 않습니다.</string>
+    <string name="not_implementation">준비중인 기능입니다.</string>
     <string name="confirm">확인</string>
     <string name="complete">완료</string>
     <string name="continued">다음</string>
@@ -71,6 +72,9 @@
     <string name="write_recipe_info">오늘 제조한 술의 제조법을 설명해주세요</string>
     <string name="write_delete_tag">해당 술 태그를 삭제하시겠습니까?</string>
     <string name="write_delete_ingredient">해당 재료를 삭제하시겠습니까?</string>
+
+    <!-- modify -->
+    <string name="modify_title">게시물 수정</string>
 
 
     <!-- setting -->

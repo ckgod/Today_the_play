@@ -3,6 +3,7 @@ package com.theplay.aos
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.lifecycle.MutableLiveData
 import com.theplay.aos.api.model.HotRecipeDetailResponse
 import com.theplay.aos.api.model.MainBoardResponse
 import com.theplay.aos.api.model.MyPageTopResponse
@@ -49,11 +50,15 @@ class ApplicationClass : Application() {
 
         // user정보 저장
         var userInfo : MyPageTopResponse? = null
+        var userLiveData : MutableLiveData<MyPageTopResponse> = MutableLiveData()
         // mainboard 게시글들 저장
         var mainBoardList : MutableList<MainBoardResponse.Content>? = null
         var followingPostList : MutableList<MainBoardResponse.Content>? = null
         var myLikedPost : MutableList<MainBoardResponse.Content>? = null
         var myPostedPost : MutableList<MainBoardResponse.Content>? = null
+
+        // 게시물 수정을 위해 게시글 정보 담아두는 공간
+        var PostTemplate : MainBoardResponse.Content? = null
 
         // 인기 레시피 태그 목록 저장
         var hotRecipeListTmp : MutableList<HotRecipeDetailResponse.Content>? = null

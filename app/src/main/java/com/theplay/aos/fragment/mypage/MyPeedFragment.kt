@@ -14,6 +14,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.theplay.aos.ApplicationClass
 import com.theplay.aos.ApplicationClass.Companion.userInfo
+import com.theplay.aos.ApplicationClass.Companion.userLiveData
 import com.theplay.aos.R
 import com.theplay.aos.base.BaseKotlinFragment
 import com.theplay.aos.databinding.FragmentMyPeedBinding
@@ -47,8 +48,54 @@ class MyPeedFragment() : BaseKotlinFragment<FragmentMyPeedBinding>() {
         super.onDestroyView()
     }
 
+    fun reLoadUserInfo() {
+        userInfo?.let { // 홈프레그먼트에서 유저정보를 받아왔다면
+            binding.tvNickName.text = it.data.nickname
+            TabLayoutMediator(binding.tlTab, binding.vpPager) { tab, position ->
+                when(position) {
+                    0 -> {
+                        val view = layoutInflater.inflate(R.layout.tab_my_page,null)
+                        val tv1 = view.findViewById<TextView>(R.id.tv_title)
+                        val tv2 = view.findViewById<TextView>(R.id.tv_count)
+                        tv1.text = "게시물"
+                        tv2.text = it.data.posts.toString()
+                        tab.customView = view
+                    }
+                    1 -> {
+                        val view = layoutInflater.inflate(R.layout.tab_my_page,null)
+                        val tv1 = view.findViewById<TextView>(R.id.tv_title)
+                        val tv2 = view.findViewById<TextView>(R.id.tv_count)
+                        tv1.text = "좋아요"
+                        tv2.text = it.data.likes.toString()
+                        tab.customView = view
+                    }
+                    2 -> {
+                        val view = layoutInflater.inflate(R.layout.tab_my_page,null)
+                        val tv1 = view.findViewById<TextView>(R.id.tv_title)
+                        val tv2 = view.findViewById<TextView>(R.id.tv_count)
+                        tv1.text = "팔로워"
+                        tv2.text = it.data.followers.toString()
+                        tab.customView = view
+                    }
+                    3 -> {
+                        val view = layoutInflater.inflate(R.layout.tab_my_page,null)
+                        val tv1 = view.findViewById<TextView>(R.id.tv_title)
+                        val tv2 = view.findViewById<TextView>(R.id.tv_count)
+                        tv1.text = "나의 레시피"
+                        tv2.text = it.data.recipes.toString()
+                        tab.customView = view
+                    }
+                }
+            }.attach()
+        }
+    }
+
     override fun onResume() {
         Log.d(TAG, "onResume")
+        userLiveData.observe(this, Observer {
+            userInfo = it
+            reLoadUserInfo()
+        })
         userInfo?.let { // 홈프레그먼트에서 유저정보를 받아왔다면
             binding.tvNickName.text = it.data.nickname
             TabLayoutMediator(binding.tlTab, binding.vpPager) { tab, position ->

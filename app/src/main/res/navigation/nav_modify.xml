@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_modify"
+    app:startDestination="@id/modifyFragemnt">
+
+    <fragment
+        android:id="@+id/modifyFragemnt"
+        android:name="com.theplay.aos.fragment.write.ModifyFragment"
+        android:label="ModifyFragment"
+        tools:layout="@layout/fragment_modify">
+        <action
+            android:id="@+id/action_modifyFragment_to_writeRecipeFragment"
+            app:destination="@id/writeRecipeFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/writeRecipeFragment"
+        android:name="com.theplay.aos.fragment.write.WriteRecipeFragment"
+        android:label="WriteRecipeFragment"
+        tools:layout="@layout/fragment_write_recipe">
+        <argument
+            android:name="icon"
+            app:argType="integer" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="colorType"
+            app:argType="integer" />
+    </fragment>
+</navigation>

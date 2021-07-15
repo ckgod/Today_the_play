@@ -24,11 +24,15 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
+import com.theplay.aos.ApplicationClass.Companion.colorHashMap
 import com.theplay.aos.ApplicationClass.Companion.userInfo
 import com.theplay.aos.api.model.MainBoardResponse
+import com.theplay.aos.api.model.ModifyPostRequest
 import com.theplay.aos.customview.CustomDialogDeleteTag
 import com.theplay.aos.customview.CustomDialogDeleteTagInterface
+import com.theplay.aos.databinding.FragmentModifyBinding
 import com.theplay.aos.iadapter.DrinkAdapterInterface
+import com.theplay.aos.item.RecipeMaterialItem
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -36,31 +40,59 @@ import java.io.File
 import java.util.*
 
 
-class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
+class ModifyFragment() : BaseKotlinFragment<FragmentModifyBinding>() {
     override val layoutResourceId: Int
-        get() = R.layout.fragment_write
+        get() = R.layout.fragment_modify
 
     private var viewPagerAdapter: ViewPagerAdapter? = null
     private val viewModel by lazy { WriteViewModel() }
 
     var hasRecipe : Boolean = false
+    private var postId : Int = -1
 
     var drinkList : MutableList<DrinkItem> = mutableListOf()
-    var ingredientList : MutableList<AddPostRequest.Ingredient> = mutableListOf()
-    var stepList : MutableList<AddPostRequest.Step> = mutableListOf()
-    var alcoholTagList : MutableList<AddPostRequest.AlcoholTag> = mutableListOf()
-    lateinit var images: List<File>
+    var ingredientList : MutableList<ModifyPostRequest.Ingredient> = mutableListOf()
+    var stepList : MutableList<ModifyPostRequest.Step> = mutableListOf()
+    var alcoholTagList : MutableList<ModifyPostRequest.AlcoholTag> = mutableListOf()
+    lateinit var images: MutableList<MainBoardResponse.Image>
     lateinit var drinkAdapterListener : DrinkAdapterInterface
 
     override fun initStartView() {
+        ApplicationClass.PostTemplate?.let {
+            postId = it.postId
+            images = it.images
+            binding.etContent.setText(it.content)
+            var ingreList : MutableList<RecipeMaterialItem> = mutableListOf()
+            for(i in it.ingredients) {
+                ingreList.add(RecipeMaterialItem(iconHashMap[i.iconName]!!,i.name, colorHashMap[i.color]!!))
+            }
+            for(i in it.alcoholTags) {
+//                alcoholTagList.add(ModifyPostRequest.AlcoholTag(i.color,i.iconName,i.name,i.recipeYn))
+                var hasRecipe = false
+                if (i.recipeYn == "Y") {
+                    hasRecipe = true
+                }
+                drinkList.add(DrinkItem(iconHashMap[i.iconName]!!,i.name,hasRecipe, colorHashMap[i.color]!!,ingreList))
+            }
+        }
         binding.btnBack.setOnClickListener {
             DrinkUtil.clearRecipeSaved()
             requireActivity().finish()
-            requireActivity().overridePendingTransition(R.anim.slide_from_right,R.anim.slide_to_left)
+//            requireActivity().overridePendingTransition(R.anim.slide_from_right,R.anim.slide_to_left)
         }
+
+        // note --------------- 이미지 뷰페이저 세팅 -----------------------------------------------------------------------------------------
         binding.vpPager.isSaveEnabled = false
         binding.vpPager.isUserInputEnabled = true
         viewPagerAdapter = ViewPagerAdapter(this)
+        for (item in images) {
+            viewPagerAdapter?.addFragment(ImageFragment(item.filePath))
+        }
+        binding.vpPager.adapter = viewPagerAdapter
+        binding.wormDotsIndicator.setViewPager2(binding.vpPager)
+        // note --------------- 이미지 뷰페이저 세팅 -----------------------------------------------------------------------------------------
+
+
         binding.btnPlusRecipe.setOnClickListener {
             if (drinkList.size >= 6) {
                 showCustomToast("최대 6개까지만 태그할 수 있습니다.")
@@ -77,6 +109,7 @@ class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
             }
             dialog.show()
         }
+
         binding.rvDrinks.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvDrinks.adapter = DrinkAdapter(requireActivity(), requireContext(), drinkList).apply {
             setInterface(object : DrinkAdapterInterface{
@@ -97,12 +130,10 @@ class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
                 }
 
                 override fun clickRecipe(icon: Int, name: String, colorType: Int) {
-                    requireActivity().findNavController(R.id.main_nav_host_fragment).navigate(WriteFragmentDirections.actionWriteFragmentToWriteRecipeFragment(icon, name, colorType))
+                    requireActivity().findNavController(R.id.main_nav_host_fragment).navigate(ModifyFragmentDirections.actionModifyFragmentToWriteRecipeFragment(icon, name, colorType))
                 }
             })
         }
-        //https://github.com/akvelon/android-image-picker
-        ImagePicker.launch(this)
 
         binding.btnComplete.setOnClickListener {
             if(binding.etContent.text.isEmpty()) {
@@ -114,39 +145,29 @@ class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
                 return@setOnClickListener
             }
 
-            val imageFileList : MutableList<MultipartBody.Part> = mutableListOf()
-            for(img in images) {
-                val re = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), img)
-                val multipartItem = MultipartBody.Part.createFormData("files", img.name, re)
-                imageFileList.add(multipartItem)
-            }
             var hasRecipeYn = "N"
-            if(hasRecipe == true) {
+            if(hasRecipe) {
                 hasRecipeYn = "Y"
-            } // 흰 메인 분 노 갈
+            }
             for(drink in drinkList) {
                 var reYn = "N"
                 if(drink.hasRecipe) reYn = "Y"
+
                 val iconName = iconHashMap.filterValues { it == drink.icon }.keys.elementAt(0)
                 val color = ApplicationClass.colorToCodeHashMap[drink.colorType]!!
                 val realIconName = DrinkUtil.convertIconFromColor(iconName, color)
                 Log.d(TAG, "drink color is ${color}, icon is ${realIconName}, name is ${drink.name}")
-                alcoholTagList.add(AddPostRequest.AlcoholTag(color,realIconName,drink.name,reYn))
+                alcoholTagList.add(ModifyPostRequest.AlcoholTag(color,realIconName,drink.name,reYn))
             }
-            val addPostRequest = AddPostRequest(alcoholTagList, binding.etContent.text.toString(),hasRecipeYn,ingredientList,stepList)
-            val hashMap = HashMap<String, RequestBody>()
-            Log.d(TAG, addPostRequest.toString())
-            val requestString = Gson().toJson(addPostRequest)
-            val body = RequestBody.create("application/json".toMediaTypeOrNull(), requestString)
-            hashMap.put("request",body)
+            val modifyPostRequest = ModifyPostRequest(alcoholTagList, binding.etContent.text.toString(),hasRecipeYn,ingredientList,stepList)
             showProgress()
-            viewModel.postAddPost(hashMap, imageFileList)
+            viewModel.putModifyPost(postId,modifyPostRequest)
         }
     }
 
 
     override fun initDataBinding() {
-        viewModel.getMyPostResponse.observe(this@WriteFragment, Observer {
+        viewModel.getMyPostResponse.observe(this@ModifyFragment, Observer {
             if(it == null) showNetworkError()
             else {
                 Log.d(TAG, it.toString())
@@ -164,29 +185,26 @@ class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
             }
             hideProgress()
         })
-        viewModel.addPostResponse.observe(this@WriteFragment, Observer {
-            if(it == null) showNetworkError()
-            else {
-                Log.d(TAG, it.toString())
-                if(it.code == 0) {
-                    DrinkUtil.clearRecipeSaved()
-                    viewModel.getMainBoard(0,30)
-//                    removeActivity()
-                }
-            }
-//            hideProgress()
-        })
-        viewModel.mainBoardResponse.observe(this@WriteFragment, Observer {
+        viewModel.mainBoardResponse.observe(this@ModifyFragment, Observer {
             if(it == null) showNetworkError()
             else {
                 Log.d(TAG, it.toString())
                 if(it.code == 0) {
                     ApplicationClass.mainBoardList = it.data.content
-                    viewModel.getMyPost(0,30)
+                    viewModel.getMyPost(0,50)
                 }
             }
         })
-
+        viewModel.putModifyResponse.observe(this@ModifyFragment, Observer {
+            if(it == null) showNetworkError()
+            else {
+                Log.d(TAG, it.msg)
+                if(it.code == 0) {
+                    removeActivity()
+                }
+            }
+            hideProgress()
+        })
     }
 
     override fun initAfterBinding() {
@@ -199,8 +217,14 @@ class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
                 drink.hasRecipe = drink.name == DrinkUtil.DrinkName
             }
             hasRecipe = true
-            ingredientList = DrinkUtil.materialList
-            stepList = DrinkUtil.stepList
+            ingredientList = mutableListOf()
+            for(i in DrinkUtil.materialList) {
+                ingredientList.add(ModifyPostRequest.Ingredient(i.color,i.iconName,i.name,i.quantity))
+            }
+            stepList = mutableListOf()
+            for(i in DrinkUtil.stepList) {
+                stepList.add(ModifyPostRequest.Step(i.content,i.number))
+            }
             binding.rvDrinks.adapter?.notifyDataSetChanged()
         }
         Log.d(TAG, "recipe exist = $hasRecipe")
@@ -208,35 +232,9 @@ class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
 
     fun removeActivity() {
         requireActivity().finish()
-        requireActivity().overridePendingTransition(R.anim.slide_from_right,R.anim.slide_to_left)
+//        requireActivity().overridePendingTransition(R.anim.slide_from_right,R.anim.slide_to_left)
     }
 
-    //            get a single image only
-//            val image: File? = getSingleImageOrNull(data)
-//            Log.d(TAG, image.toString())
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (shouldResolve(requestCode, resultCode)) {
-            if (data?.extras?.getInt("cancelSelect") == -1) {
-                DrinkUtil.clearRecipeSaved()
-                removeActivity()
-                return
-            }
-            Log.d(TAG, "onActivity Result")
-            // Get a list of picked images
-            images = getImages(data)
-            Log.d(TAG, images.toString())
-            if (images.isEmpty()) {
-                showCustomToast("사진을 선택해주세요")
-            } else {
-                for (item in images) {
-                    viewPagerAdapter?.addFragment(ImageFragment(item))
-                }
-                binding.vpPager.adapter = viewPagerAdapter
-                binding.wormDotsIndicator.setViewPager2(binding.vpPager)
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data)
-    }
 
     private inner class ViewPagerAdapter(fa: Fragment) : FragmentStateAdapter(fa) {
         var fragments: MutableList<Fragment> = mutableListOf()
@@ -256,6 +254,6 @@ class WriteFragment() : BaseKotlinFragment<FragmentWriteBinding>() {
     }
 
     companion object {
-        const val TAG = "WriteFragment"
+        const val TAG = "ModifyFragment"
     }
 }

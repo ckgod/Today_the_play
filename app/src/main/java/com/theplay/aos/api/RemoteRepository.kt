@@ -237,4 +237,12 @@ class RemoteRepository{
             UserApi.UserApiImpl::class.java
         ).postCommentLike(commentId)
     }
+
+    fun putModifyPost(postId: Int, params: ModifyPostRequest) : Observable<DefaultResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).putModifyPost(postId, params)
+    }
+
+
 }

@@ -16,6 +16,7 @@ import com.theplay.aos.item.DrinkItem
 
 interface DrinkAdapterInterface {
     fun clickDelete(icon : Int, colorType : Int, name : String, position : Int)
+    fun clickRecipe(icon : Int, name : String, colorType: Int)
 }
 
 class DrinkAdapter(private val activity : Activity, private val context: Context, private val items: MutableList<DrinkItem>) : RecyclerView.Adapter<DrinkAdapter.DrinkVH>() {
@@ -72,7 +73,8 @@ class DrinkAdapter(private val activity : Activity, private val context: Context
                         return@setOnClickListener
                     }
                 }
-                activity.findNavController(R.id.main_nav_host_fragment).navigate(WriteFragmentDirections.actionWriteFragmentToWriteRecipeFragment(item.icon,item.name,item.colorType))
+                listener?.clickRecipe(item.icon,item.name,item.colorType)
+//                activity.findNavController(R.id.main_nav_host_fragment).navigate(WriteFragmentDirections.actionWriteFragmentToWriteRecipeFragment(item.icon,item.name,item.colorType))
 //                activity.findNavController(R.id.main_nav_host_fragment).navigate(WriteFragmentDirections.actionWriteFragmentToWriteRecipeFragment(item.icon,item.name, item.colorType))
             }
 

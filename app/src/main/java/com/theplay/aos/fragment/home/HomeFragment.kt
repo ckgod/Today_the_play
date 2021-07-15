@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import com.theplay.aos.ApplicationClass
 import com.theplay.aos.ApplicationClass.Companion.followingPostList
 import com.theplay.aos.ApplicationClass.Companion.userInfo
 import com.theplay.aos.R

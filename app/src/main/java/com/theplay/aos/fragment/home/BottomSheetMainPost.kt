@@ -8,6 +8,7 @@ import com.theplay.aos.ApplicationClass
 import com.theplay.aos.R
 import com.theplay.aos.base.BaseBottomSheetFragment
 import com.theplay.aos.databinding.BottomSheetPostMenuBinding
+import com.theplay.aos.fragment.mypage.MyPageBoardPersonalFragment
 import com.theplay.aos.iadapter.PostMenuAdapter
 import com.theplay.aos.iadapter.PostMenuInterface
 import com.theplay.aos.item.PostMenuItem
@@ -53,7 +54,11 @@ class BottomSheetMainPost(private var nickName : String, private var rootFragmen
                         menuItemList.add(PostMenuItem(getString(R.string.menu_report),4))
                     }
                 }
-
+            }
+            is MyPageBoardPersonalFragment -> {
+                menuItemList.add(PostMenuItem(getString(R.string.menu_share),1))
+                menuItemList.add(PostMenuItem(getString(R.string.menu_modify),2))
+                menuItemList.add(PostMenuItem(getString(R.string.menu_delete),3))
             }
         }
 
