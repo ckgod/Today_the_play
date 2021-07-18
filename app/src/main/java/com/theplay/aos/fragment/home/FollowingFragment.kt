@@ -41,7 +41,6 @@ class FollowingFragment() : BaseKotlinFragment<FragmentFollowingBinding>() {
                                     Log.d(TAG, "tag id : $tagId")
                                     if(tagId == -1) showCustomToast("레시피가 없는 게시글입니다.")
                                     else {
-
                                     }
                                 }
                                 2-> { // plan 공유하기

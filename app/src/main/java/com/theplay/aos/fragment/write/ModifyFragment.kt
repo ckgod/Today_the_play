@@ -1,43 +1,30 @@
 package com.theplay.aos.fragment.write
 
-import android.content.Intent
 import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.theplay.aos.ApplicationClass
+import com.theplay.aos.ApplicationClass.Companion.colorHashMap
 import com.theplay.aos.ApplicationClass.Companion.iconHashMap
+import com.theplay.aos.ApplicationClass.Companion.userInfo
 import com.theplay.aos.R
-import com.theplay.aos.api.model.AddPostRequest
+import com.theplay.aos.api.model.MainBoardResponse
+import com.theplay.aos.api.model.ModifyPostRequest
 import com.theplay.aos.base.BaseKotlinFragment
 import com.theplay.aos.customview.AddDrinkDialog
 import com.theplay.aos.customview.AddDrinkListener
-import com.theplay.aos.databinding.FragmentWriteBinding
-import com.theplay.aos.fragment.home.ImageFragment
-import com.theplay.aos.iadapter.DrinkAdapter
-import com.theplay.aos.imagepicker.ImagePicker
-import com.theplay.aos.imagepicker.ImagePicker.getImages
-import com.theplay.aos.imagepicker.ImagePicker.shouldResolve
-import com.theplay.aos.item.DrinkItem
-import com.theplay.aos.utils.DrinkUtil
-import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import com.google.gson.Gson
-import com.theplay.aos.ApplicationClass.Companion.colorHashMap
-import com.theplay.aos.ApplicationClass.Companion.userInfo
-import com.theplay.aos.api.model.MainBoardResponse
-import com.theplay.aos.api.model.ModifyPostRequest
 import com.theplay.aos.customview.CustomDialogDeleteTag
 import com.theplay.aos.customview.CustomDialogDeleteTagInterface
 import com.theplay.aos.databinding.FragmentModifyBinding
+import com.theplay.aos.fragment.home.ImageFragment
+import com.theplay.aos.iadapter.DrinkAdapter
 import com.theplay.aos.iadapter.DrinkAdapterInterface
+import com.theplay.aos.item.DrinkItem
 import com.theplay.aos.item.RecipeMaterialItem
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import java.io.File
-import java.util.*
+import com.theplay.aos.utils.DrinkUtil
 
 
 class ModifyFragment() : BaseKotlinFragment<FragmentModifyBinding>() {
@@ -165,7 +152,6 @@ class ModifyFragment() : BaseKotlinFragment<FragmentModifyBinding>() {
         }
     }
 
-
     override fun initDataBinding() {
         viewModel.getMyPostResponse.observe(this@ModifyFragment, Observer {
             if(it == null) showNetworkError()
@@ -200,10 +186,9 @@ class ModifyFragment() : BaseKotlinFragment<FragmentModifyBinding>() {
             else {
                 Log.d(TAG, it.msg)
                 if(it.code == 0) {
-                    removeActivity()
+                    viewModel.getMainBoard(0,50)
                 }
             }
-            hideProgress()
         })
     }
 
