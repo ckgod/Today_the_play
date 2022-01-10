@@ -26,21 +26,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         binding.bottomNav.itemIconTintList = null
 
-
         supportFragmentManager.addOnBackStackChangedListener {
             val backStackEntryCount = supportFragmentManager.backStackEntryCount
             val fragments = supportFragmentManager.fragments
             val fragmentCount = fragments.size
-    //            Toast.makeText(
-//                this,
-//                "MainActivity backStackEntryCount: $backStackEntryCount, fragmentCount: $fragmentCount, fragments: $fragments",
-//                Toast.LENGTH_SHORT
-//            ).show()
         }
         if (savedInstanceState == null) {
             binding.bottomNav.selectedItemId = R.id.nav_home
             setupBottomNavigationBar()
         } // Else, need to wait for onRestoreInstanceState
+
+
+
         binding.btnWrite.setOnClickListener {
 //            Toast.makeText(this, "write clicked", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, WriteActivity::class.java)

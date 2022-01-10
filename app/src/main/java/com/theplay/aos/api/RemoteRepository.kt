@@ -9,7 +9,6 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 class RemoteRepository{
-
     fun postLogin(loginRequest: LoginRequest): Observable<LoginResponse> {
         return RetrofitCreator.create(
             UserApi.UserApiImpl::class.java
@@ -34,7 +33,7 @@ class RemoteRepository{
         ).getNotice()
     }
 
-    fun getNoticeDetail(noticeId : Int) :Observable<NoticeDetailResponse> {
+    fun getNoticeDetail(noticeId : Int) : Observable<NoticeDetailResponse> {
         return RetrofitCreator.create(
             UserApi.UserApiImpl::class.java
         ).getNoticeDetail(noticeId)

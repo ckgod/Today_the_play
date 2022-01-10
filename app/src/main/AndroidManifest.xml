@@ -17,7 +17,7 @@
         android:roundIcon="@mipmap/ic_today_logo_v1_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Aos">
-        <activity android:name=".UserPeedActivity"></activity>
+        <activity android:name=".UserPeedActivity"/>
         <activity android:name=".HotRecipeActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".imagepicker.PickerActivity" />

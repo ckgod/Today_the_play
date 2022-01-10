@@ -1,6 +1,5 @@
 package com.theplay.aos.base
 
-import android.app.ProgressDialog
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
@@ -30,6 +29,7 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
 
 //    lateinit var binding: T
     var databinding: T? = null
+
     lateinit var binding : T
 
     /**
@@ -65,8 +65,6 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
      * Observing 형식의 데이터만 아닌 경우에만 해당
      */
     abstract fun reLoadUI()
-
-
 
     private var isSetBackButtonValid = false
 

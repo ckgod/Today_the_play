@@ -1,6 +1,5 @@
 package com.theplay.aos.api
 
-import android.util.Log
 import com.theplay.aos.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.theplay.aos.ApplicationClass.Companion.spToken
 import okhttp3.Interceptor

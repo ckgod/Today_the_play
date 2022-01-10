@@ -8,8 +8,7 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.theplay.aos.fragment.SplashFragment"
-        android:label="SplashFragment"
-        tools:layout="@layout/fragment_splash">
+        android:label="SplashFragment">
         <action
             android:id="@+id/action_splashFragment_to_prevLoginFragment"
             app:destination="@id/prevLoginFragment"

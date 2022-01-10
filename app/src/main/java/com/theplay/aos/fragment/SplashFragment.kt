@@ -20,19 +20,13 @@ class SplashFragment() : BaseKotlinFragment<FragmentSplashBinding>() {
         Handler().postDelayed({
             val jwtToken: String? = spToken?.getString(X_ACCESS_TOKEN, null)
             if(jwtToken == null) {
-//                val nextIntent = Intent(requireContext(), MainActivity::class.java)
-//                startActivity(nextIntent)
-//                requireActivity().finish()
                 view?.findNavController()?.navigate(SplashFragmentDirections.actionSplashFragmentToPrevLoginFragment())
             }
             else {
                 val nextIntent = Intent(requireContext(), MainActivity::class.java)
                 startActivity(nextIntent)
                 requireActivity().finish()
-//                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToMainActivity())
-//                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToMainFragment())
             }
-//            findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToPrevLoginFragment())
         }, SPLASH_TIME_OUT)
     }
 

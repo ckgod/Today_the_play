@@ -9,10 +9,9 @@
     <string name="complete">완료</string>
     <string name="continued">다음</string>
     <string name="cancel">취소</string>
-    <string name="app_version">현재 버전 1.0.0</string>
+    <string name="app_version">현재 버전 1.0</string>
     <string name="default_notification_channel_id">default_notification_channel_id</string>
     <string name="ask_email">theplaydev2021@gmail.com</string>
-
 
     <!-- 회원가입 / 로그인 -->
     <string name="login_title">술꾼들이 만든 음주생활을 위한 공간\n\n오늘 한 주</string>

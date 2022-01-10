@@ -26,6 +26,7 @@ class SignUpNextFragment() : BaseKotlinFragment<FragmentSignUpNextBinding>() {
     private val viewModel by lazy { SignUpViewModel() }
     private val safeArgs : SignUpNextFragmentArgs by navArgs()
 
+
     private var checkTos = false
     private var checkFirstNick = true
     private var checkSecondNick = false
@@ -120,7 +121,11 @@ class SignUpNextFragment() : BaseKotlinFragment<FragmentSignUpNextBinding>() {
                 }
                 else if(checkThirdNick) {
                     Log.d(TAG, "${safeArgs.email} , ${safeArgs.pw}, ${binding.etThirdNick.text.toString()}")
+
+
                     viewModel.postSignUp(SignUpRequest(safeArgs.pw, safeArgs.email, binding.etThirdNick.text.toString(), safeArgs.pw))
+
+
                 }
             }
         })

@@ -54,22 +54,6 @@ class RootFragment() : BaseKotlinFragment<FragmentRootBinding>() {
     override fun reLoadUI() {
 
     }
-//
-//    fun setPagingEnabled() { //이 메소드를 이용해서 스크롤을 풀어주고
-//        binding.vpPager.isUserInputEnabled = true
-//    }
-//
-//    fun setPagingDisabled() { //이 메소드를 이용해서 스크롤을 막아줍니다.
-//        binding.vpPager.isUserInputEnabled = false
-//    }
-
-//    fun interceptBackPressed() : Boolean {
-////        if(binding.vpPager.currentItem == 0) {
-////            binding.vpPager.setCurrentItem(1, true)
-////            return true
-////        }
-//        return false
-//    }
 
     private inner class ViewPagerAdapter(fa: Fragment) : FragmentStateAdapter(fa) {
         var fragments: HashMap<Int, Fragment> = HashMap()
